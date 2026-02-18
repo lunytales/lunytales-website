@@ -19,7 +19,7 @@ export const en = {
   nav: {
     include: "See what's included",
     how: "How it works",
-    home: "Go to the main page",
+    home: "Return to website",
     buyNow: "Buy now",
     buyMenuAria: "Buy Luny Tales now on Hotmart (menu)",
     languageEs: "ES",
@@ -109,8 +109,8 @@ export const en = {
     emailButton: "Send email",
     emailHref: "mailto:hola@lunytales.com?subject=Contact%20%E2%80%94%20Luny%20Tales&body=Hello%20Luny%20Tales%2C%0D%0A%0D%0A",
     mascotAlt: "Luny the owl mascot holding a tablet with the cover of Sleep in 3 Stories",
-    legalPrivacy: "Privacy (Spanish)",
-    legalTerms: "Terms (Spanish)",
+    legalPrivacy: "Privacy",
+    legalTerms: "Terms",
     legalCookies: "Cookie preferences",
   },
   cookie: {

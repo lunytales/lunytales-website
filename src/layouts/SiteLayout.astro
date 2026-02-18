@@ -3,9 +3,12 @@ import { SITE_CONFIG, toHref } from "../config/site";
 import { getStrings, type Language } from "../i18n";
 import type { SeoMeta } from "../lib/seo";
 
+type RouteKey = "home" | "privacy" | "terms";
+
 interface Props {
   lang: Language;
   seo: SeoMeta;
+  routeKey?: RouteKey;
   navVariant?: "home" | "legal";
   footerVariant?: "home" | "legal";
   legalNavLabel?: string;
@@ -14,23 +17,44 @@ interface Props {
 const {
   lang,
   seo,
+  routeKey = "home",
   navVariant = "home",
   footerVariant = navVariant === "legal" ? "legal" : "home",
-  legalNavLabel = lang === "en" ? "Go to the main page" : "Ir a la página principal",
+  legalNavLabel,
 } = Astro.props;
 
 const strings = getStrings(lang);
 const baseHref = import.meta.env.BASE_URL;
 
-const homeHref = toHref(SITE_CONFIG.paths.home);
-const enHref = toHref(SITE_CONFIG.paths.homeEn);
-const privacyHref = toHref(SITE_CONFIG.paths.privacy);
-const termsHref = toHref(SITE_CONFIG.paths.terms);
+const routeLinks: Record<RouteKey, { es: string; en: string }> = {
+  home: {
+    es: SITE_CONFIG.paths.home,
+    en: SITE_CONFIG.paths.homeEn,
+  },
+  privacy: {
+    es: SITE_CONFIG.paths.privacy,
+    en: SITE_CONFIG.paths.privacyEn,
+  },
+  terms: {
+    es: SITE_CONFIG.paths.terms,
+    en: SITE_CONFIG.paths.termsEn,
+  },
+};
+
+const homeHref = toHref(routeLinks.home.es);
+const homeEnHref = toHref(routeLinks.home.en);
+const currentRouteLinks = routeLinks[routeKey];
+const switchEsHref = toHref(currentRouteLinks.es);
+const switchEnHref = toHref(currentRouteLinks.en);
+
+const currentLangLegalPrivacyHref = toHref(lang === "en" ? SITE_CONFIG.paths.privacyEn : SITE_CONFIG.paths.privacy);
+const currentLangLegalTermsHref = toHref(lang === "en" ? SITE_CONFIG.paths.termsEn : SITE_CONFIG.paths.terms);
 const hotmartUrl = SITE_CONFIG.hotmartUrl;
 
-const currentLangHomeHref = lang === "en" ? enHref : homeHref;
-const brandHref = navVariant === "home" ? currentLangHomeHref : homeHref;
-const footerLogoHref = footerVariant === "home" ? currentLangHomeHref : homeHref;
+const currentLangHomeHref = lang === "en" ? homeEnHref : homeHref;
+const resolvedLegalNavLabel = legalNavLabel ?? strings.nav.home;
+const brandHref = currentLangHomeHref;
+const footerLogoHref = currentLangHomeHref;
 
 const primaryOgImage = seo.og.images[0];
 const secondaryOgImage = seo.og.images[1];
@@ -116,7 +140,7 @@ const secondaryOgImage = seo.og.images[1];
               <div class="d-flex align-items-center" role="group" aria-label={strings.a11y.languageSwitcher}>
                 <a
                   class="nav-link px-1"
-                  href={homeHref}
+                  href={switchEsHref}
                   aria-label={strings.a11y.switchToEs}
                   aria-current={lang === "es" ? "page" : undefined}
                 >
@@ -125,7 +149,7 @@ const secondaryOgImage = seo.og.images[1];
                 <span class="nav-link px-0" aria-hidden="true">|</span>
                 <a
                   class="nav-link px-1"
-                  href={enHref}
+                  href={switchEnHref}
                   aria-label={strings.a11y.switchToEn}
                   aria-current={lang === "en" ? "page" : undefined}
                 >
@@ -144,7 +168,28 @@ const secondaryOgImage = seo.og.images[1];
               </a>
             </>
           ) : (
-            <a class="nav-link" href={homeHref}>{legalNavLabel}</a>
+            <>
+              <a class="nav-link" href={currentLangHomeHref}>{resolvedLegalNavLabel}</a>
+              <div class="d-flex align-items-center" role="group" aria-label={strings.a11y.languageSwitcher}>
+                <a
+                  class="nav-link px-1"
+                  href={switchEsHref}
+                  aria-label={strings.a11y.switchToEs}
+                  aria-current={lang === "es" ? "page" : undefined}
+                >
+                  {strings.nav.languageEs}
+                </a>
+                <span class="nav-link px-0" aria-hidden="true">|</span>
+                <a
+                  class="nav-link px-1"
+                  href={switchEnHref}
+                  aria-label={strings.a11y.switchToEn}
+                  aria-current={lang === "en" ? "page" : undefined}
+                >
+                  {strings.nav.languageEn}
+                </a>
+              </div>
+            </>
           )}
         </div>
       </div>
@@ -201,9 +246,9 @@ const secondaryOgImage = seo.og.images[1];
             <div class="col-lg-6">
               <div class="footer-title">{strings.footer.legalTitle}</div>
               <div class="footer-legal footer-legal-inline">
-                <a href={privacyHref}>{strings.footer.legalPrivacy}</a>
+                <a href={currentLangLegalPrivacyHref}>{strings.footer.legalPrivacy}</a>
                 <span aria-hidden="true">|</span>
-                <a href={termsHref}>{strings.footer.legalTerms}</a>
+                <a href={currentLangLegalTermsHref}>{strings.footer.legalTerms}</a>
                 <span aria-hidden="true">|</span>
                 <button type="button" class="cookie-pref-link" id="cookiePrefs">{strings.footer.legalCookies}</button>
               </div>
@@ -225,9 +270,9 @@ const secondaryOgImage = seo.og.images[1];
         <div class="small">© <span id="y"></span> Luny Tales</div>
         {footerVariant === "home" && (
           <div class="footer-legal small">
-            <a href={privacyHref}>{strings.footer.legalPrivacy}</a>
+            <a href={currentLangLegalPrivacyHref}>{strings.footer.legalPrivacy}</a>
             <span aria-hidden="true">|</span>
-            <a href={termsHref}>{strings.footer.legalTerms}</a>
+            <a href={currentLangLegalTermsHref}>{strings.footer.legalTerms}</a>
             <span aria-hidden="true">|</span>
             <button type="button" class="cookie-pref-link" id="cookiePrefs">{strings.footer.legalCookies}</button>
           </div>

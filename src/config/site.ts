@@ -15,6 +15,8 @@ export const SITE_CONFIG = {
     homeEn: "en/",
     privacy: "privacy/",
     terms: "terms/",
+    privacyEn: "en/privacy/",
+    termsEn: "en/terms/",
     demoPdf: "assets/demo/demo.pdf",
     ogImagePng: "assets/img/og-lunytales.png",
     ogImageWebp: "assets/img/og-lunytales.webp",
