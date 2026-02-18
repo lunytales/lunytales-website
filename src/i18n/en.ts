@@ -22,6 +22,7 @@ export const en = {
     home: "Return to website",
     buyNow: "Buy now",
     buyMenuAria: "Buy Luny Tales now on Hotmart (menu)",
+    languageLabel: "Language",
     languageEs: "ES",
     languageEn: "EN",
   },

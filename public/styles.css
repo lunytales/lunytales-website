@@ -76,6 +76,19 @@ button:focus-visible{
   opacity: 1;
 }
 
+.navbar-luny .lang-control{
+  display: inline-flex;
+  align-items: center;
+}
+
+.lang-switch-label{
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: rgba(255,255,255,.72);
+  line-height: 1.15;
+}
+
 .navbar-luny .lang-switch{
   display: inline-flex;
   align-items: center;
@@ -759,16 +772,41 @@ button:focus-visible{
 
 /* Media queries */
 @media (min-width: 992px){
-  .nav-cta{
-    display: none !important;
-  }
-
   .navbar-luny .navbar-toggler{
     display: none !important;
   }
 }
 
 @media (max-width: 991.98px){
+  .navbar-luny .navbar-collapse .lang-control{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .3rem;
+    margin-top: .15rem;
+  }
+
+  .navbar-luny .navbar-collapse .lang-switch{
+    padding: .16rem;
+    gap: .12rem;
+    align-self: flex-start;
+    background: rgba(255,255,255,.10);
+    border-color: rgba(255,255,255,.20);
+    box-shadow: none;
+  }
+
+  .navbar-luny .navbar-collapse .lang-switch > .nav-link{
+    min-width: 2.45rem;
+    min-height: 2.35rem;
+    padding: .34rem .62rem !important;
+    font-size: .8rem;
+    opacity: .74;
+  }
+
+  .navbar-luny .navbar-collapse .lang-switch > a:not([aria-current="page"]):hover{
+    background: rgba(255,255,255,.12);
+  }
+
   .hero-luny{
     padding: 3.5rem 0 4rem;
     text-align: left;

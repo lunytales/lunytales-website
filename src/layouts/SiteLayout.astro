@@ -49,7 +49,6 @@ const switchEnHref = toHref(currentRouteLinks.en);
 
 const currentLangLegalPrivacyHref = toHref(lang === "en" ? SITE_CONFIG.paths.privacyEn : SITE_CONFIG.paths.privacy);
 const currentLangLegalTermsHref = toHref(lang === "en" ? SITE_CONFIG.paths.termsEn : SITE_CONFIG.paths.terms);
-const hotmartUrl = SITE_CONFIG.hotmartUrl;
 
 const currentLangHomeHref = lang === "en" ? homeEnHref : homeHref;
 const resolvedLegalNavLabel = legalNavLabel ?? strings.nav.home;
@@ -137,57 +136,53 @@ const secondaryOgImage = seo.og.images[1];
               <a class="nav-link" href="#incluye">{strings.nav.include}</a>
               <a class="nav-link" href="#como">{strings.nav.how}</a>
 
-              <div class="d-flex align-items-center lang-switch" role="group" aria-label={strings.a11y.languageSwitcher}>
-                <a
-                  class="nav-link px-1"
-                  href={switchEsHref}
-                  aria-label={strings.a11y.switchToEs}
-                  aria-current={lang === "es" ? "page" : undefined}
-                >
-                  {strings.nav.languageEs}
-                </a>
-                <span class="nav-link px-0" aria-hidden="true">|</span>
-                <a
-                  class="nav-link px-1"
-                  href={switchEnHref}
-                  aria-label={strings.a11y.switchToEn}
-                  aria-current={lang === "en" ? "page" : undefined}
-                >
-                  {strings.nav.languageEn}
-                </a>
+              <div class="lang-control">
+                <span class="lang-switch-label d-lg-none">{strings.nav.languageLabel}</span>
+                <div class="d-flex align-items-center lang-switch" role="group" aria-label={strings.a11y.languageSwitcher}>
+                  <a
+                    class="nav-link px-1"
+                    href={switchEsHref}
+                    aria-label={strings.a11y.switchToEs}
+                    aria-current={lang === "es" ? "page" : undefined}
+                  >
+                    {strings.nav.languageEs}
+                  </a>
+                  <span class="nav-link px-0" aria-hidden="true">|</span>
+                  <a
+                    class="nav-link px-1"
+                    href={switchEnHref}
+                    aria-label={strings.a11y.switchToEn}
+                    aria-current={lang === "en" ? "page" : undefined}
+                  >
+                    {strings.nav.languageEn}
+                  </a>
+                </div>
               </div>
-
-              <a
-                class="btn btn-primary btn-pill btn-luny px-4 nav-cta d-lg-none"
-                href={hotmartUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={strings.nav.buyMenuAria}
-              >
-                {strings.nav.buyNow}
-              </a>
             </>
           ) : (
             <>
               <a class="nav-link" href={currentLangHomeHref}>{resolvedLegalNavLabel}</a>
-              <div class="d-flex align-items-center lang-switch" role="group" aria-label={strings.a11y.languageSwitcher}>
-                <a
-                  class="nav-link px-1"
-                  href={switchEsHref}
-                  aria-label={strings.a11y.switchToEs}
-                  aria-current={lang === "es" ? "page" : undefined}
-                >
-                  {strings.nav.languageEs}
-                </a>
-                <span class="nav-link px-0" aria-hidden="true">|</span>
-                <a
-                  class="nav-link px-1"
-                  href={switchEnHref}
-                  aria-label={strings.a11y.switchToEn}
-                  aria-current={lang === "en" ? "page" : undefined}
-                >
-                  {strings.nav.languageEn}
-                </a>
+              <div class="lang-control">
+                <span class="lang-switch-label d-lg-none">{strings.nav.languageLabel}</span>
+                <div class="d-flex align-items-center lang-switch" role="group" aria-label={strings.a11y.languageSwitcher}>
+                  <a
+                    class="nav-link px-1"
+                    href={switchEsHref}
+                    aria-label={strings.a11y.switchToEs}
+                    aria-current={lang === "es" ? "page" : undefined}
+                  >
+                    {strings.nav.languageEs}
+                  </a>
+                  <span class="nav-link px-0" aria-hidden="true">|</span>
+                  <a
+                    class="nav-link px-1"
+                    href={switchEnHref}
+                    aria-label={strings.a11y.switchToEn}
+                    aria-current={lang === "en" ? "page" : undefined}
+                  >
+                    {strings.nav.languageEn}
+                  </a>
+                </div>
               </div>
             </>
           )}
