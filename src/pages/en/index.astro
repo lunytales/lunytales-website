@@ -1,6 +1,6 @@
 ---
 const baseHref = import.meta.env.BASE_URL;
-const siteUrl = Astro.site ?? new URL("https://lunytales.github.io");
+const siteUrl = Astro.site ?? new URL("https://lunytales.com");
 const canonicalEs = new URL(baseHref, siteUrl).href;
 const canonicalEn = new URL(`${baseHref}en/`, siteUrl).href;
 const ogImagePng = new URL(`${baseHref}assets/img/og-lunytales.png`, siteUrl).href;
@@ -14,6 +14,7 @@ const ogImageWebp = new URL(`${baseHref}assets/img/og-lunytales.webp`, siteUrl).
   <base href={baseHref} />
   <title>Luny Tales | English Version Coming Soon</title>
   <meta name="description" content="Luny Tales in English is coming soon. Explore bedtime stories and calming audio for kids." />
+  <meta name="robots" content="noindex,nofollow" />
   <link rel="canonical" href={canonicalEn} />
   <link rel="alternate" hreflang="es" href={canonicalEs} />
   <link rel="alternate" hreflang="en" href={canonicalEn} />

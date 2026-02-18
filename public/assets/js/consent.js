@@ -12,6 +12,7 @@
         ? "/assets/js/tracking.js"
         : "assets/js/tracking.js"
     );
+  const TRACKING_QUERY_ENABLED = new URLSearchParams(window.location.search).get("track") === "1";
 
   const setBodyPadding = () => {
     if (!banner || banner.hasAttribute("hidden")) return;
@@ -68,7 +69,7 @@
     localStorage.setItem(KEY, value);
     acceptBtn?.blur();
     rejectBtn?.blur();
-    if (value === "accepted") {
+    if (value === "accepted" && TRACKING_QUERY_ENABLED) {
       loadMetaPixel();
       loadTracking();
     }
@@ -78,9 +79,11 @@
   const getConsent = () => localStorage.getItem(KEY);
 
   const consent = getConsent();
-  if (consent === "accepted") {
+  if (consent === "accepted" && TRACKING_QUERY_ENABLED) {
     loadMetaPixel();
     loadTracking();
+  } else if (consent === "accepted") {
+    // In v2 staging, tracking stays disabled unless ?track=1 is present.
   } else if (consent === "rejected") {
     // No cargar el Pixel
   } else {
