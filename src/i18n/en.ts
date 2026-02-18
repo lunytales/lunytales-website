@@ -19,6 +19,7 @@ export const en = {
   nav: {
     include: "See what's included",
     how: "How it works",
+    home: "Go to the main page",
     buyNow: "Buy now",
     buyMenuAria: "Buy Luny Tales now on Hotmart (menu)",
     languageEs: "ES",
@@ -99,6 +100,7 @@ export const en = {
   footer: {
     tagline: "Stories, audio, and music for sleep.",
     navTitle: "Navigation",
+    legalTitle: "Legal",
     navInclude: "What's included",
     navHow: "How it works",
     navBuy: "Buy",

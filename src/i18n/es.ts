@@ -19,6 +19,7 @@ export const es = {
   nav: {
     include: "Ver qué incluye",
     how: "Cómo funciona",
+    home: "Ir a la página principal",
     buyNow: "Comprar ahora",
     buyMenuAria: "Comprar ahora Luny Tales en Hotmart (menú)",
     languageEs: "ES",
@@ -99,6 +100,7 @@ export const es = {
   footer: {
     tagline: "Cuentos, audio y música para dormir.",
     navTitle: "Navegación",
+    legalTitle: "Legal",
     navInclude: "Qué incluye",
     navHow: "Cómo funciona",
     navBuy: "Comprar",

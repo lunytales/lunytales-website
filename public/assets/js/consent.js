@@ -12,7 +12,15 @@
         ? "/assets/js/tracking.js"
         : "assets/js/tracking.js"
     );
+  const config = window.__LUNY_CONFIG && window.__LUNY_CONFIG.flags
+    ? window.__LUNY_CONFIG.flags
+    : null;
+  const TRACKING_GATE_ENABLED =
+    config && typeof config.trackingGate === "boolean"
+      ? config.trackingGate
+      : true;
   const TRACKING_QUERY_ENABLED = new URLSearchParams(window.location.search).get("track") === "1";
+  const TRACKING_ENABLED = TRACKING_GATE_ENABLED ? TRACKING_QUERY_ENABLED : true;
 
   const setBodyPadding = () => {
     if (!banner || banner.hasAttribute("hidden")) return;
@@ -69,7 +77,7 @@
     localStorage.setItem(KEY, value);
     acceptBtn?.blur();
     rejectBtn?.blur();
-    if (value === "accepted" && TRACKING_QUERY_ENABLED) {
+    if (value === "accepted" && TRACKING_ENABLED) {
       loadMetaPixel();
       loadTracking();
     }
@@ -79,10 +87,10 @@
   const getConsent = () => localStorage.getItem(KEY);
 
   const consent = getConsent();
-  if (consent === "accepted" && TRACKING_QUERY_ENABLED) {
+  if (consent === "accepted" && TRACKING_ENABLED) {
     loadMetaPixel();
     loadTracking();
-  } else if (consent === "accepted") {
+  } else if (consent === "accepted" && TRACKING_GATE_ENABLED) {
     // In v2 staging, tracking stays disabled unless ?track=1 is present.
   } else if (consent === "rejected") {
     // No cargar el Pixel
