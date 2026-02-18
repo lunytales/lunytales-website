@@ -1,0 +1,105 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { createSeo } from "../lib/seo";
+
+const lang = "es" as const;
+const seo = createSeo({
+  lang,
+  page: "privacy",
+  meta: {
+    title: "Política de Privacidad | Luny Tales",
+    description: "Política de Privacidad de la skill Cuentos Luna por Luny Tales.",
+    ogTitle: "Política de Privacidad — Cuentos Luna",
+    ogDescription: "Política de Privacidad de la skill Cuentos Luna por Luny Tales.",
+    twitterTitle: "Política de Privacidad — Cuentos Luna",
+    twitterDescription: "Política de Privacidad de la skill Cuentos Luna por Luny Tales.",
+  },
+  baseHref: import.meta.env.BASE_URL,
+  siteUrl: Astro.site,
+});
+---
+<SiteLayout lang={lang} seo={seo} navVariant="legal" footerVariant="legal">
+  <section class="policy-hero policy-hero-full">
+    <div class="container">
+      <h1 class="policy-title">Política de Privacidad – Skill Cuentos Luna</h1>
+      <p class="policy-subtitle mb-0">Cuentos Luna por Luny Tales</p>
+    </div>
+  </section>
+
+  <section class="pt-5 pb-4">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card h-100 policy-card shadow-sm">
+            <div class="card-body">
+              <div class="policy-icon" aria-hidden="true">
+                <img src="assets/icons/policy-sin-registros.webp" alt="">
+              </div>
+              <h3 class="h6 fw-bold mb-2">Sin registros</h3>
+              <p class="mb-0">No requiere cuentas de usuario ni inicio de sesión para usar la skill.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 policy-card shadow-sm">
+            <div class="card-body">
+              <div class="policy-icon" aria-hidden="true">
+                <img src="assets/icons/policy-privacidad-total.webp" alt="">
+              </div>
+              <h3 class="h6 fw-bold mb-2">Privacidad total</h3>
+              <p class="mb-0">No recopila, almacena ni comparte información personal.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 policy-card shadow-sm">
+            <div class="card-body">
+              <div class="policy-icon" aria-hidden="true">
+                <img src="assets/icons/policy-voz-segura.webp" alt="">
+              </div>
+              <h3 class="h6 fw-bold mb-2">Voz segura</h3>
+              <p class="mb-0">Los comandos de voz son procesados por Amazon Alexa de forma protegida, conforme a sus políticas de privacidad.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-4">
+    <div class="container">
+      <div class="card policy-panel shadow-sm">
+        <div class="card-body">
+          <h2 class="h5 fw-bold mb-2">Información general</h2>
+          <p class="mb-4">Cuentos Luna es una skill para Amazon Alexa desarrollada y operada por Luny Tales. Esta política de privacidad explica cómo se maneja la información cuando usas nuestra skill.</p>
+
+          <div class="row g-4 policy-sections">
+            <div class="col-md-6">
+              <h3 class="h6 fw-bold mb-2">Seguridad de datos</h3>
+              <p class="mb-0">Cuentos Luna no recopila, almacena ni comparte información personal identificable. La interacción se realiza únicamente mediante comandos de voz procesados por Amazon Alexa, conforme a las políticas de privacidad de Amazon.</p>
+            </div>
+            <div class="col-md-6">
+              <h3 class="h6 fw-bold mb-2">Uso de la información</h3>
+              <p class="mb-0">La skill no accede a datos personales del usuario ni guarda historial de uso. Todo el contenido ofrecido es de carácter narrativo y musical, con fines de entretenimiento y relajación.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-4">
+    <div class="container">
+      <div class="card policy-contact shadow-sm">
+        <div class="card-body text-center">
+          <h2 class="h5 fw-bold mb-2">¿Tienes alguna pregunta?</h2>
+          <p class="mb-3">Estamos aquí para ayudarte a que la hora del cuento sea mágica y segura.</p>
+          <a class="btn btn-primary btn-pill btn-luny px-4" href="mailto:hola@lunytales.com">hola@lunytales.com</a>
+        </div>
+      </div>
+      <div class="text-center small text-secondary mt-3">
+        Última actualización: 8 de febrero de 2026
+      </div>
+    </div>
+  </section>
+</SiteLayout>

@@ -1,0 +1,105 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { createSeo } from "../lib/seo";
+
+const lang = "es" as const;
+const seo = createSeo({
+  lang,
+  page: "terms",
+  meta: {
+    title: "Términos de Uso | Luny Tales",
+    description: "Términos de uso de la skill Cuentos Luna por Luny Tales.",
+    ogTitle: "Términos de Uso — Cuentos Luna",
+    ogDescription: "Términos de uso de la skill Cuentos Luna por Luny Tales.",
+    twitterTitle: "Términos de Uso — Cuentos Luna",
+    twitterDescription: "Términos de uso de la skill Cuentos Luna por Luny Tales.",
+  },
+  baseHref: import.meta.env.BASE_URL,
+  siteUrl: Astro.site,
+});
+---
+<SiteLayout lang={lang} seo={seo} navVariant="legal" footerVariant="legal">
+  <section class="policy-hero policy-hero-full">
+    <div class="container">
+      <h1 class="policy-title">Términos de Uso – Skill Cuentos Luna</h1>
+      <p class="policy-subtitle mb-0">Cuentos Luna por Luny Tales</p>
+    </div>
+  </section>
+
+  <section class="pt-5 pb-4">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card h-100 policy-card shadow-sm">
+            <div class="card-body">
+              <div class="policy-icon" aria-hidden="true">
+                <img src="assets/icons/policy-sin-registros.webp" alt="">
+              </div>
+              <h3 class="h6 fw-bold mb-2">Uso Responsable</h3>
+              <p class="mb-0">Entretenimiento Seguro. El contenido de Cuentos Luna está diseñado exclusivamente para fines de entretenimiento, descanso y relajación, especialmente en rutinas nocturnas. El uso de esta skill no sustituye asesoramiento médico, psicológico, terapéutico ni profesional de ningún tipo.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 policy-card shadow-sm">
+            <div class="card-body">
+              <div class="policy-icon" aria-hidden="true">
+                <img src="assets/icons/policy-voz-segura.webp" alt="">
+              </div>
+              <h3 class="h6 fw-bold mb-2">Uso del Contenido</h3>
+              <p class="mb-0">Experiencia Narrativa y Musical. Cuentos Luna ofrece: • Cuentos narrados. • Música ambiental y relajante. Todo el contenido se reproduce de forma automática a través de comandos de voz en dispositivos compatibles con Amazon Alexa.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 policy-card shadow-sm">
+            <div class="card-body">
+              <div class="policy-icon" aria-hidden="true">
+                <img src="assets/icons/policy-privacidad-total.webp" alt="">
+              </div>
+              <h3 class="h6 fw-bold mb-2">Privacidad y Datos</h3>
+              <p class="mb-0">Sin Registro ni Datos Personales. El uso de Cuentos Luna: • No requiere crear cuentas. • No solicita inicio de sesión. • No recopila ni almacena datos personales del usuario. La interacción se limita al uso de comandos de voz procesados por Amazon Alexa, conforme a sus propias políticas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-4">
+    <div class="container">
+      <div class="card policy-panel shadow-sm">
+        <div class="card-body">
+          <h2 class="h5 fw-bold mb-2">Disponibilidad del Servicio</h2>
+          <p class="mb-4">Funcionamiento Variable. Luny Tales no garantiza que la skill esté disponible de forma continua o ininterrumpida. El acceso y funcionamiento pueden variar por: • Cambios técnicos. • Actualizaciones. • Limitaciones propias de la plataforma Alexa.</p>
+
+          <div class="row g-4 policy-sections">
+            <div class="col-md-6">
+              <h3 class="h6 fw-bold mb-2">Uso Gratuito</h3>
+              <p class="mb-0">Acceso Libre. El uso de la skill Cuentos Luna es completamente gratuito y no incluye compras dentro de la skill en su versión actual.</p>
+            </div>
+            <div class="col-md-6">
+              <h3 class="h6 fw-bold mb-2">Aceptación de los Términos</h3>
+              <p class="mb-0">Al usar la skill Cuentos Luna, el usuario acepta automáticamente estos Términos de Uso.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-4">
+    <div class="container">
+      <div class="card policy-contact shadow-sm">
+        <div class="card-body text-center">
+          <h2 class="h5 fw-bold mb-2">¿Tienes alguna pregunta?</h2>
+          <p class="mb-3">Estamos aquí para ayudarte a que la experiencia con Cuentos Luna sea clara, segura y agradable.</p>
+          <a class="btn btn-primary btn-pill btn-luny px-4" href="mailto:hola@lunytales.com">hola@lunytales.com</a>
+        </div>
+      </div>
+      <div class="text-center small text-secondary mt-3">
+        Última actualización: 8 de febrero de 2026
+      </div>
+    </div>
+  </section>
+</SiteLayout>
