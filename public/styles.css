@@ -765,25 +765,71 @@ button:focus-visible{
 }
 
 @media (max-width: 991.98px){
+  .navbar-luny .navbar-toggler{
+    border-color: rgba(255,255,255,.22);
+    background: transparent;
+  }
+
+  .navbar-luny .navbar-collapse{
+    margin-top: .45rem;
+    padding: .85rem 1rem 1.15rem;
+    background: var(--indigo);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 0 0 26px 26px;
+    box-shadow: 0 14px 30px rgba(18,24,58,.22);
+  }
+
+  .navbar-luny .navbar-collapse .navbar-nav{
+    gap: 0 !important;
+    align-items: stretch;
+  }
+
+  .navbar-luny .navbar-collapse .navbar-nav > .nav-link{
+    font-size: clamp(1.55rem, 3.4vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.2;
+    padding: .8rem 0 .95rem;
+    border-radius: 0;
+    opacity: .95;
+    border-bottom: 1px solid rgba(255,255,255,.2);
+  }
+
+  .navbar-luny .navbar-collapse .navbar-nav > .nav-link:hover{
+    opacity: 1;
+  }
+
+  .navbar-luny .navbar-collapse .navbar-nav > .nav-link:focus-visible{
+    border-radius: 12px;
+  }
+
   .navbar-luny .navbar-collapse .lang-switch{
-    padding: .16rem;
-    gap: .12rem;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: .95rem;
+    padding: .22rem;
+    gap: .18rem;
     align-self: flex-start;
-    background: rgba(255,255,255,.10);
-    border-color: rgba(255,255,255,.20);
+    background: rgba(255,255,255,.11);
+    border-color: rgba(255,255,255,.24);
     box-shadow: none;
   }
 
   .navbar-luny .navbar-collapse .lang-switch > .nav-link{
-    min-width: 2.45rem;
-    min-height: 2.35rem;
-    padding: .34rem .62rem !important;
-    font-size: .8rem;
-    opacity: .74;
+    min-height: 2.2rem;
+    padding: .42rem .92rem !important;
+    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+    font-weight: 600;
+    opacity: .75;
+    color: rgba(255,255,255,.82);
+  }
+
+  .navbar-luny .navbar-collapse .lang-switch > .nav-link[aria-current="page"]{
+    color: #052015;
+    opacity: 1;
   }
 
   .navbar-luny .navbar-collapse .lang-switch > a:not([aria-current="page"]):hover{
-    background: rgba(255,255,255,.12);
+    background: rgba(255,255,255,.14);
   }
 
   .hero-luny{
