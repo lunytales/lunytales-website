@@ -36,7 +36,6 @@ Central site config lives in `src/config/site.ts`:
 
 - `baseUrls.staging` / `baseUrls.production`
 - `IS_STAGING` (single source of truth for `noindex` and `robots.txt`)
-- `email`
 - `hotmartUrl`
 - `paths` (home, legal pages, demo, OG images)
 - `trackingGate`

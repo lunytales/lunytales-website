@@ -1,5 +1,4 @@
 import { ACTIVE_BASE_URL, IS_STAGING, SITE_CONFIG } from "../config/site";
-import type { Language } from "../i18n";
 
 type SeoPage = "home" | "homeEn" | "privacy" | "privacyEn" | "terms" | "termsEn";
 
@@ -46,7 +45,6 @@ export type SeoMeta = {
 };
 
 type CreateSeoParams = {
-  lang: Language;
   page: SeoPage;
   meta: SeoMetaInput;
   baseHref: string;

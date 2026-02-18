@@ -8,7 +8,6 @@ export const SITE_CONFIG = {
     staging: "https://lunytales.com",
     production: "https://lunytales.com",
   },
-  email: "hola@lunytales.com",
   hotmartUrl: "https://pay.hotmart.com/H100949723W?off=94i6su53",
   paths: {
     home: "",
