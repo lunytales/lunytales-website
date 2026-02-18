@@ -765,23 +765,40 @@ button:focus-visible{
 }
 
 @media (max-width: 991.98px){
-  .navbar-luny .navbar-collapse{
-    margin-top: .6rem;
-    padding: .75rem .9rem .95rem;
-    border-radius: var(--radius-md);
-    border: 1px solid rgba(255,255,255,.16);
+  .navbar-luny .navbar-brand,
+  .navbar-luny .navbar-toggler{
+    position: relative;
+    z-index: 1201;
+  }
+
+  .navbar-luny .navbar-toggler{
+    border-color: rgba(255,255,255,.2);
+    background: transparent;
+  }
+
+  .navbar-luny .navbar-collapse.show,
+  .navbar-luny .navbar-collapse.collapsing{
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    padding: calc(78px + env(safe-area-inset-top)) 1.2rem 1.2rem;
     background:
       radial-gradient(900px 520px at 78% 18%, rgba(95,196,152,.16), transparent 62%),
       radial-gradient(820px 520px at 18% 22%, rgba(20,18,60,.22), transparent 58%),
       linear-gradient(90deg, #3A329C 0%, #4338B0 38%, #5148C6 68%, #6258D6 100%);
-    box-shadow: 0 18px 42px rgba(18,24,58,.22);
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .navbar-luny .navbar-collapse.collapsing{
+    height: 100dvh !important;
   }
 
   .navbar-luny .navbar-collapse .navbar-nav{
     gap: 0 !important;
+    align-items: flex-start !important;
     opacity: 0;
-    transform: translateY(-6px);
+    transform: translateY(8px);
     transition:
       opacity var(--dur-1) var(--ease-standard),
       transform var(--dur-1) var(--ease-standard);
@@ -795,49 +812,39 @@ button:focus-visible{
 
   .navbar-luny .navbar-collapse .navbar-nav > .nav-link{
     display: block;
-    font-size: 1.03rem;
-    font-weight: 700;
+    font-size: 1.05rem;
+    font-weight: 750;
     line-height: 1.2;
-    padding: .72rem .28rem;
+    padding: .8rem 0;
+    border-radius: 0;
     opacity: .96;
   }
 
-  .navbar-luny .navbar-collapse .navbar-nav > .nav-link + .nav-link{
-    margin-top: .2rem;
+  .navbar-luny .navbar-collapse .navbar-nav > .nav-link:hover{
+    background: transparent;
+    opacity: 1;
   }
 
   .navbar-luny .navbar-collapse .lang-switch{
-    padding: .16rem;
-    gap: .12rem;
-    align-self: center;
-    margin: .95rem auto 0;
-    background: rgba(255,255,255,.10);
-    border-color: rgba(255,255,255,.20);
+    padding: .14rem;
+    gap: .1rem;
+    align-self: flex-end;
+    margin-top: 1rem;
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.18);
     box-shadow: none;
-    position: relative;
-  }
-
-  .navbar-luny .navbar-collapse .lang-switch::before{
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: -.62rem;
-    transform: translateX(-50%);
-    width: clamp(180px, 72vw, 280px);
-    height: 1px;
-    background: rgba(255,255,255,.2);
   }
 
   .navbar-luny .navbar-collapse .lang-switch > .nav-link{
-    min-width: 2.45rem;
-    min-height: 2.35rem;
-    padding: .34rem .62rem !important;
-    font-size: .8rem;
-    opacity: .74;
+    min-height: 2.2rem;
+    padding: .32rem .56rem !important;
+    font-size: .78rem;
+    opacity: .72;
   }
 
   .navbar-luny .navbar-collapse .lang-switch > a:not([aria-current="page"]):hover{
-    background: rgba(255,255,255,.12);
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.26);
   }
 
   .hero-luny{
