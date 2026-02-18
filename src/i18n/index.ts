@@ -8,77 +8,142 @@ export type HomeStrings = typeof es;
 export type HomeStringKey = keyof HomeStrings;
 export const HOME_STRING_KEYS = Object.keys(es) as HomeStringKey[];
 
-type DeepPartial<T> = {
-  [K in keyof T]?: T[K] extends Array<infer U>
-    ? Array<DeepPartial<U>>
-    : T[K] extends object
-      ? DeepPartial<T[K]>
-      : T[K];
-};
+const MAX_PARITY_ERRORS = 25;
 
-function flattenKeys(value: unknown, prefix = ""): string[] {
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function valueType(value: unknown): string {
   if (Array.isArray(value)) {
-    return value.flatMap((item, index) => flattenKeys(item, `${prefix}[${index}]`));
+    return "array";
   }
 
-  if (value && typeof value === "object") {
-    return Object.entries(value as Record<string, unknown>).flatMap(([key, nested]) => {
-      const next = prefix ? `${prefix}.${key}` : key;
-      return flattenKeys(nested, next);
-    });
+  if (value === null) {
+    return "null";
   }
 
-  return [prefix];
+  return typeof value;
 }
 
-function normalizeKeyPath(path: string): string {
-  return path.replace(/\[\d+\]/g, "[]");
+function appendError(errors: string[], message: string): void {
+  if (errors.length < MAX_PARITY_ERRORS) {
+    errors.push(message);
+  }
 }
 
-function assertDictionaryCompleteness(): void {
-  const esKeys = flattenKeys(es).map(normalizeKeyPath);
-  const enKeys = flattenKeys(en).map(normalizeKeyPath);
+function compareObjectKeys(
+  esValue: Record<string, unknown>,
+  enValue: Record<string, unknown>,
+  path: string,
+  errors: string[],
+): void {
+  const esKeys = Object.keys(esValue);
+  const enKeys = Object.keys(enValue);
 
-  const missingInEn = esKeys.filter((key) => !enKeys.includes(key));
+  const missingInEn = esKeys.filter((key) => !(key in enValue));
   if (missingInEn.length > 0) {
-    throw new Error(
-      `[i18n] Missing keys in en dictionary: ${missingInEn.join(", ")}`,
+    appendError(
+      errors,
+      `${path}: missing keys in en -> ${missingInEn.join(", ")}`,
+    );
+  }
+
+  const extraInEn = enKeys.filter((key) => !(key in esValue));
+  if (extraInEn.length > 0) {
+    appendError(
+      errors,
+      `${path}: unexpected keys in en -> ${extraInEn.join(", ")}`,
     );
   }
 }
 
-assertDictionaryCompleteness();
+function compareDictionaryShape(
+  esValue: unknown,
+  enValue: unknown,
+  path: string,
+  errors: string[],
+): void {
+  if (Array.isArray(esValue)) {
+    if (!Array.isArray(enValue)) {
+      appendError(
+        errors,
+        `${path}: expected array in en, received ${valueType(enValue)}`,
+      );
+      return;
+    }
 
-const dictionaries: Record<Language, DeepPartial<HomeStrings>> = {
-  es,
-  en,
-};
-
-function mergeWithFallback<T>(fallback: T, partial: DeepPartial<T> | undefined): T {
-  if (Array.isArray(fallback)) {
-    const source = Array.isArray(partial) ? partial : [];
-    return fallback.map((item, index) => {
-      return mergeWithFallback(item, source[index] as DeepPartial<typeof item> | undefined);
-    }) as T;
-  }
-
-  if (fallback && typeof fallback === "object") {
-    const source = partial && typeof partial === "object" ? partial : ({} as DeepPartial<T>);
-    const result: Record<string, unknown> = {};
-
-    for (const key of Object.keys(fallback as Record<string, unknown>)) {
-      result[key] = mergeWithFallback(
-        (fallback as Record<string, unknown>)[key],
-        (source as Record<string, unknown>)[key] as DeepPartial<unknown> | undefined,
+    if (esValue.length !== enValue.length) {
+      appendError(
+        errors,
+        `${path}: array length mismatch (es=${esValue.length}, en=${enValue.length})`,
       );
     }
 
-    return result as T;
+    const itemCount = Math.min(esValue.length, enValue.length);
+    for (let index = 0; index < itemCount; index += 1) {
+      const esItem = esValue[index];
+      const enItem = enValue[index];
+      const itemPath = `${path}[${index}]`;
+
+      if (isPlainObject(esItem) && isPlainObject(enItem)) {
+        compareObjectKeys(esItem, enItem, itemPath, errors);
+      }
+
+      compareDictionaryShape(esItem, enItem, itemPath, errors);
+    }
+
+    return;
   }
 
-  return (partial === undefined ? fallback : (partial as T));
+  if (isPlainObject(esValue)) {
+    if (!isPlainObject(enValue)) {
+      appendError(
+        errors,
+        `${path}: expected object in en, received ${valueType(enValue)}`,
+      );
+      return;
+    }
+
+    compareObjectKeys(esValue, enValue, path, errors);
+
+    for (const key of Object.keys(esValue)) {
+      if (key in enValue) {
+        const nestedPath = path ? `${path}.${key}` : key;
+        compareDictionaryShape(esValue[key], enValue[key], nestedPath, errors);
+      }
+    }
+
+    return;
+  }
+
+  if (valueType(esValue) !== valueType(enValue)) {
+    appendError(
+      errors,
+      `${path}: type mismatch (es=${valueType(esValue)}, en=${valueType(enValue)})`,
+    );
+  }
 }
 
+function assertDictionaryParity(): void {
+  const errors: string[] = [];
+  compareDictionaryShape(es, en, "root", errors);
+
+  if (errors.length > 0) {
+    const truncated = errors.slice(0, MAX_PARITY_ERRORS);
+    throw new Error(
+      `[i18n] Dictionary parity check failed:\n- ${truncated.join("\n- ")}`,
+    );
+  }
+}
+
+assertDictionaryParity();
+
+const dictionaries = {
+  es,
+  en,
+} satisfies Record<Language, HomeStrings>;
+
 export function getStrings(lang: Language): HomeStrings {
-  return mergeWithFallback(es, dictionaries[lang]);
+  return dictionaries[lang];
 }
