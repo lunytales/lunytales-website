@@ -4,9 +4,14 @@
   const acceptBtn = document.getElementById("cookieAccept");
   const rejectBtn = document.getElementById("cookieReject");
   const prefsBtn = document.getElementById("cookiePrefs");
-  const TRACKING_SRC = (document.currentScript && document.currentScript.getAttribute("src") || "").startsWith("/")
-    ? "/assets/js/tracking.js"
-    : "assets/js/tracking.js";
+  const currentScriptSrc = (document.currentScript && document.currentScript.getAttribute("src")) || "";
+  const TRACKING_SRC = currentScriptSrc.includes("consent.js")
+    ? currentScriptSrc.replace("consent.js", "tracking.js")
+    : (
+      currentScriptSrc.startsWith("/")
+        ? "/assets/js/tracking.js"
+        : "assets/js/tracking.js"
+    );
 
   const setBodyPadding = () => {
     if (!banner || banner.hasAttribute("hidden")) return;
