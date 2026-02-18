@@ -1,7 +1,7 @@
 import { ACTIVE_BASE_URL, IS_STAGING, SITE_CONFIG } from "../config/site";
 import type { Language } from "../i18n";
 
-type SeoPage = "home" | "homeEn" | "privacy" | "terms";
+type SeoPage = "home" | "homeEn" | "privacy" | "privacyEn" | "terms" | "termsEn";
 
 type SeoMetaInput = {
   title: string;
@@ -57,7 +57,18 @@ const PAGE_PATHS: Record<SeoPage, string> = {
   home: SITE_CONFIG.paths.home,
   homeEn: SITE_CONFIG.paths.homeEn,
   privacy: SITE_CONFIG.paths.privacy,
+  privacyEn: SITE_CONFIG.paths.privacyEn,
   terms: SITE_CONFIG.paths.terms,
+  termsEn: SITE_CONFIG.paths.termsEn,
+};
+
+const ALTERNATE_PAGE_GROUPS: Record<SeoPage, { es: SeoPage; en: SeoPage }> = {
+  home: { es: "home", en: "homeEn" },
+  homeEn: { es: "home", en: "homeEn" },
+  privacy: { es: "privacy", en: "privacyEn" },
+  privacyEn: { es: "privacy", en: "privacyEn" },
+  terms: { es: "terms", en: "termsEn" },
+  termsEn: { es: "terms", en: "termsEn" },
 };
 
 function normalizeBase(baseHref: string): string {
@@ -76,16 +87,14 @@ export function createSeo(params: CreateSeoParams): SeoMeta {
   const siteUrl = resolveSiteUrl(params.siteUrl);
   const canonical = resolveUrl(siteUrl, params.baseHref, PAGE_PATHS[params.page]);
 
-  const homeEsUrl = resolveUrl(siteUrl, params.baseHref, SITE_CONFIG.paths.home);
-  const homeEnUrl = resolveUrl(siteUrl, params.baseHref, SITE_CONFIG.paths.homeEn);
-  const alternates =
-    params.page === "home" || params.page === "homeEn"
-      ? [
-          { hreflang: "es", href: homeEsUrl },
-          { hreflang: "en", href: homeEnUrl },
-          { hreflang: "x-default", href: homeEsUrl },
-        ]
-      : [];
+  const alternatePages = ALTERNATE_PAGE_GROUPS[params.page];
+  const alternateEsUrl = resolveUrl(siteUrl, params.baseHref, PAGE_PATHS[alternatePages.es]);
+  const alternateEnUrl = resolveUrl(siteUrl, params.baseHref, PAGE_PATHS[alternatePages.en]);
+  const alternates = [
+    { hreflang: "es", href: alternateEsUrl },
+    { hreflang: "en", href: alternateEnUrl },
+    { hreflang: "x-default", href: alternateEsUrl },
+  ];
 
   const ogImagePng = resolveUrl(siteUrl, params.baseHref, SITE_CONFIG.paths.ogImagePng);
   const ogImageWebp = resolveUrl(siteUrl, params.baseHref, SITE_CONFIG.paths.ogImageWebp);
