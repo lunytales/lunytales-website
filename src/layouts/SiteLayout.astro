@@ -137,7 +137,7 @@ const secondaryOgImage = seo.og.images[1];
               <a class="nav-link" href="#incluye">{strings.nav.include}</a>
               <a class="nav-link" href="#como">{strings.nav.how}</a>
 
-              <div class="d-flex align-items-center" role="group" aria-label={strings.a11y.languageSwitcher}>
+              <div class="d-flex align-items-center lang-switch" role="group" aria-label={strings.a11y.languageSwitcher}>
                 <a
                   class="nav-link px-1"
                   href={switchEsHref}
@@ -170,7 +170,7 @@ const secondaryOgImage = seo.og.images[1];
           ) : (
             <>
               <a class="nav-link" href={currentLangHomeHref}>{resolvedLegalNavLabel}</a>
-              <div class="d-flex align-items-center" role="group" aria-label={strings.a11y.languageSwitcher}>
+              <div class="d-flex align-items-center lang-switch" role="group" aria-label={strings.a11y.languageSwitcher}>
                 <a
                   class="nav-link px-1"
                   href={switchEsHref}
