@@ -13,7 +13,7 @@ export const es = {
     openMenu: "Abrir menú",
     languageSwitcher: "Selector de idioma",
     switchToEs: "Cambiar a Español",
-    switchToEn: "Cambiar a Inglés",
+    switchToEn: "Cambiar a English",
     cookieRegion: "Preferencias de cookies",
   },
   nav: {
@@ -22,9 +22,8 @@ export const es = {
     home: "Ir a la página principal",
     buyNow: "Comprar ahora",
     buyMenuAria: "Comprar ahora Luny Tales en Hotmart (menú)",
-    languageLabel: "Idioma",
-    languageEs: "ES",
-    languageEn: "EN",
+    languageEs: "Español",
+    languageEn: "English",
   },
   hero: {
     titleImageSrc: "assets/img/logo2.svg",
