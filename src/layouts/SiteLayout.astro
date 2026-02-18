@@ -260,7 +260,7 @@ const secondaryOgImage = seo.og.images[1];
     </div>
   </div>
 
-  <script is:inline define:vars={{ trackingGateEnabled: SITE_CONFIG.flags.trackingGate }}>
+  <script is:inline define:vars={{ trackingGateEnabled: SITE_CONFIG.trackingGate }}>
     window.__LUNY_CONFIG = window.__LUNY_CONFIG || {};
     window.__LUNY_CONFIG.flags = Object.assign({}, window.__LUNY_CONFIG.flags, {
       trackingGate: trackingGateEnabled,

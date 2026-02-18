@@ -1,4 +1,4 @@
-import { ACTIVE_BASE_URL, SITE_CONFIG } from "../config/site";
+import { ACTIVE_BASE_URL, IS_STAGING, SITE_CONFIG } from "../config/site";
 import type { Language } from "../i18n";
 
 type SeoPage = "home" | "homeEn" | "privacy" | "terms";
@@ -93,7 +93,7 @@ export function createSeo(params: CreateSeoParams): SeoMeta {
   return {
     title: params.meta.title,
     description: params.meta.description,
-    robots: SITE_CONFIG.flags.noindex ? "noindex,nofollow" : "index,follow",
+    robots: IS_STAGING ? "noindex,nofollow" : "index,follow",
     canonical,
     alternates,
     og: {
