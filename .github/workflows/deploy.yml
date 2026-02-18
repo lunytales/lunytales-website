@@ -28,6 +28,30 @@ jobs:
       - name: Build Astro site
         run: npm run build
 
+      - name: Verify required build artifacts
+        run: |
+          set -euo pipefail
+          test -f dist/index.html
+          test -f dist/en/index.html
+          test -f dist/privacy/index.html
+          test -f dist/terms/index.html
+
+      - name: Smoke test built routes
+        run: |
+          set -euo pipefail
+          python3 -m http.server --bind 127.0.0.1 --directory dist 4173 >/tmp/lunytales-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          sleep 1
+
+          for route in / /en/ /privacy/ /terms/; do
+            status_code=$(curl -s -o /dev/null -w "%{http_code}" "http://127.0.0.1:4173${route}")
+            if [ "$status_code" != "200" ]; then
+              echo "Route ${route} returned ${status_code}"
+              exit 1
+            fi
+          done
+
       - name: Publish to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
