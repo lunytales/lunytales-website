@@ -26,6 +26,8 @@ export const es = {
     languageEn: "EN",
   },
   hero: {
+    titleImageSrc: "assets/img/logo2.svg",
+    mascotImageSrc: "assets/img/mascota.webp",
     logoAlt: "A dormir en 3 cuentos",
     title: "Aventuras que florecen en tu mente.",
     subtitle: "Para niños de 3 a 6 años · Tres cuentos de 3 minutos · Lectura o audio, con música suave para dormir.",

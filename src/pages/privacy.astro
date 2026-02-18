@@ -1,8 +1,10 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
+import { getStrings } from "../i18n";
 import { createSeo } from "../lib/seo";
 
 const lang = "es" as const;
+const strings = getStrings(lang);
 const seo = createSeo({
   lang,
   page: "privacy",
@@ -94,7 +96,7 @@ const seo = createSeo({
         <div class="card-body text-center">
           <h2 class="h5 fw-bold mb-2">¿Tienes alguna pregunta?</h2>
           <p class="mb-3">Estamos aquí para ayudarte a que la hora del cuento sea mágica y segura.</p>
-          <a class="btn btn-primary btn-pill btn-luny px-4" href="mailto:hola@lunytales.com">hola@lunytales.com</a>
+          <a class="btn btn-primary btn-pill btn-luny px-4" href={strings.footer.emailHref}>{strings.footer.email}</a>
         </div>
       </div>
       <div class="text-center small text-secondary mt-3">
