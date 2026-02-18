@@ -35,17 +35,15 @@ Build output is generated in `dist/` (never edit `dist/` manually).
 Central site config lives in `src/config/site.ts`:
 
 - `baseUrls.staging` / `baseUrls.production`
-- `environment` (switch target with `PUBLIC_SITE_ENV`, defaults to `staging`)
+- `IS_STAGING` (single source of truth for `noindex` and `robots.txt`)
 - `email`
 - `hotmartUrl`
 - `paths` (home, legal pages, demo, OG images)
-- `flags.noindex`
-- `flags.trackingGate`
+- `trackingGate`
 
 SEO helpers are in `src/lib/seo.ts`.
 
-## Staging flags
+## Staging behavior
 
-- `flags.noindex: true` keeps meta robots as `noindex,nofollow`.
-- `flags.trackingGate: true` keeps tracking disabled unless URL contains `?track=1`.
-
+- `IS_STAGING: true` sets `meta robots` to `noindex,nofollow` and `robots.txt` to `Disallow: /`.
+- `trackingGate: true` keeps tracking disabled unless URL contains `?track=1`.
