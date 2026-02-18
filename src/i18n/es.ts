@@ -1,0 +1,120 @@
+export const es = {
+  meta: {
+    title: "Luny Tales",
+    description: "PDF interactivo + audiocuentos + música para dormir + Skill de Alexa.",
+    ogTitle: "Luny Tales",
+    ogDescription: "PDF interactivo + audiocuentos + música para dormir + Skill de Alexa.",
+    twitterTitle: "Luny Tales",
+    twitterDescription: "PDF interactivo + audiocuentos + música para dormir + Skill de Alexa.",
+  },
+  a11y: {
+    skipToContent: "Saltar al contenido",
+    mainNav: "Navegación principal",
+    openMenu: "Abrir menú",
+    languageSwitcher: "Selector de idioma",
+    switchToEs: "Cambiar a Español",
+    switchToEn: "Cambiar a Inglés",
+    cookieRegion: "Preferencias de cookies",
+  },
+  nav: {
+    include: "Ver qué incluye",
+    how: "Cómo funciona",
+    buyNow: "Comprar ahora",
+    buyMenuAria: "Comprar ahora Luny Tales en Hotmart (menú)",
+    languageEs: "ES",
+    languageEn: "EN",
+  },
+  hero: {
+    logoAlt: "A dormir en 3 cuentos",
+    title: "Aventuras que florecen en tu mente.",
+    subtitle: "Para niños de 3 a 6 años · Tres cuentos de 3 minutos · Lectura o audio, con música suave para dormir.",
+    buyNow: "Comprar ahora",
+    buyAria: "Comprar ahora Luny Tales en Hotmart (hero)",
+    includeCta: "Ver qué incluye",
+    mascotAlt: "Luny, el búho mascota, sosteniendo una tablet con la portada de A dormir en 3 cuentos",
+  },
+  includes: {
+    title: "Qué incluye",
+    items: [
+      {
+        title: "PDF interactivo",
+        note: "Contenido principal (pago único).",
+      },
+      {
+        title: "Audiocuentos",
+        note: "Acceso para escuchar cuando quieras.",
+      },
+      {
+        title: "Música para dormir",
+        note: "Ambiente suave para cerrar el día.",
+      },
+      {
+        title: "Skill de Alexa",
+        note: "Escúchalos por comando de voz, manos libres.",
+      },
+    ],
+  },
+  stories: {
+    title: "A dormir en 3 cuentos",
+    subtitle: "3 cuentos que siembran valores mientras tus hijos descansan.",
+    items: [
+      {
+        imageAlt: "Portada del cuento: ¿Quién vive en la cueva?",
+        title: "¿Quién vive en la cueva?",
+        description: "Timo descubre, a través del eco, cómo se sienten sus amigos.",
+      },
+      {
+        imageAlt: "Portada del cuento: Donde florecen los deseos",
+        title: "Donde florecen los deseos",
+        description: "Galen aprende que sus acciones hacen que las estrellas viajen a su jardín.",
+      },
+      {
+        imageAlt: "Portada del cuento: Lira y la lluvia de risas",
+        title: "Lira y la lluvia de risas",
+        description: "Una golondrina que no se rinde hasta que el bosque vuelve a sonreír.",
+      },
+    ],
+    buyNow: "Comprar ahora",
+    buyAria: "Comprar ahora Luny Tales en Hotmart (sección cuentos)",
+    demo: "Ver demo",
+    demoAria: "Ver demo (PDF) — se abre en una nueva pestaña",
+  },
+  how: {
+    title: "Cómo funciona",
+    items: [
+      {
+        title: "Elige un cuento",
+        description: "Selecciona una historia corta y perfecta para cerrar el día.",
+      },
+      {
+        title: "Lee o escucha",
+        description: "PDF interactivo o audiocuento narrado: tú eliges según la noche.",
+      },
+      {
+        title: "Cierra con calma",
+        description: "Música ambiental y control por voz con Alexa para una rutina perfecta.",
+      },
+    ],
+  },
+  footer: {
+    tagline: "Cuentos, audio y música para dormir.",
+    navTitle: "Navegación",
+    navInclude: "Qué incluye",
+    navHow: "Cómo funciona",
+    navBuy: "Comprar",
+    contactTitle: "Escríbenos",
+    email: "hola@lunytales.com",
+    emailButton: "Enviar correo",
+    emailHref: "mailto:hola@lunytales.com?subject=Contacto%20%E2%80%94%20Luny%20Tales&body=Hola%20Luny%20Tales%2C%0D%0A%0D%0A",
+    mascotAlt: "Luny, el búho mascota, sosteniendo una tablet con la portada de A dormir en 3 cuentos",
+    legalPrivacy: "Privacidad",
+    legalTerms: "Términos",
+    legalCookies: "Preferencias de cookies",
+  },
+  cookie: {
+    textLine1: "Queremos ofrecerte la mejor experiencia posible. Usamos cookies para mejorar el contenido y entender cómo nos visitas.",
+    textLine2: "Puedes aceptarlas o rechazarlas cuando quieras.",
+    accept: "Aceptar",
+    reject: "Rechazar",
+  },
+} as const;

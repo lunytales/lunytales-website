@@ -1,0 +1,361 @@
+---
+import { getStrings, type Language } from "../i18n";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const strings = getStrings(lang);
+
+const baseHref = import.meta.env.BASE_URL;
+const siteUrl = Astro.site ?? new URL("https://lunytales.com");
+const canonicalEs = new URL(baseHref, siteUrl).href;
+const canonicalEn = new URL(`${baseHref}en/`, siteUrl).href;
+const canonicalCurrent = lang === "en" ? canonicalEn : canonicalEs;
+const ogImagePng = new URL(`${baseHref}assets/img/og-lunytales.png`, siteUrl).href;
+const ogImageWebp = new URL(`${baseHref}assets/img/og-lunytales.webp`, siteUrl).href;
+
+const includeCardClasses = [
+  "incluye-card--1",
+  "incluye-card--2",
+  "incluye-card--3",
+  "incluye-card--4",
+] as const;
+
+const storyImagePaths = ["timo.webp", "galen.webp", "lira.webp"] as const;
+const howPillClasses = ["how-pill--lila", "how-pill--mint", "how-pill--durazno"] as const;
+const howIconPaths = ["libro.webp", "audio.webp", "luna.webp"] as const;
+
+const homeHref = "./";
+const enHref = "en/";
+const brandHref = lang === "en" ? enHref : homeHref;
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <base href={baseHref} />
+  <title>{strings.meta.title}</title>
+  <meta name="description" content={strings.meta.description} />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="canonical" href={canonicalCurrent} />
+  <link rel="alternate" hreflang="es" href={canonicalEs} />
+  <link rel="alternate" hreflang="en" href={canonicalEn} />
+  <link rel="alternate" hreflang="x-default" href={canonicalEs} />
+
+  <meta property="og:title" content={strings.meta.ogTitle} />
+  <meta property="og:description" content={strings.meta.ogDescription} />
+  <meta property="og:image" content={ogImagePng} />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image" content={ogImageWebp} />
+  <meta property="og:image:type" content="image/webp" />
+  <meta property="og:url" content={canonicalCurrent} />
+  <meta property="og:type" content="website" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={strings.meta.twitterTitle} />
+  <meta name="twitter:description" content={strings.meta.twitterDescription} />
+  <meta name="twitter:image" content={ogImagePng} />
+
+  <link rel="icon" href="favicon.ico" sizes="any" type="image/x-icon">
+  <link rel="icon" href="assets/favicon/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="assets/favicon/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="assets/favicon/favicon.svg" sizes="any" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon-152.png" sizes="152x152">
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon-167.png" sizes="167x167">
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" sizes="180x180">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./styles.css" rel="stylesheet">
+</head>
+
+<body class="bg-light luny">
+  <a class="skip-link" href="#main">{strings.a11y.skipToContent}</a>
+
+  <nav class="navbar navbar-expand-lg navbar-luny sticky-top" aria-label={strings.a11y.mainNav}>
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href={brandHref}>
+        <img src="assets/img/logo-horizontal.svg" alt="Luny Tales" width="178" height="28" class="nav-logo">
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#nav"
+        aria-controls="nav"
+        aria-expanded="false"
+        aria-label={strings.a11y.openMenu}
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="nav">
+        <div class="navbar-nav ms-auto gap-2 align-items-lg-center">
+          <a class="nav-link" href="#incluye">{strings.nav.include}</a>
+          <a class="nav-link" href="#como">{strings.nav.how}</a>
+
+          <div class="d-flex align-items-center" role="group" aria-label={strings.a11y.languageSwitcher}>
+            <a
+              class="nav-link px-1"
+              href={homeHref}
+              aria-label={strings.a11y.switchToEs}
+              aria-current={lang === "es" ? "page" : undefined}
+            >
+              {strings.nav.languageEs}
+            </a>
+            <span class="nav-link px-0" aria-hidden="true">|</span>
+            <a
+              class="nav-link px-1"
+              href={enHref}
+              aria-label={strings.a11y.switchToEn}
+              aria-current={lang === "en" ? "page" : undefined}
+            >
+              {strings.nav.languageEn}
+            </a>
+          </div>
+
+          <a
+            class="btn btn-primary btn-pill btn-luny px-4 nav-cta d-lg-none"
+            href="https://pay.hotmart.com/H100949723W?off=94i6su53"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={strings.nav.buyMenuAria}
+          >
+            {strings.nav.buyNow}
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main" role="main">
+    <header class="hero-luny hero-luny--grad">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6">
+            <img
+              src="assets/img/logo2.svg"
+              alt={strings.hero.logoAlt}
+              width="402"
+              height="202"
+              class="hero-logo mb-4"
+              loading="eager"
+            >
+
+            <h1 class="hero-title mb-3">{strings.hero.title}</h1>
+
+            <p class="hero-subtitle mb-4">{strings.hero.subtitle}</p>
+
+            <div class="d-flex flex-wrap gap-3" id="comprar">
+              <a
+                class="btn btn-primary btn-pill btn-luny px-4"
+                href="https://pay.hotmart.com/H100949723W?off=94i6su53"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={strings.hero.buyAria}
+              >
+                {strings.hero.buyNow}
+              </a>
+              <a class="btn btn-outline-mint btn-pill btn-luny px-4" href="#incluye">
+                {strings.hero.includeCta}
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-6 text-center text-lg-end">
+            <img
+              src="assets/img/mascota.webp"
+              alt={strings.hero.mascotAlt}
+              width="1024"
+              height="1024"
+              class="hero-mascota"
+              loading="lazy"
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="py-5 bg-white border-top" id="incluye">
+      <div class="container">
+        <h2 class="fw-bold mb-4">{strings.includes.title}</h2>
+
+        <div class="row g-3">
+          {strings.includes.items.map((item, index) => (
+            <div class="col-md-6 col-lg-3">
+              <div class={`card h-100 incluye-card ${includeCardClasses[index] ?? ""}`}>
+                <div class="card-body">
+                  <h3 class="fw-bold h6 m-0">{item.title}</h3>
+                  <div class="incluye-note small mt-1">{item.note}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-5" id="a-dormir-3-cuentos">
+      <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
+          <div>
+            <h2 class="fw-bold mb-1">{strings.stories.title}</h2>
+            <p class="text-secondary mb-0">{strings.stories.subtitle}</p>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          {strings.stories.items.map((story, index) => (
+            <div class="col-lg-4">
+              <article class="story-vertical card h-100 shadow-sm">
+                <div class="story-vertical__media">
+                  <img
+                    src={`assets/img/${storyImagePaths[index] ?? storyImagePaths[0]}`}
+                    alt={story.imageAlt}
+                    width="1100"
+                    height="1100"
+                    class="story-vertical__img"
+                    loading="lazy"
+                  >
+                </div>
+                <div class="story-vertical__body">
+                  <h3 class="story-title">{story.title}</h3>
+                  <p class="story-desc">{story.description}</p>
+                </div>
+              </article>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-4 d-flex flex-column flex-lg-row gap-3 align-items-start cta-stack">
+          <a
+            class="btn btn-primary btn-pill btn-luny px-4"
+            href="https://pay.hotmart.com/H100949723W?off=94i6su53"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={strings.stories.buyAria}
+          >
+            {strings.stories.buyNow}
+          </a>
+          <a
+            class="btn btn-outline-mint btn-pill btn-luny px-4"
+            href="assets/demo/demo.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={strings.stories.demoAria}
+          >
+            {strings.stories.demo}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-5" id="como">
+      <div class="container">
+        <h2 class="fw-bold mb-4">{strings.how.title}</h2>
+
+        <div class="row g-3">
+          {strings.how.items.map((item, index) => (
+            <div class="col-lg-4">
+              <div class={`how-pill ${howPillClasses[index] ?? howPillClasses[0]}`}>
+                <div class="how-pill__text">
+                  <h3 class="how-pill__title">{item.title}</h3>
+                  <div class="how-pill__desc">{item.description}</div>
+                </div>
+                <img class="how-pill__icon" src={`assets/icons/${howIconPaths[index] ?? howIconPaths[0]}`} alt="" loading="lazy">
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-luny">
+    <div class="container position-relative">
+      <div class="row gy-4 align-items-start">
+        <div class="col-lg-4">
+          <a href="#" class="d-inline-flex align-items-center gap-2 text-decoration-none">
+            <img src="assets/img/logo-horizontal.svg" alt="Luny Tales" height="28">
+          </a>
+          <p class="footer-tagline mt-3 mb-0">{strings.footer.tagline}</p>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <div class="footer-title">{strings.footer.navTitle}</div>
+          <ul class="list-unstyled footer-links mb-0">
+            <li><a href="#incluye">{strings.footer.navInclude}</a></li>
+            <li><a href="#como">{strings.footer.navHow}</a></li>
+            <li><a href="#comprar">{strings.footer.navBuy}</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-lg-5">
+          <div class="footer-title">{strings.footer.contactTitle}</div>
+          <span class="footer-email d-inline-block">{strings.footer.email}</span>
+
+          <div class="mt-2">
+            <a class="btn btn-primary btn-pill btn-luny px-4" href={strings.footer.emailHref}>
+              {strings.footer.emailButton}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <img
+        src="assets/img/mascota.webp"
+        alt={strings.footer.mascotAlt}
+        width="1024"
+        height="1024"
+        class="footer-mascota d-none d-lg-block"
+        loading="lazy"
+      >
+
+      <div class="footer-bottom mt-4 pt-3">
+        <div class="small">© <span id="y"></span> Luny Tales</div>
+        <div class="footer-legal small">
+          <a href="privacy">{strings.footer.legalPrivacy}</a>
+          <span aria-hidden="true">|</span>
+          <a href="terms">{strings.footer.legalTerms}</a>
+          <span aria-hidden="true">|</span>
+          <button type="button" class="cookie-pref-link" id="cookiePrefs">{strings.footer.legalCookies}</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div
+    class="cookie-banner"
+    id="cookieBanner"
+    hidden
+    role="region"
+    aria-label={strings.a11y.cookieRegion}
+    aria-live="polite"
+  >
+    <div class="cookie-banner__inner">
+      <p class="cookie-banner__text">
+        {strings.cookie.textLine1}<br class="cookie-banner__br">
+        {strings.cookie.textLine2}
+      </p>
+      <div class="cookie-banner__actions">
+        <button type="button" class="btn btn-primary btn-pill btn-luny cookie-banner__btn" id="cookieAccept">
+          {strings.cookie.accept}
+        </button>
+        <button type="button" class="btn btn-outline-mint btn-pill btn-luny cookie-banner__btn" id="cookieReject">
+          {strings.cookie.reject}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script defer src="assets/js/utils.js"></script>
+  <script defer src="assets/js/nav.js"></script>
+  <script defer src="assets/js/consent.js"></script>
+</body>
+</html>

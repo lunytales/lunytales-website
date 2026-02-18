@@ -2,9 +2,16 @@
   const nav = document.getElementById("nav");
   const toggler = document.querySelector(".navbar-toggler");
   if (!nav || !toggler) return;
+  const docLang = (document.documentElement.getAttribute("lang") || "es").toLowerCase();
+  const labels = docLang.startsWith("en")
+    ? { open: "Open menu", close: "Close menu" }
+    : { open: "Abrir menú", close: "Cerrar menú" };
+  const bootstrapWarning = docLang.startsWith("en")
+    ? "Bootstrap is not available. Accessible menu was not initialized."
+    : "Bootstrap no está disponible. El menú accesible no se inicializó.";
   if (!window.bootstrap) {
     if (window.location.hostname === "localhost" || window.location.protocol === "file:") {
-      console.warn("Bootstrap no está disponible. El menú accesible no se inicializó.");
+      console.warn(bootstrapWarning);
     }
     return;
   }
@@ -19,7 +26,7 @@
 
   const syncAriaLabel = () => {
     const isOpen = toggler.getAttribute("aria-expanded") === "true";
-    toggler.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+    toggler.setAttribute("aria-label", isOpen ? labels.close : labels.open);
     toggler.classList.toggle("is-open", isOpen);
   };
 
