@@ -44,7 +44,7 @@ jobs:
           trap 'kill "$server_pid"' EXIT
           sleep 1
 
-          for route in / /en/ /privacy/ /terms/; do
+          for route in / /en/ /privacy/ /terms/ /styles.css /assets/demo/demo.pdf; do
             status_code=$(curl -s -o /dev/null -w "%{http_code}" "http://127.0.0.1:4173${route}")
             if [ "$status_code" != "200" ]; then
               echo "Route ${route} returned ${status_code}"
