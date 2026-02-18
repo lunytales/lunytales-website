@@ -16,6 +16,39 @@ type DeepPartial<T> = {
       : T[K];
 };
 
+function flattenKeys(value: unknown, prefix = ""): string[] {
+  if (Array.isArray(value)) {
+    return value.flatMap((item, index) => flattenKeys(item, `${prefix}[${index}]`));
+  }
+
+  if (value && typeof value === "object") {
+    return Object.entries(value as Record<string, unknown>).flatMap(([key, nested]) => {
+      const next = prefix ? `${prefix}.${key}` : key;
+      return flattenKeys(nested, next);
+    });
+  }
+
+  return [prefix];
+}
+
+function normalizeKeyPath(path: string): string {
+  return path.replace(/\[\d+\]/g, "[]");
+}
+
+function assertDictionaryCompleteness(): void {
+  const esKeys = flattenKeys(es).map(normalizeKeyPath);
+  const enKeys = flattenKeys(en).map(normalizeKeyPath);
+
+  const missingInEn = esKeys.filter((key) => !enKeys.includes(key));
+  if (missingInEn.length > 0) {
+    throw new Error(
+      `[i18n] Missing keys in en dictionary: ${missingInEn.join(", ")}`,
+    );
+  }
+}
+
+assertDictionaryCompleteness();
+
 const dictionaries: Record<Language, DeepPartial<HomeStrings>> = {
   es,
   en,
