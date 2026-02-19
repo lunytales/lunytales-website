@@ -18,7 +18,7 @@ type AlternateLink = {
 
 type OpenGraphImage = {
   url: string;
-  type: "image/png" | "image/webp";
+  type: "image/png" | "image/webp" | "image/jpeg";
   width?: number;
   height?: number;
 };
@@ -94,7 +94,7 @@ export function createSeo(params: CreateSeoParams): SeoMeta {
     { hreflang: "x-default", href: alternateEsUrl },
   ];
 
-  const ogImagePng = resolveUrl(siteUrl, params.baseHref, SITE_CONFIG.paths.ogImagePng);
+  const ogImage = resolveUrl(siteUrl, params.baseHref, SITE_CONFIG.paths.ogImage);
 
   return {
     title: params.meta.title,
@@ -109,8 +109,8 @@ export function createSeo(params: CreateSeoParams): SeoMeta {
       type: "website",
       images: [
         {
-          url: ogImagePng,
-          type: "image/png",
+          url: ogImage,
+          type: "image/jpeg",
           width: 1200,
           height: 630,
         },
@@ -120,7 +120,7 @@ export function createSeo(params: CreateSeoParams): SeoMeta {
       card: "summary_large_image",
       title: params.meta.twitterTitle ?? params.meta.title,
       description: params.meta.twitterDescription ?? params.meta.description,
-      image: ogImagePng,
+      image: ogImage,
     },
   };
 }

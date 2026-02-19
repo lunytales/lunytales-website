@@ -17,8 +17,7 @@ export const SITE_CONFIG = {
     privacyEn: "en/privacy/",
     termsEn: "en/terms/",
     demoPdf: "assets/demo/demo.pdf",
-    ogImagePng: "assets/img/og-lunytales.png",
-    ogImageWebp: "assets/img/og-lunytales.webp",
+    ogImage: "assets/img/og-lunytales.jpg",
   },
   trackingGate: true,
 } as const;
