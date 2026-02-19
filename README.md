@@ -2,6 +2,10 @@
 
 Astro static site for Luny Tales v2.
 
+## Full technical documentation
+
+- See `docs/PROJECT_HANDBOOK.md` for architecture, configuration, SEO/i18n rules, CI/CD, and migration notes.
+
 ## Local development
 
 ```bash
@@ -34,8 +38,8 @@ Build output is generated in `dist/` (never edit `dist/` manually).
 
 Central site config lives in `src/config/site.ts`:
 
-- `baseUrls.staging` / `baseUrls.production`
-- `IS_STAGING` (single source of truth for `noindex` and `robots.txt`)
+- `SITE_CONFIG.origin` (single source of truth for canonical origin)
+- `IS_STAGING` from `PUBLIC_IS_STAGING` (single source of truth for `noindex` and `robots.txt`)
 - `hotmartUrl`
 - `paths` (home, legal pages, demo, OG images)
 - `trackingGate`
