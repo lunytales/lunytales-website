@@ -26,13 +26,13 @@ export const en = {
   hero: {
     titleImageSrc: "assets/img/hero-title-en.svg",
     mascotImageSrc: "assets/img/mascota-en.webp",
-    logoAlt: "Sleep in 3 stories",
+    logoAlt: "Bedtime in 3 stories",
     title: "Adventures that bloom in your mind.",
     subtitle: "For kids ages 3 to 6 · Three 3-minute stories · Read or listen, with gentle music for bedtime.",
     buyNow: "Buy now",
     buyAria: "Buy Luny Tales now on Hotmart (hero)",
     includeCta: "See what's included",
-    mascotAlt: "Luny the owl mascot holding a tablet with the cover of Sleep in 3 Stories",
+    mascotAlt: "Luny the owl mascot holding a tablet with the cover of Bedtime in 3 Stories",
   },
   includes: {
     title: "What's included",
@@ -56,7 +56,7 @@ export const en = {
     ],
   },
   stories: {
-    title: "Sleep in 3 stories",
+    title: "Bedtime in 3 stories",
     subtitle: "3 stories that plant values while your children rest.",
     items: [
       {
@@ -107,7 +107,7 @@ export const en = {
     contactTitle: "Contact us",
     email: "hello@lunytales.com",
     emailButton: "Send email",
-    mascotAlt: "Luny the owl mascot holding a tablet with the cover of Sleep in 3 Stories",
+    mascotAlt: "Luny the owl mascot holding a tablet with the cover of Bedtime in 3 Stories",
     legalPrivacy: "Privacy",
     legalTerms: "Terms",
     legalCookies: "Cookie preferences",
