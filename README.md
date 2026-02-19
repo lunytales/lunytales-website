@@ -5,6 +5,7 @@ Astro static site for Luny Tales v2.
 ## Full technical documentation
 
 - See `docs/PROJECT_HANDBOOK.md` for architecture, configuration, SEO/i18n rules, CI/CD, and migration notes.
+- Spanish version: `docs/PROJECT_HANDBOOK.es.md`.
 
 ## Local development
 
