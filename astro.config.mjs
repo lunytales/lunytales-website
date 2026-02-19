@@ -5,6 +5,6 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   output: 'static',
   site: 'https://lunytales.com',
-  base: '/lunytales-v2',
+  base: '/',
   trailingSlash: 'always',
 });

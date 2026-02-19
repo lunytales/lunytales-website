@@ -1,7 +1,5 @@
 export const IS_STAGING =
-  import.meta.env.PUBLIC_IS_STAGING === undefined
-    ? true
-    : import.meta.env.PUBLIC_IS_STAGING === "true";
+  import.meta.env.PUBLIC_IS_STAGING === "true";
 
 export const SITE_CONFIG = {
   baseUrls: {

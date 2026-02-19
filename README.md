@@ -1,6 +1,6 @@
 # lunytales-v2
 
-Astro static site for Luny Tales v2 (staging on GitHub Pages).
+Astro static site for Luny Tales v2.
 
 ## Local development
 
@@ -42,7 +42,8 @@ Central site config lives in `src/config/site.ts`:
 
 SEO helpers are in `src/lib/seo.ts`.
 
-## Staging behavior
+## Environment behavior
 
-- `IS_STAGING: true` sets `meta robots` to `noindex,nofollow` and `robots.txt` to `Disallow: /`.
+- `IS_STAGING: false` (default) sets `meta robots` to `index,follow` and `robots.txt` to `Allow: /`.
+- Set `PUBLIC_IS_STAGING=true` to enforce `meta robots` as `noindex,nofollow` and `robots.txt` as `Disallow: /`.
 - `trackingGate: true` keeps tracking disabled unless URL contains `?track=1`.
