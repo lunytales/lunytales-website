@@ -776,7 +776,7 @@ button:focus-visible{
     background: var(--indigo);
     border: 0;
     border-radius: 0 0 26px 26px;
-    box-shadow: 0 14px 30px rgba(18,24,58,.22);
+    box-shadow: none;
   }
 
   .navbar-luny .navbar-collapse .navbar-nav{
