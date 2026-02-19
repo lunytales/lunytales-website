@@ -1,4 +1,4 @@
-import { ACTIVE_BASE_URL, IS_STAGING, SITE_CONFIG } from "../config/site";
+import { IS_STAGING, SITE_CONFIG, SITE_ORIGIN } from "../config/site";
 
 type SeoPage = "home" | "homeEn" | "privacy" | "privacyEn" | "terms" | "termsEn";
 
@@ -48,7 +48,6 @@ type CreateSeoParams = {
   page: SeoPage;
   meta: SeoMetaInput;
   baseHref: string;
-  siteUrl?: URL;
 };
 
 const PAGE_PATHS: Record<SeoPage, string> = {
@@ -77,12 +76,12 @@ function resolveUrl(siteUrl: URL, baseHref: string, path: string): string {
   return new URL(`${normalizeBase(baseHref)}${path}`, siteUrl).href;
 }
 
-function resolveSiteUrl(siteUrl?: URL): URL {
-  return siteUrl ?? new URL(ACTIVE_BASE_URL);
+function resolveSiteUrl(): URL {
+  return new URL(SITE_ORIGIN);
 }
 
 export function createSeo(params: CreateSeoParams): SeoMeta {
-  const siteUrl = resolveSiteUrl(params.siteUrl);
+  const siteUrl = resolveSiteUrl();
   const canonical = resolveUrl(siteUrl, params.baseHref, PAGE_PATHS[params.page]);
 
   const alternatePages = ALTERNATE_PAGE_GROUPS[params.page];
