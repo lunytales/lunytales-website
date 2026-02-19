@@ -21,7 +21,7 @@ const howPillClasses = ["how-pill--lila", "how-pill--mint", "how-pill--durazno"]
 const howIconPaths = ["libro.webp", "audio.webp", "luna.webp"] as const;
 
 const hotmartUrl = SITE_CONFIG.hotmartUrl;
-const demoPdfPath = SITE_CONFIG.paths.demoPdf;
+const demoPdfPath = lang === "en" ? SITE_CONFIG.paths.demoPdfEn : SITE_CONFIG.paths.demoPdf;
 ---
 <header class="hero-luny hero-luny--grad">
   <div class="container">
