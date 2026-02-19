@@ -1,5 +1,5 @@
 ---
-import { SITE_CONFIG } from "../config/site";
+import { SITE_CONFIG, toHref } from "../config/site";
 import { getStrings, type Language } from "../i18n";
 
 interface Props {
@@ -22,6 +22,8 @@ const howIconPaths = ["libro.webp", "audio.webp", "luna.webp"] as const;
 
 const hotmartUrl = SITE_CONFIG.hotmartUrl;
 const demoPdfPath = lang === "en" ? SITE_CONFIG.paths.demoPdfEn : SITE_CONFIG.paths.demoPdf;
+const currentLangHomePath = lang === "en" ? SITE_CONFIG.paths.homeEn : SITE_CONFIG.paths.home;
+const includeSectionHref = `${toHref(currentLangHomePath)}#incluye`;
 ---
 <header class="hero-luny hero-luny--grad">
   <div class="container">
@@ -52,7 +54,7 @@ const demoPdfPath = lang === "en" ? SITE_CONFIG.paths.demoPdfEn : SITE_CONFIG.pa
           >
             {strings.hero.buyNow}
           </a>
-          <a class="btn btn-outline-mint btn-pill btn-luny px-4" href="#incluye">
+          <a class="btn btn-outline-mint btn-pill btn-luny px-4" href={includeSectionHref}>
             {strings.hero.includeCta}
           </a>
         </div>

@@ -52,6 +52,9 @@ const currentLangLegalPrivacyHref = toHref(lang === "en" ? SITE_CONFIG.paths.pri
 const currentLangLegalTermsHref = toHref(lang === "en" ? SITE_CONFIG.paths.termsEn : SITE_CONFIG.paths.terms);
 
 const currentLangHomeHref = lang === "en" ? homeEnHref : homeHref;
+const includeSectionHref = `${currentLangHomeHref}#incluye`;
+const howSectionHref = `${currentLangHomeHref}#como`;
+const buySectionHref = `${currentLangHomeHref}#comprar`;
 const resolvedLegalNavLabel = legalNavLabel ?? strings.nav.home;
 const brandHref = currentLangHomeHref;
 const footerLogoHref = currentLangHomeHref;
@@ -129,8 +132,8 @@ const primaryOgImage = seo.og.images[0];
         <div class="navbar-nav ms-auto gap-2 align-items-lg-center">
           {navVariant === "home" ? (
             <>
-              <a class="nav-link" href="#incluye">{strings.nav.include}</a>
-              <a class="nav-link" href="#como">{strings.nav.how}</a>
+              <a class="nav-link" href={includeSectionHref}>{strings.nav.include}</a>
+              <a class="nav-link" href={howSectionHref}>{strings.nav.how}</a>
 
               <div class="d-flex align-items-center lang-switch" role="group" aria-label={strings.a11y.languageSwitcher}>
                 <a
@@ -200,9 +203,9 @@ const primaryOgImage = seo.og.images[0];
             <div class="col-6 col-lg-3">
               <div class="footer-title">{strings.footer.navTitle}</div>
               <ul class="list-unstyled footer-links mb-0">
-                <li><a href="#incluye">{strings.footer.navInclude}</a></li>
-                <li><a href="#como">{strings.footer.navHow}</a></li>
-                <li><a href="#comprar">{strings.footer.navBuy}</a></li>
+                <li><a href={includeSectionHref}>{strings.footer.navInclude}</a></li>
+                <li><a href={howSectionHref}>{strings.footer.navHow}</a></li>
+                <li><a href={buySectionHref}>{strings.footer.navBuy}</a></li>
               </ul>
             </div>
 
