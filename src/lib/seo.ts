@@ -95,7 +95,6 @@ export function createSeo(params: CreateSeoParams): SeoMeta {
   ];
 
   const ogImagePng = resolveUrl(siteUrl, params.baseHref, SITE_CONFIG.paths.ogImagePng);
-  const ogImageWebp = resolveUrl(siteUrl, params.baseHref, SITE_CONFIG.paths.ogImageWebp);
 
   return {
     title: params.meta.title,
@@ -114,10 +113,6 @@ export function createSeo(params: CreateSeoParams): SeoMeta {
           type: "image/png",
           width: 1200,
           height: 630,
-        },
-        {
-          url: ogImageWebp,
-          type: "image/webp",
         },
       ],
     },
