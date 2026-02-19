@@ -18,6 +18,14 @@
 
   const collapse = bootstrap.Collapse.getOrCreateInstance(nav, { toggle: false });
   let lastFocused = null;
+  const focusWithoutScroll = (el) => {
+    if (!el || typeof el.focus !== "function") return;
+    try {
+      el.focus({ preventScroll: true });
+    } catch (_error) {
+      el.focus();
+    }
+  };
 
   const getFocusable = () =>
     Array.from(
@@ -32,15 +40,23 @@
 
   const firstLink = nav.querySelector(".nav-link");
 
-  nav.addEventListener("shown.bs.collapse", () => {
+  nav.addEventListener("show.bs.collapse", () => {
     lastFocused = document.activeElement;
     syncAriaLabel();
-    if (firstLink) firstLink.focus();
+  });
+
+  nav.addEventListener("hide.bs.collapse", () => {
+    syncAriaLabel();
+  });
+
+  nav.addEventListener("shown.bs.collapse", () => {
+    syncAriaLabel();
+    if (firstLink) focusWithoutScroll(firstLink);
   });
 
   nav.addEventListener("hidden.bs.collapse", () => {
     syncAriaLabel();
-    (lastFocused || toggler).focus();
+    focusWithoutScroll(lastFocused || toggler);
   });
 
   nav.querySelectorAll(".nav-link").forEach((link) => {

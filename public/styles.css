@@ -777,6 +777,13 @@ button:focus-visible{
     border: 0;
     border-radius: 0 0 26px 26px;
     box-shadow: none;
+    will-change: height;
+    contain: layout paint;
+    transform: translateZ(0);
+  }
+
+  .navbar-luny .navbar-collapse.collapsing{
+    transition: height 170ms var(--ease-standard);
   }
 
   .navbar-luny .navbar-collapse .navbar-nav{

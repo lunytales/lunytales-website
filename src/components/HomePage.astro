@@ -34,6 +34,8 @@ const demoPdfPath = lang === "en" ? SITE_CONFIG.paths.demoPdfEn : SITE_CONFIG.pa
           height="202"
           class="hero-logo mb-4"
           loading="eager"
+          decoding="async"
+          fetchpriority="high"
         >
 
         <h1 class="hero-title mb-3">{strings.hero.title}</h1>
@@ -63,7 +65,9 @@ const demoPdfPath = lang === "en" ? SITE_CONFIG.paths.demoPdfEn : SITE_CONFIG.pa
           width="1024"
           height="1024"
           class="hero-mascota"
-          loading="lazy"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
         >
       </div>
     </div>
@@ -110,6 +114,7 @@ const demoPdfPath = lang === "en" ? SITE_CONFIG.paths.demoPdfEn : SITE_CONFIG.pa
                 height="1100"
                 class="story-vertical__img"
                 loading="lazy"
+                decoding="async"
               >
             </div>
             <div class="story-vertical__body">
