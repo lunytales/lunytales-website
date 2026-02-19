@@ -20,8 +20,6 @@ export const en = {
     include: "See what's included",
     how: "How it works",
     home: "Return to website",
-    buyNow: "Buy now",
-    buyMenuAria: "Buy Luny Tales now on Hotmart (menu)",
     languageEs: "Español",
     languageEn: "English",
   },

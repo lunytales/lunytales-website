@@ -5,8 +5,6 @@ export const LANGUAGES = ["es", "en"] as const;
 
 export type Language = (typeof LANGUAGES)[number];
 export type HomeStrings = typeof es;
-export type HomeStringKey = keyof HomeStrings;
-export const HOME_STRING_KEYS = Object.keys(es) as HomeStringKey[];
 
 const MAX_PARITY_ERRORS = 25;
 
