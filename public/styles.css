@@ -8,7 +8,7 @@
   --radius-md: 18px;
   --radius-pill: 18px;
 
-  /* Shadows (system) — suaves, difusas, sin “glow” evidente */
+  /* Shadows (system) - soft, diffused, no obvious glow */
   --shadow-card: 0 10px 26px rgba(18, 24, 58, .10);
   --shadow-card-hover: 0 16px 34px rgba(18, 24, 58, .14);
   --shadow-btn: 0 8px 18px rgba(18, 24, 58, .10);
@@ -198,7 +198,7 @@ button:focus-visible{
   transform: rotate(-45deg);
 }
 
-/* Anclas con header sticky */
+/* Anchors with sticky header */
 #incluye,
 #como{
   scroll-margin-top: var(--nav-offset);
@@ -210,7 +210,7 @@ button:focus-visible{
   }
 }
 
-/* Botones */
+/* Buttons */
 .btn.btn-pill{
   border-radius: var(--radius-pill);
 }
@@ -258,7 +258,7 @@ button:focus-visible{
   color:#052015;
 }
 
-/* Asegurar que el foco NO aclare el botón (evitar efecto “hover permanente”) */
+/* Keep focus from lightening the button (avoid sticky hover effect) */
 .btn-primary:focus,
 .btn-primary:focus-visible,
 .btn-primary:active{
@@ -266,7 +266,7 @@ button:focus-visible{
   color: #052015;
 }
 
-/* Mantener un foco accesible sin cambiar el fill */
+/* Keep accessible focus without changing fill */
 .btn-primary:focus-visible{
   outline: 3px solid rgba(98, 88, 214, 0.55);
   outline-offset: 3px;
@@ -321,7 +321,7 @@ button:focus-visible{
   display: inline-block;
 }
 
-/* Política de privacidad */
+/* Privacy policy */
 .policy-hero{
   background: var(--indigo);
   color: #fff;
@@ -448,7 +448,7 @@ button:focus-visible{
   padding: 0;
 }
 
-/* Qué incluye */
+/* What's included */
 #incluye .incluye-card{
   color: inherit;
   box-shadow: none;
@@ -486,7 +486,7 @@ button:focus-visible{
   color: #373584;
 }
 
-/* Cuentos */
+/* Stories */
 .story-vertical{
   display: flex;
   flex-direction: column;
@@ -550,7 +550,7 @@ button:focus-visible{
   color: rgba(255,255,255,.92);
 }
 
-/* Cómo funciona */
+/* How it works */
 #como .row{
   align-items: stretch;
 }
@@ -746,7 +746,7 @@ button:focus-visible{
   position:absolute;
   inset:0;
   pointer-events:none;
-  /* Oscurece ligeramente el lado izquierdo, pero se desvanece suave (sin corte vertical) */
+  /* Slightly darken the left side with a smooth fade (no hard vertical cut) */
   background: linear-gradient(
     90deg,
     rgba(20,18,60,.30) 0%,
@@ -882,7 +882,7 @@ button:focus-visible{
   }
 }
 
-/* Cookie banner — Fase A (mínimo, limpio, responsive, accesible) */
+/* Cookie banner - Phase A (minimal, clean, responsive, accessible) */
 .cookie-banner{
   position: fixed;
   left: 0;
@@ -950,7 +950,7 @@ button:focus-visible{
   box-shadow: none;
 }
 
-/* Cookie banner: focus solo para teclado */
+/* Cookie banner: keyboard-only focus styling */
 .cookie-banner button:focus{
   outline: none;
 }
@@ -963,12 +963,12 @@ button:focus-visible{
 }
 
 
-/* Evitar que el banner tape contenido */
+/* Prevent the banner from covering content */
 body.has-cookie-banner{
   padding-bottom: var(--cookie-h, 96px);
 }
 
-/* Link de preferencias (footer) */
+/* Preferences link (footer) */
 .cookie-pref-link{
   background: none;
   border: 0;

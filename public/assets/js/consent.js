@@ -93,7 +93,7 @@
   } else if (consent === "accepted" && TRACKING_GATE_ENABLED) {
     // In v2 staging, tracking stays disabled unless ?track=1 is present.
   } else if (consent === "rejected") {
-    // No cargar el Pixel
+    // Keep the Meta Pixel disabled.
   } else {
     showBanner();
   }
