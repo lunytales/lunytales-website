@@ -109,7 +109,6 @@ export const es = {
     contactTitle: "Escríbenos",
     email: "hola@lunytales.com",
     emailButton: "Enviar correo",
-    emailHref: "mailto:hola@lunytales.com?subject=Contacto%20%E2%80%94%20Luny%20Tales&body=Hola%20Luny%20Tales%2C%0D%0A%0D%0A",
     mascotAlt: "Luny, el búho mascota, sosteniendo una tablet con la portada de A dormir en 3 cuentos",
     legalPrivacy: "Privacidad",
     legalTerms: "Términos",

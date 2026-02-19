@@ -1,6 +1,7 @@
 ---
 import { SITE_CONFIG, toHref } from "../config/site";
 import { getStrings, type Language } from "../i18n";
+import { createContactMailto } from "../lib/contact";
 import type { SeoMeta } from "../lib/seo";
 
 type RouteKey = "home" | "privacy" | "terms";
@@ -54,6 +55,7 @@ const currentLangHomeHref = lang === "en" ? homeEnHref : homeHref;
 const resolvedLegalNavLabel = legalNavLabel ?? strings.nav.home;
 const brandHref = currentLangHomeHref;
 const footerLogoHref = currentLangHomeHref;
+const contactMailto = createContactMailto(strings.footer.email, lang);
 const assetVersion = import.meta.env.PUBLIC_ASSET_VERSION ?? "20260218r1";
 
 const primaryOgImage = seo.og.images[0];
@@ -209,7 +211,7 @@ const primaryOgImage = seo.og.images[0];
               <span class="footer-email d-inline-block">{strings.footer.email}</span>
 
               <div class="mt-2">
-                <a class="btn btn-primary btn-pill btn-luny px-4" href={strings.footer.emailHref}>
+                <a class="btn btn-primary btn-pill btn-luny px-4" href={contactMailto}>
                   {strings.footer.emailButton}
                 </a>
               </div>

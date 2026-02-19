@@ -1,10 +1,12 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { getStrings } from "../i18n";
+import { createContactMailto } from "../lib/contact";
 import { createSeo } from "../lib/seo";
 
 const lang = "es" as const;
 const strings = getStrings(lang);
+const contactMailto = createContactMailto(strings.footer.email, lang);
 const seo = createSeo({
   page: "terms",
   meta: {
@@ -94,7 +96,7 @@ const seo = createSeo({
         <div class="card-body text-center">
           <h2 class="h5 fw-bold mb-2">¿Tienes alguna pregunta?</h2>
           <p class="mb-3">Estamos aquí para ayudarte a que la experiencia con Cuentos Luna sea clara, segura y agradable.</p>
-          <a class="btn btn-primary btn-pill btn-luny px-4" href={strings.footer.emailHref}>{strings.footer.email}</a>
+          <a class="btn btn-primary btn-pill btn-luny px-4" href={contactMailto}>{strings.footer.email}</a>
         </div>
       </div>
       <div class="text-center small text-secondary mt-3">
