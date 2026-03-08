@@ -278,9 +278,4 @@ Cobertura actual de smoke tests:
 
 Flujo de despliegue:
 
-- Build de Astro
-- Workflow de GitHub Actions
-- Publicación en rama `gh-pages`
-- Hosting de GitHub Pages
-- Proxy de Cloudflare (edge)
-- Solicitud/respuesta al usuario final
+- Build de Astro → GitHub Actions → rama `gh-pages` → origen de GitHub Pages → caché edge de Cloudflare → usuario final

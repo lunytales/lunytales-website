@@ -278,9 +278,4 @@ Smoke test routes/assets currently covered:
 
 Deployment flow:
 
-- Astro build
-- GitHub Actions workflow
-- `gh-pages` branch publish
-- GitHub Pages hosting
-- Cloudflare proxy (edge)
-- End user request/response
+- Astro build → GitHub Actions → `gh-pages` branch → GitHub Pages origin → Cloudflare edge cache → end user
