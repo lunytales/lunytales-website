@@ -1,0 +1,76 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import { createSeo } from "../../lib/seo";
+import { createHomeStructuredData } from "../../lib/structured-data";
+import { getStrings } from "../../i18n";
+
+const lang = "en" as const;
+const strings = getStrings(lang);
+const title = "3 Minute Bedtime Stories for Kids | Luny Tales";
+const description = "Short calming bedtime stories that help children relax and fall asleep peacefully.";
+const canonical = "https://lunytales.com/en/3-minute-bedtime-stories";
+const canonicalEs = "https://lunytales.com/3-cuentos-para-dormir";
+
+const seoBase = createSeo({
+  page: "homeEn",
+  meta: {
+    title,
+    description,
+    ogTitle: title,
+    ogDescription: description,
+    twitterTitle: title,
+    twitterDescription: description,
+  },
+  baseHref: import.meta.env.BASE_URL,
+});
+
+const seo = {
+  ...seoBase,
+  canonical,
+  alternates: [
+    { hreflang: "es", href: canonicalEs },
+    { hreflang: "en", href: canonical },
+    { hreflang: "x-default", href: canonicalEs },
+  ],
+  og: {
+    ...seoBase.og,
+    url: canonical,
+  },
+};
+
+const structuredData = createHomeStructuredData({
+  lang,
+  pageUrl: canonical,
+  description,
+});
+
+const featuredStories = [
+  strings.stories.items[2],
+  strings.stories.items[0],
+  strings.stories.items[1],
+];
+---
+<SiteLayout lang={lang} seo={seo} structuredData={structuredData} routeKey="home" navVariant="home" footerVariant="home">
+  <section class="py-5 bg-white border-top" id="incluye">
+    <div class="container">
+      <h1 class="fw-bold mb-3">3 Minute Bedtime Stories for Kids</h1>
+      <p class="mb-4">Short calming bedtime stories that help children relax and fall asleep peacefully.</p>
+
+      <ul>
+        {featuredStories.map((story) => (
+          <li>
+            <strong>{story.title}</strong>: {story.description}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-5" id="como">
+    <div class="container">
+      <p id="comprar">
+        <a href="/en/">Listen to the full bedtime stories with Luny Tales</a>
+      </p>
+    </div>
+  </section>
+</SiteLayout>

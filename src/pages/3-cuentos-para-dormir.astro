@@ -1,0 +1,76 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { createSeo } from "../lib/seo";
+import { createHomeStructuredData } from "../lib/structured-data";
+import { getStrings } from "../i18n";
+
+const lang = "es" as const;
+const strings = getStrings(lang);
+const title = "3 Cuentos para Dormir Niños | Luny Tales";
+const description = "Cuentos cortos para dormir que ayudan a los niños a relajarse antes de dormir.";
+const canonical = "https://lunytales.com/3-cuentos-para-dormir";
+const canonicalEn = "https://lunytales.com/en/3-minute-bedtime-stories";
+
+const seoBase = createSeo({
+  page: "home",
+  meta: {
+    title,
+    description,
+    ogTitle: title,
+    ogDescription: description,
+    twitterTitle: title,
+    twitterDescription: description,
+  },
+  baseHref: import.meta.env.BASE_URL,
+});
+
+const seo = {
+  ...seoBase,
+  canonical,
+  alternates: [
+    { hreflang: "es", href: canonical },
+    { hreflang: "en", href: canonicalEn },
+    { hreflang: "x-default", href: canonical },
+  ],
+  og: {
+    ...seoBase.og,
+    url: canonical,
+  },
+};
+
+const structuredData = createHomeStructuredData({
+  lang,
+  pageUrl: canonical,
+  description,
+});
+
+const featuredStories = [
+  strings.stories.items[2],
+  strings.stories.items[0],
+  strings.stories.items[1],
+];
+---
+<SiteLayout lang={lang} seo={seo} structuredData={structuredData} routeKey="home" navVariant="home" footerVariant="home">
+  <section class="py-5 bg-white border-top" id="incluye">
+    <div class="container">
+      <h1 class="fw-bold mb-3">3 Cuentos para Dormir Niños</h1>
+      <p class="mb-4">Cuentos cortos para dormir que ayudan a los niños a relajarse antes de dormir.</p>
+
+      <ul>
+        {featuredStories.map((story) => (
+          <li>
+            <strong>{story.title}</strong>: {story.description}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-5" id="como">
+    <div class="container">
+      <p id="comprar">
+        <a href="/">Escucha los cuentos completos con Luny Tales</a>
+      </p>
+    </div>
+  </section>
+</SiteLayout>
