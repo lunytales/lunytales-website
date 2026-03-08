@@ -50,9 +50,10 @@ export function createHomeStructuredData(params: HomeStructuredDataParams): Json
         "@type": "CreativeWorkSeries",
         name: "Luny Tales",
         description: params.description,
-        brand: {
-          "@type": "Brand",
+        publisher: {
+          "@type": "Organization",
           name: "Luny Tales",
+          url: SITE_ORIGIN,
         },
         url: params.pageUrl,
         image: ogImageUrl,
