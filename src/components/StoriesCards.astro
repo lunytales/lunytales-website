@@ -3,12 +3,22 @@ import { getStrings, type Language } from "../i18n";
 
 interface Props {
   lang: Language;
+  showHeader?: boolean;
 }
 
-const { lang } = Astro.props;
+const { lang, showHeader = true } = Astro.props;
 const strings = getStrings(lang);
 const storyImagePaths = ["timo.webp", "galen.webp", "lira.webp"] as const;
 ---
+{showHeader && (
+  <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
+    <div>
+      <h2 class="fw-bold mb-1">{strings.stories.title}</h2>
+      <p class="text-secondary mb-0">{strings.stories.subtitle}</p>
+    </div>
+  </div>
+)}
+
 <div class="row g-3">
   {strings.stories.items.map((story, index) => (
     <div class="col-lg-4">
