@@ -30,6 +30,12 @@ Esta configuración es operativa (fuera del repositorio) y debe mantenerse:
 - HTTPS forzado en el edge para todas las solicitudes.
 - TLS y caché gestionados por Cloudflare delante de GitHub Pages.
 
+Nota de mapeo de dominio:
+
+- El dominio de producción se declara en `public/CNAME` como `lunytales.com`.
+- GitHub Pages sirve esa asociación de dominio personalizado, mientras que el DNS autoritativo se gestiona en Cloudflare.
+- Todo el tráfico público debe pasar por el proxy de Cloudflare (nube naranja).
+
 Comandos de verificación:
 
 ```bash
@@ -98,6 +104,11 @@ Rutas de infraestructura:
 - `/sitemap.xml` desde `src/pages/sitemap.xml.ts` (apunta a `sitemap-index.xml`)
 - `/lunytales-v2/` página de redirección a `/` para compatibilidad legacy
 
+Descubrimiento por robots:
+
+- En producción, `/robots.txt` permite rastreo completo (`Allow: /`).
+- También expone el sitemap con `Sitemap: https://lunytales.com/sitemap.xml`.
+
 ## 5) Modelo de configuración
 
 Archivo fuente único para configuración global:
@@ -157,6 +168,13 @@ Sitemaps:
 - `@astrojs/sitemap` genera `sitemap-index.xml` + `sitemap-0.xml`.
 - `astro.config.mjs` excluye la ruta legacy `/lunytales-v2/` del sitemap generado.
 - `src/pages/sitemap.xml.ts` publica `/sitemap.xml` como entrypoint estable.
+
+Punto de entrada público del sitemap:
+
+- `https://lunytales.com/sitemap.xml` es el punto de entrada público que consumen los rastreadores.
+- Ese endpoint apunta a `sitemap-index.xml`, que referencia `sitemap-0.xml` generado por `@astrojs/sitemap`.
+- El sitemap generado solo incluye URLs canónicas e indexables.
+- Las rutas legacy con redirección (por ejemplo `/lunytales-v2/`) se excluyen de forma intencional.
 
 ## 8) Estilos y orden de carga de Bootstrap
 
@@ -255,3 +273,14 @@ Cobertura actual de smoke tests:
 - Mantener mensajes de commit y comentarios técnicos en inglés profesional.
 - Mantener commits atómicos y con Conventional Commits.
 - Mantener `/lunytales-v2/` hasta migrar por completo los enlaces externos legacy.
+
+## 16) Topología de hosting
+
+Flujo de despliegue:
+
+- Build de Astro
+- Workflow de GitHub Actions
+- Publicación en rama `gh-pages`
+- Hosting de GitHub Pages
+- Proxy de Cloudflare (edge)
+- Solicitud/respuesta al usuario final
