@@ -3,6 +3,8 @@ import SiteLayout from "../../layouts/SiteLayout.astro";
 import { createSeo } from "../../lib/seo";
 import { createHomeStructuredData } from "../../lib/structured-data";
 import { getStrings } from "../../i18n";
+import StoriesCards from "../../components/StoriesCards.astro";
+import { SITE_CONFIG, toHref } from "../../config/site";
 
 const lang = "en" as const;
 const strings = getStrings(lang);
@@ -43,34 +45,33 @@ const structuredData = createHomeStructuredData({
   pageUrl: canonical,
   description,
 });
-
-const featuredStories = [
-  strings.stories.items[2],
-  strings.stories.items[0],
-  strings.stories.items[1],
-];
+const homeEnHref = toHref(SITE_CONFIG.paths.homeEn);
 ---
 <SiteLayout lang={lang} seo={seo} structuredData={structuredData} routeKey="bedtimeStories" navVariant="home" footerVariant="home">
-  <section class="py-5 bg-white border-top" id="incluye">
+  <section class="py-5" id="a-dormir-3-cuentos">
     <div class="container">
       <h1 class="fw-bold mb-3">3 Minute Bedtime Stories for Kids</h1>
-      <p class="mb-4">Short calming bedtime stories that help children relax and fall asleep peacefully.</p>
+      <p class="mb-4">Short bedtime stories that help children relax before sleep.</p>
 
-      <ul>
-        {featuredStories.map((story) => (
-          <li>
-            <strong>{story.title}</strong>: {story.description}
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
+        <div>
+          <h2 class="fw-bold mb-1">{strings.stories.title}</h2>
+          <p class="text-secondary mb-0">{strings.stories.subtitle}</p>
+        </div>
+      </div>
 
-  <section class="py-5" id="como">
-    <div class="container">
-      <p id="comprar">
-        <a href="/en/">Listen to the full bedtime stories with Luny Tales</a>
+      <StoriesCards lang={lang} />
+
+      <p class="mt-4 mb-0">
+        These short bedtime stories help children relax before sleep. Each story encourages values like empathy,
+        responsibility and perseverance, while creating a calm moment between parents and children at the end of the day.
       </p>
+
+      <div class="mt-4 d-flex flex-column flex-lg-row gap-3 align-items-start cta-stack" id="comprar">
+        <a class="btn btn-primary btn-pill btn-luny px-4" href={homeEnHref}>
+          Listen to the full bedtime stories with Luny Tales
+        </a>
+      </div>
     </div>
   </section>
 </SiteLayout>
