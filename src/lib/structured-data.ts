@@ -27,14 +27,6 @@ function getAudienceByLanguage(lang: Language): Array<{ "@type": "PeopleAudience
   ];
 }
 
-function getCategoryByLanguage(lang: Language): string {
-  if (lang === "en") {
-    return "Children's bedtime stories and educational content";
-  }
-
-  return "Cuentos infantiles para dormir y contenido educativo";
-}
-
 export function createHomeStructuredData(params: HomeStructuredDataParams): JsonLdNode {
   const ogImageUrl = resolveAbsoluteUrl(SITE_CONFIG.paths.ogImage);
   const inLanguage = params.lang;
@@ -55,10 +47,9 @@ export function createHomeStructuredData(params: HomeStructuredDataParams): Json
         inLanguage,
       },
       {
-        "@type": "Product",
+        "@type": "CreativeWorkSeries",
         name: "Luny Tales",
         description: params.description,
-        category: getCategoryByLanguage(params.lang),
         brand: {
           "@type": "Brand",
           name: "Luny Tales",
