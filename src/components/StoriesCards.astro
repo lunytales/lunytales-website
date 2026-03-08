@@ -1,0 +1,34 @@
+---
+import { getStrings, type Language } from "../i18n";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const strings = getStrings(lang);
+const storyImagePaths = ["timo.webp", "galen.webp", "lira.webp"] as const;
+---
+<div class="row g-3">
+  {strings.stories.items.map((story, index) => (
+    <div class="col-lg-4">
+      <article class="story-vertical card h-100 shadow-sm">
+        <div class="story-vertical__media">
+          <img
+            src={`assets/img/${storyImagePaths[index] ?? storyImagePaths[0]}`}
+            alt={story.imageAlt}
+            width="1100"
+            height="1100"
+            class="story-vertical__img"
+            loading="lazy"
+            decoding="async"
+          >
+        </div>
+        <div class="story-vertical__body">
+          <h3 class="story-title">{story.title}</h3>
+          <p class="story-desc">{story.description}</p>
+        </div>
+      </article>
+    </div>
+  ))}
+</div>

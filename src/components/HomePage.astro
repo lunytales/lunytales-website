@@ -1,6 +1,7 @@
 ---
 import { SITE_CONFIG, toHref } from "../config/site";
 import { getStrings, type Language } from "../i18n";
+import StoriesCards from "./StoriesCards.astro";
 
 interface Props {
   lang: Language;
@@ -16,7 +17,6 @@ const includeCardClasses = [
   "incluye-card--4",
 ] as const;
 
-const storyImagePaths = ["timo.webp", "galen.webp", "lira.webp"] as const;
 const howPillClasses = ["how-pill--lila", "how-pill--mint", "how-pill--durazno"] as const;
 const howIconPaths = ["libro.webp", "audio.webp", "luna.webp"] as const;
 
@@ -104,29 +104,7 @@ const includeSectionHref = `${toHref(currentLangHomePath)}#incluye`;
       </div>
     </div>
 
-    <div class="row g-3">
-      {strings.stories.items.map((story, index) => (
-        <div class="col-lg-4">
-          <article class="story-vertical card h-100 shadow-sm">
-            <div class="story-vertical__media">
-              <img
-                src={`assets/img/${storyImagePaths[index] ?? storyImagePaths[0]}`}
-                alt={story.imageAlt}
-                width="1100"
-                height="1100"
-                class="story-vertical__img"
-                loading="lazy"
-                decoding="async"
-              >
-            </div>
-            <div class="story-vertical__body">
-              <h3 class="story-title">{story.title}</h3>
-              <p class="story-desc">{story.description}</p>
-            </div>
-          </article>
-        </div>
-      ))}
-    </div>
+    <StoriesCards lang={lang} />
 
     <div class="mt-4 d-flex flex-column flex-lg-row gap-3 align-items-start cta-stack">
       <a
