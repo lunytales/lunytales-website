@@ -1,33 +1,38 @@
 # Luny Tales v2 — Manual del Proyecto
 
-Este documento es la fuente técnica de verdad para el repositorio `lunytales-v2`.
-Está pensado para cualquier persona del equipo que necesite mantener, extender o migrar el proyecto.
+Este documento es la fuente técnica de verdad del repositorio `lunytales-v2`.
+Está pensado para cualquier persona que necesite mantener, extender o migrar el sitio.
 
 ## 1) Alcance del proyecto
 
 - Producto: sitio web de Luny Tales (español + inglés) construido con Astro.
-- Objetivo de despliegue: `https://lunytales.com` (dominio raíz).
-- Arquitectura actual: generación estática (`output: "static"`).
-- Regla clave: no editar `dist/` manualmente (solo salida de build).
+- Dominio de producción: `https://lunytales.com` (dominio raíz).
+- Modo de salida: generación estática (`output: "static"`).
+- Regla: nunca editar `dist/` manualmente.
 
 ## 2) Stack tecnológico
 
 - Runtime: Node.js (CI usa Node 20).
 - Framework: Astro `^5.17.1`.
-- Estilos: CSS global en `public/styles.css` + Bootstrap 5 (CDN).
+- Estilos:
+  - Bootstrap `^5.3.8` (instalado por npm, servido localmente desde assets del build).
+  - CSS global personalizado en `public/styles.css`.
 - Scripts de cliente: JavaScript vanilla en `public/assets/js/`.
+- Integración de sitemap SEO: `@astrojs/sitemap`.
 - CI/CD: GitHub Actions + `peaceiris/actions-gh-pages`.
-- Hosting: GitHub Pages con dominio personalizado (`public/CNAME`).
+- Hosting: GitHub Pages (`gh-pages`) + dominio personalizado desde `public/CNAME`.
 
 ## 3) Estructura del repositorio
 
-```
+```text
 .
 ├── .github/workflows/deploy.yml
 ├── astro.config.mjs
+├── docs/
+│   ├── PROJECT_HANDBOOK.md
+│   └── PROJECT_HANDBOOK.es.md
 ├── public/
 │   ├── CNAME
-│   ├── sitemap.xml
 │   ├── styles.css
 │   ├── favicon.ico
 │   └── assets/
@@ -38,55 +43,52 @@ Está pensado para cualquier persona del equipo que necesite mantener, extender 
 │       └── js/
 ├── src/
 │   ├── components/
-│   ├── config/
+│   │   ├── HomePage.astro
+│   │   └── StoriesCards.astro
+│   ├── config/site.ts
 │   ├── i18n/
-│   ├── layouts/
+│   ├── layouts/SiteLayout.astro
 │   ├── lib/
 │   └── pages/
 └── README.md
 ```
 
-### Carpetas importantes
-
-- `src/pages/`: definición de rutas.
-- `src/layouts/SiteLayout.astro`: shell compartido (head, nav, footer, banner de cookies, scripts).
-- `src/components/HomePage.astro`: markup compartido del home ES/EN.
-- `src/i18n/`: diccionarios + validación estricta de paridad.
-- `src/config/site.ts`: configuración global del proyecto (origin, paths, flags).
-- `src/lib/seo.ts`: generación de canonical/hreflang/og/twitter.
-- `public/`: assets estáticos copiados tal cual al build.
-
 ## 4) Mapa de rutas
 
-- `/` → home en español.
-- `/en/` → home en inglés.
-- `/privacy/` → privacidad en español.
-- `/terms/` → términos en español.
-- `/en/privacy/` → privacidad en inglés.
-- `/en/terms/` → términos en inglés.
-- `/robots.txt` → generado por `src/pages/robots.txt.ts`.
-- `/sitemap.xml` → archivo estático desde `public/sitemap.xml`.
-- `/lunytales-v2/` → redirección a `/` (compatibilidad con la URL legacy de project page).
+Rutas principales:
+
+- `/` (home en español)
+- `/en/` (home en inglés)
+- `/privacy/`
+- `/terms/`
+- `/en/privacy/`
+- `/en/terms/`
+- `/3-cuentos-para-dormir/` (landing SEO ES)
+- `/en/3-minute-bedtime-stories/` (landing SEO EN)
+
+Rutas de infraestructura:
+
+- `/robots.txt` desde `src/pages/robots.txt.ts`
+- `/sitemap.xml` desde `src/pages/sitemap.xml.ts` (apunta a `sitemap-index.xml`)
+- `/lunytales-v2/` página de redirección a `/` para compatibilidad legacy
 
 ## 5) Modelo de configuración
 
-Archivo único: `src/config/site.ts`.
+Archivo fuente único para configuración global:
 
-### Claves actuales
+- `src/config/site.ts`
 
-- `IS_STAGING`: derivado de `PUBLIC_IS_STAGING === "true"`.
-- `SITE_CONFIG.origin`: origen canónico (`https://lunytales.com`).
-- `SITE_CONFIG.hotmartUrl`: URL de checkout.
-- `SITE_CONFIG.paths.*`: rutas y paths de assets.
-- `SITE_CONFIG.trackingGate`: controla el gate de tracking.
-- `toHref(path)`: normaliza la generación de href internos.
+Claves importantes:
 
-### Variable de entorno
+- `IS_STAGING` derivado de `PUBLIC_IS_STAGING === "true"`.
+- `SITE_CONFIG.origin` (`https://lunytales.com`).
+- `SITE_CONFIG.hotmartUrl` (checkout).
+- `SITE_CONFIG.paths.*` (rutas canónicas y assets clave).
+- `SITE_CONFIG.trackingGate`.
 
-- `PUBLIC_IS_STAGING`
-  - `true`: comportamiento SEO de staging (`noindex` + `disallow` en robots).
-  - ausente/false: comportamiento SEO de producción (`index` + `allow` en robots).
-  - valor por defecto: seguro para producción (false si falta).
+Utilidad:
+
+- `toHref(path)` normaliza enlaces internos (`""` -> `"./"`).
 
 ## 6) Arquitectura i18n
 
@@ -96,42 +98,59 @@ Archivos:
 - `src/i18n/en.ts`
 - `src/i18n/index.ts`
 
-Reglas:
+Guardrails:
 
-- Los diccionarios EN y ES deben mantenerse en paridad.
-- El build falla si:
-  - falta cualquier key,
-  - existe una key inesperada,
-  - difieren los tipos de valor,
-  - difiere el largo de arrays,
-  - difieren las keys de objetos dentro de arrays.
+- El build falla si se rompe la paridad de diccionarios ES/EN.
+- La validación exige:
+  - keys faltantes o extra,
+  - tipos inconsistentes,
+  - longitudes distintas en arrays,
+  - keys distintas en objetos dentro de arrays.
 
-Este guardrail se aplica en `assertDictionaryParity()` y corre durante import/build.
+## 7) SEO y datos estructurados
 
-## 7) SEO e indexación
+Generador SEO:
 
-Generador central: `src/lib/seo.ts`.
+- `src/lib/seo.ts`
 
 Define:
 
-- `canonical`
-- `alternate` hreflang (`es`, `en`, `x-default`)
-- Open Graph (`og:title`, `og:description`, `og:url`, `og:image`)
-- Twitter cards
-- `robots` meta (`index,follow` o `noindex,nofollow`)
+- canonical,
+- hreflang alternates (`es`, `en`, `x-default`),
+- metas OG/Twitter,
+- meta robots según flag de staging.
 
-Política de robots:
+Datos estructurados:
 
-- Servida por `src/pages/robots.txt.ts`.
-- También depende de `IS_STAGING`.
-- Incluye `Sitemap: https://lunytales.com/sitemap.xml`.
+- Se generan en `src/lib/structured-data.ts`.
+- Se inyectan en `src/layouts/SiteLayout.astro` como JSON-LD.
+- Grafo actual: `Organization`, `WebSite`, `CreativeWorkSeries`.
 
-Sitemap:
+Sitemaps:
 
-- Archivo estático `public/sitemap.xml`.
-- Debe incluir solo rutas canónicas vivas, salvo expansión intencional.
+- `@astrojs/sitemap` genera `sitemap-index.xml` + `sitemap-0.xml`.
+- `astro.config.mjs` excluye la ruta legacy `/lunytales-v2/` del sitemap generado.
+- `src/pages/sitemap.xml.ts` publica `/sitemap.xml` como entrypoint estable.
 
-## 8) Tracking y consentimiento
+## 8) Estilos y orden de carga de Bootstrap
+
+Archivo fuente para shell y orden de CSS:
+
+- `src/layouts/SiteLayout.astro`
+
+Orden actual en HTML generado:
+
+1. Bootstrap local (`/_astro/bootstrap.min.*.css`)
+2. Hoja personalizada (`/styles.css?...`)
+
+Este orden es intencional para que `public/styles.css` sobrescriba estilos base de Bootstrap (por ejemplo, botones).
+
+Bootstrap JS:
+
+- Se carga localmente desde asset generado (`/_astro/bootstrap.bundle.min.*.js`).
+- No quedan referencias a CDN de Bootstrap en source ni en build.
+
+## 9) Tracking y consentimiento
 
 Archivos:
 
@@ -140,129 +159,73 @@ Archivos:
 
 Comportamiento:
 
-- Se requiere consentimiento de cookies (`accepted`) para cargar tracking.
-- Si `SITE_CONFIG.trackingGate` es `true`, además se exige `?track=1`.
-- Meta Pixel y listeners custom se cargan dinámicamente solo cuando corresponde.
+- Requiere consentimiento de cookies para activar tracking.
+- Si `SITE_CONFIG.trackingGate` está activo, además requiere `?track=1`.
 
-Esto evita tracking accidental en contextos restringidos o de staging.
+## 10) Pipeline de CI/CD
 
-## 9) Pipeline de CI/CD
+Workflow:
 
-Workflow: `.github/workflows/deploy.yml`
+- `.github/workflows/deploy.yml`
 
 Pasos:
 
-1. Checkout.
-2. Instalación de dependencias (`npm ci`).
-3. Build (`npm run build`).
-4. Verificación de archivos requeridos en build.
-5. Smoke tests locales contra output estático (checks HTTP 200).
-6. Publicación de `dist/` en `gh-pages` con historial huérfano.
+1. Checkout
+2. `npm ci`
+3. `npm run build`
+4. Verificación de artefactos requeridos
+5. Smoke test contra salida estática en servidor local
+6. Publicación de `dist/` en `gh-pages`
 
-### Cobertura actual de smoke tests (debe seguir en verde)
+Cobertura actual de smoke tests:
 
-Rutas:
-
-- `/`
-- `/en/`
-- `/privacy/`
-- `/terms/`
-- `/en/privacy/`
-- `/en/terms/`
-- `/sitemap.xml`
-- `/robots.txt`
-
-Assets críticos:
-
+- `/`, `/en/`, `/privacy/`, `/terms/`, `/en/privacy/`, `/en/terms/`
+- `/sitemap.xml`, `/robots.txt`
 - `/styles.css`
-- `/assets/demo/demo.pdf`
-- `/assets/demo/demo_eng.pdf`
+- `/assets/demo/demo.pdf`, `/assets/demo/demo_eng.pdf`
 
-## 10) Estrategia de assets
+## 11) Estrategia de assets
 
 - Los assets estáticos viven en `public/assets/...`.
-- Referenciar assets con paths compatibles con la estrategia actual de `<base>`.
-- Mantener assets de hero separados por idioma:
-  - ES usa assets del hero en español.
-  - EN usa assets del hero en inglés.
+- Hero por idioma:
+  - ES: assets base
+  - EN: `hero-title-en.svg`, `mascota-en.webp`
 - PDFs demo:
   - ES: `assets/demo/demo.pdf`
   - EN: `assets/demo/demo_eng.pdf`
 
-## 11) Flujo de desarrollo
+## 12) Componentes compartidos clave
 
-Local:
+- `src/layouts/SiteLayout.astro`: shell global (head/nav/footer/cookies/tracking).
+- `src/components/HomePage.astro`: estructura compartida del home.
+- `src/components/StoriesCards.astro`: bloque reutilizable de cards de cuentos (permite ocultar/mostrar encabezado).
 
-```bash
-npm ci
-npm run dev
-```
+## 13) Guía de cambios
 
-Validación de build:
-
-```bash
-npm run build
-npm run preview
-```
-
-### Convenciones no negociables
-
-- Usar Conventional Commits.
-- Mantener commits atómicos (un objetivo por commit).
-- No editar `dist/` manualmente.
-- Mantener docs/comentarios técnicos/mensajes de commit en inglés.
-- Centralizar constantes de configuración (`src/config/site.ts`).
-- No introducir fallbacks silenciosos en i18n.
-
-## 12) Guía rápida de cambios (dónde editar)
-
-| Cambio requerido | Archivo(s) a editar |
+| Cambio requerido | Archivo(s) principal(es) |
 | --- | --- |
-| Dominio/origen/base canónica | `src/config/site.ts` |
-| Reglas SEO/meta | `src/lib/seo.ts` |
-| Rutas o páginas nuevas | `src/pages/` |
-| Estructura compartida del home | `src/components/HomePage.astro` |
-| Shell global (nav/footer/scripts) | `src/layouts/SiteLayout.astro` |
+| Origen canónico / flags globales | `src/config/site.ts` |
+| Comportamiento SEO | `src/lib/seo.ts` |
+| Datos estructurados | `src/lib/structured-data.ts` |
+| Layout global/scripts | `src/layouts/SiteLayout.astro` |
+| Presentación de home/cards SEO | `src/components/HomePage.astro`, `src/components/StoriesCards.astro` |
 | Copy ES/EN | `src/i18n/es.ts`, `src/i18n/en.ts` |
-| Comportamiento de tracking | `public/assets/js/consent.js`, `public/assets/js/tracking.js` |
-| Estilos | `public/styles.css` |
-| Deploy/smoke checks | `.github/workflows/deploy.yml` |
-| URLs del sitemap | `public/sitemap.xml` |
-| Dominio personalizado | `public/CNAME` |
+| Estilo global | `public/styles.css` |
+| Robots/sitemap | `src/pages/robots.txt.ts`, `src/pages/sitemap.xml.ts`, `astro.config.mjs` |
+| Deploy y checks | `.github/workflows/deploy.yml` |
 
-## 13) Notas de migración (si se cambia de servicio)
+## 14) Checklist antes de release
 
-Si se migra a otro proveedor:
+- `npm run build` pasa.
+- Validación de paridad i18n en verde.
+- Sin cambios manuales en `dist/`.
+- Sin dominios/rutas hardcodeados obsoletos.
+- Sin referencias a Bootstrap CDN en source/build.
+- Smoke tests de rutas/assets en verde.
+- Canonical, hreflang, robots y sitemap correctos para producción.
 
-1. Preservar `SITE_CONFIG.origin` y actualizarlo primero.
-2. Mantener validación de canonical/hreflang/robots en entorno staging.
-3. Replicar smoke tests actuales (rutas + assets críticos).
-4. Preservar comportamiento de rutas estáticas y trailing slashes.
-5. Mantener `/lunytales-v2/` hasta migrar enlaces externos legacy.
+## 15) Notas operativas
 
-Secuencia recomendada:
-
-- Infra primero (dominio + SSL + caché),
-- luego pipeline de deploy,
-- luego corte de DNS,
-- y finalmente validación post-corte de SEO/tracking.
-
-## 14) Checklist operativo previo a release
-
-- `npm run build` pasa localmente.
-- La paridad i18n está en verde.
-- Las rutas/assets de smoke test responden 200.
-- Canonical y hreflang apuntan a URLs de producción esperadas.
-- `robots.txt` y `meta robots` coinciden con el entorno deseado.
-- No hay cambios manuales en `dist/`.
-- No hay secretos/tokens en archivos del repo.
-
-## 15) Nota de mantenimiento
-
-- Este archivo debe actualizarse cuando cambie:
-  - el esquema de configuración,
-  - el mapa de rutas,
-  - los checks del workflow,
-  - el comportamiento de tracking/SEO/i18n.
-
-Mantener este manual actualizado forma parte de la definición de terminado para cambios de arquitectura/infra/contenido.
+- Mantener mensajes de commit y comentarios técnicos en inglés profesional.
+- Mantener commits atómicos y con Conventional Commits.
+- Mantener `/lunytales-v2/` hasta migrar por completo los enlaces externos legacy.
