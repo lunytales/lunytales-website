@@ -4,7 +4,7 @@ import { getStrings, type Language } from "../i18n";
 import { createContactMailto } from "../lib/contact";
 import type { SeoMeta } from "../lib/seo";
 
-type RouteKey = "home" | "privacy" | "terms";
+type RouteKey = "home" | "privacy" | "terms" | "bedtimeStories";
 
 interface Props {
   lang: Language;
@@ -41,6 +41,10 @@ const routeLinks: Record<RouteKey, { es: string; en: string }> = {
   terms: {
     es: SITE_CONFIG.paths.terms,
     en: SITE_CONFIG.paths.termsEn,
+  },
+  bedtimeStories: {
+    es: SITE_CONFIG.paths.bedtimeStoriesEs,
+    en: SITE_CONFIG.paths.bedtimeStoriesEn,
   },
 };
 

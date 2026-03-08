@@ -11,6 +11,8 @@ export const SITE_CONFIG = {
     terms: "terms/",
     privacyEn: "en/privacy/",
     termsEn: "en/terms/",
+    bedtimeStoriesEs: "3-cuentos-para-dormir/",
+    bedtimeStoriesEn: "en/3-minute-bedtime-stories/",
     demoPdf: "assets/demo/demo.pdf",
     demoPdfEn: "assets/demo/demo_eng.pdf",
     ogImage: "assets/img/og-lunytales.jpg",
