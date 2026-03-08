@@ -22,6 +22,32 @@ It is intended for engineers maintaining, extending, or migrating the site.
 - CI/CD: GitHub Actions + `peaceiris/actions-gh-pages`.
 - Hosting: GitHub Pages (`gh-pages` branch) + custom domain from `public/CNAME`.
 
+## 2.1) Edge Infrastructure (Cloudflare)
+
+This configuration is operational (outside the repository) and must be preserved:
+
+- Domain traffic proxied through Cloudflare (orange-cloud proxy enabled).
+- HTTPS enforced at edge level for all requests.
+- TLS and cache behavior handled by Cloudflare in front of GitHub Pages.
+
+Verification commands:
+
+```bash
+curl -I https://lunytales.com/
+curl -I https://www.lunytales.com/
+curl -I https://lunytales.com/styles.css
+curl -I https://lunytales.com/assets/img/mascota.webp
+```
+
+Expected outcomes:
+
+- `https://lunytales.com/` returns `200`.
+- `https://www.lunytales.com/` redirects to apex (`301`/`308`).
+- Static assets return `200`.
+- Response headers show Cloudflare presence (`server: cloudflare`, `cf-ray`).
+
+Note: these settings are not controlled by Astro code. If behavior changes, review Cloudflare dashboard and DNS first.
+
 ## 3) Repository Layout
 
 ```text
