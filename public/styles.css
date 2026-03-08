@@ -34,6 +34,17 @@ body{
     #f7f8fb;
 }
 
+/* Keep footer anchored on short pages without per-route hacks */
+body.luny{
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+body.luny > main[role="main"]{
+  flex: 1 0 auto;
+}
+
 .skip-link{
   position: absolute;
   left: -999px;
