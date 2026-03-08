@@ -2,6 +2,7 @@
 import HomePage from "../components/HomePage.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { createSeo } from "../lib/seo";
+import { createHomeStructuredData } from "../lib/structured-data";
 import { getStrings } from "../i18n";
 
 const lang = "es" as const;
@@ -18,7 +19,19 @@ const seo = createSeo({
   },
   baseHref: import.meta.env.BASE_URL,
 });
+const structuredData = createHomeStructuredData({
+  lang,
+  pageUrl: seo.canonical,
+  description: strings.meta.description,
+});
 ---
-<SiteLayout lang={lang} seo={seo} routeKey="home" navVariant="home" footerVariant="home">
+<SiteLayout
+  lang={lang}
+  seo={seo}
+  structuredData={structuredData}
+  routeKey="home"
+  navVariant="home"
+  footerVariant="home"
+>
   <HomePage lang={lang} />
 </SiteLayout>

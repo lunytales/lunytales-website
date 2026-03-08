@@ -9,6 +9,7 @@ type RouteKey = "home" | "privacy" | "terms";
 interface Props {
   lang: Language;
   seo: SeoMeta;
+  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
   routeKey?: RouteKey;
   navVariant?: "home" | "legal";
   footerVariant?: "home" | "legal";
@@ -18,6 +19,7 @@ interface Props {
 const {
   lang,
   seo,
+  structuredData,
   routeKey = "home",
   navVariant = "home",
   footerVariant = navVariant === "legal" ? "legal" : "home",
@@ -60,6 +62,9 @@ const brandHref = currentLangHomeHref;
 const footerLogoHref = currentLangHomeHref;
 const contactMailto = createContactMailto(strings.footer.email, lang);
 const assetVersion = import.meta.env.PUBLIC_ASSET_VERSION ?? "20260218r1";
+const structuredDataNodes = structuredData
+  ? (Array.isArray(structuredData) ? structuredData : [structuredData])
+  : [];
 
 const primaryOgImage = seo.og.images[0];
 ---
@@ -94,6 +99,9 @@ const primaryOgImage = seo.og.images[0];
   <meta name="twitter:title" content={seo.twitter.title} />
   <meta name="twitter:description" content={seo.twitter.description} />
   <meta name="twitter:image" content={seo.twitter.image} />
+  {structuredDataNodes.map((node) => (
+    <script type="application/ld+json" set:html={JSON.stringify(node)} />
+  ))}
 
   <link rel="icon" href="favicon.ico" sizes="any" type="image/x-icon">
   <link rel="icon" href="assets/favicon/favicon-16.png" sizes="16x16" type="image/png">
