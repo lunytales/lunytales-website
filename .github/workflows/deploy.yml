@@ -35,6 +35,7 @@ jobs:
           test -f dist/en/index.html
           test -f dist/privacy/index.html
           test -f dist/terms/index.html
+          test ! -f dist/lunytales-v2/index.html
 
       - name: Smoke test built routes
         run: |
@@ -51,6 +52,12 @@ jobs:
               exit 1
             fi
           done
+
+          legacy_status_code=$(curl -s -o /dev/null -w "%{http_code}" "http://127.0.0.1:4173/lunytales-v2/")
+          if [ "$legacy_status_code" = "200" ]; then
+            echo "Legacy route /lunytales-v2/ should not be served as HTTP 200"
+            exit 1
+          fi
 
       - name: Validate JSON-LD output on home pages
         run: |
