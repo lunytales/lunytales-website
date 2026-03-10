@@ -3,6 +3,7 @@ import { SITE_CONFIG, toHref } from "../config/site";
 import { getStrings, type Language } from "../i18n";
 import { createContactMailto } from "../lib/contact";
 import type { SeoMeta } from "../lib/seo";
+import { normalizeStructuredData, serializeStructuredData, type JsonLdNode } from "../lib/structured-data";
 import bootstrapCssUrl from "bootstrap/dist/css/bootstrap.min.css?url";
 import bootstrapBundleUrl from "bootstrap/dist/js/bootstrap.bundle.min.js?url";
 
@@ -11,7 +12,7 @@ type RouteKey = "home" | "privacy" | "terms" | "bedtimeStories";
 interface Props {
   lang: Language;
   seo: SeoMeta;
-  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
+  structuredData?: JsonLdNode | Array<JsonLdNode>;
   routeKey?: RouteKey;
   navVariant?: "home" | "legal";
   footerVariant?: "home" | "legal";
@@ -68,9 +69,7 @@ const brandHref = currentLangHomeHref;
 const footerLogoHref = currentLangHomeHref;
 const contactMailto = createContactMailto(strings.footer.email, lang);
 const assetVersion = import.meta.env.PUBLIC_ASSET_VERSION ?? "20260218r1";
-const structuredDataNodes = structuredData
-  ? (Array.isArray(structuredData) ? structuredData : [structuredData])
-  : [];
+const structuredDataNodes = normalizeStructuredData(structuredData);
 
 const primaryOgImage = seo.og.images[0];
 ---
@@ -106,7 +105,7 @@ const primaryOgImage = seo.og.images[0];
   <meta name="twitter:description" content={seo.twitter.description} />
   <meta name="twitter:image" content={seo.twitter.image} />
   {structuredDataNodes.map((node) => (
-    <script type="application/ld+json" set:html={JSON.stringify(node)} />
+    <script type="application/ld+json" set:html={serializeStructuredData(node)} />
   ))}
 
   <link rel="icon" href="favicon.ico" sizes="any" type="image/x-icon">
