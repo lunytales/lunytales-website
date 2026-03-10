@@ -52,6 +52,49 @@ jobs:
             fi
           done
 
+      - name: Validate JSON-LD output on home pages
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          required_types = {"Organization", "WebSite", "CreativeWorkSeries"}
+
+          for page in ("dist/index.html", "dist/en/index.html"):
+              html = Path(page).read_text(encoding="utf-8")
+              scripts = re.findall(
+                  r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+                  html,
+                  flags=re.IGNORECASE | re.DOTALL,
+              )
+              if not scripts:
+                  raise SystemExit(f"{page}: missing JSON-LD script block")
+
+              found_valid_graph = False
+              for raw_json in scripts:
+                  payload = json.loads(raw_json)
+                  if payload.get("@context") != "https://schema.org":
+                      continue
+
+                  graph = payload.get("@graph")
+                  if not isinstance(graph, list):
+                      continue
+
+                  graph_types = {
+                      item.get("@type")
+                      for item in graph
+                      if isinstance(item, dict) and isinstance(item.get("@type"), str)
+                  }
+                  if required_types.issubset(graph_types):
+                      found_valid_graph = True
+                      break
+
+              if not found_valid_graph:
+                  raise SystemExit(f"{page}: JSON-LD present but required graph types are missing")
+          PY
+
       - name: Publish to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
