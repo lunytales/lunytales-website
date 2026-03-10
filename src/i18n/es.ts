@@ -1,11 +1,11 @@
 export const es = {
   meta: {
-    title: "Luny Tales",
-    description: "PDF interactivo + audiocuentos + música para dormir + Skill de Alexa.",
-    ogTitle: "Luny Tales",
-    ogDescription: "PDF interactivo + audiocuentos + música para dormir + Skill de Alexa.",
-    twitterTitle: "Luny Tales",
-    twitterDescription: "PDF interactivo + audiocuentos + música para dormir + Skill de Alexa.",
+    title: "Cuentos para dormir para niños | Luny Tales",
+    description: "Descubre cuentos para dormir para niños de 3 a 8 años. Historias breves, cálidas y memorables para acompañar la rutina de sueño en familia.",
+    ogTitle: "Cuentos para dormir para niños | Luny Tales",
+    ogDescription: "Descubre cuentos para dormir para niños de 3 a 8 años. Historias breves, cálidas y memorables para acompañar la rutina de sueño en familia.",
+    twitterTitle: "Cuentos para dormir para niños | Luny Tales",
+    twitterDescription: "Descubre cuentos para dormir para niños de 3 a 8 años. Historias breves, cálidas y memorables para acompañar la rutina de sueño en familia.",
   },
   a11y: {
     skipToContent: "Saltar al contenido",
@@ -27,8 +27,8 @@ export const es = {
     titleImageSrc: "assets/img/logo2.svg",
     mascotImageSrc: "assets/img/mascota.webp",
     logoAlt: "A dormir en 3 cuentos",
-    title: "Aventuras que florecen en tu mente.",
-    subtitle: "Para niños de 3 a 6 años · Tres cuentos de 3 minutos · Lectura o audio, con música suave para dormir.",
+    title: "Cuentos para dormir que acompañan su noche",
+    subtitle: "Historias breves para niñas y niños de 3 a 8 años, creadas para hacer de la hora de dormir un momento más tranquilo, cercano y especial.",
     buyNow: "Comprar ahora",
     buyAria: "Comprar ahora Luny Tales en Hotmart (hero)",
     includeCta: "Ver qué incluye",

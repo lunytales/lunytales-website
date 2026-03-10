@@ -1,11 +1,11 @@
 export const en = {
   meta: {
-    title: "Luny Tales",
-    description: "Interactive PDF + audio stories + sleep music + Alexa Skill.",
-    ogTitle: "Luny Tales",
-    ogDescription: "Interactive PDF + audio stories + sleep music + Alexa Skill.",
-    twitterTitle: "Luny Tales",
-    twitterDescription: "Interactive PDF + audio stories + sleep music + Alexa Skill.",
+    title: "Bedtime Stories for Kids | Luny Tales",
+    description: "Discover bedtime stories for kids ages 3 to 8. Short, warm, memorable stories designed to make bedtime calmer and more special for families.",
+    ogTitle: "Bedtime Stories for Kids | Luny Tales",
+    ogDescription: "Discover bedtime stories for kids ages 3 to 8. Short, warm, memorable stories designed to make bedtime calmer and more special for families.",
+    twitterTitle: "Bedtime Stories for Kids | Luny Tales",
+    twitterDescription: "Discover bedtime stories for kids ages 3 to 8. Short, warm, memorable stories designed to make bedtime calmer and more special for families.",
   },
   a11y: {
     skipToContent: "Skip to content",
@@ -27,8 +27,8 @@ export const en = {
     titleImageSrc: "assets/img/hero-title-en.svg",
     mascotImageSrc: "assets/img/mascota-en.webp",
     logoAlt: "Bedtime in 3 stories",
-    title: "Adventures that bloom in your mind.",
-    subtitle: "For kids ages 3 to 6 · Three 3-minute stories · Read or listen, with gentle music for bedtime.",
+    title: "Bedtime stories that gently end the day",
+    subtitle: "Short stories for children ages 3 to 8, created to make bedtime feel calmer, closer, and more meaningful.",
     buyNow: "Buy now",
     buyAria: "Buy Luny Tales now on Hotmart (hero)",
     includeCta: "See what's included",
