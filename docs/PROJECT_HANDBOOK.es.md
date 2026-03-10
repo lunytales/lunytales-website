@@ -119,7 +119,8 @@ Claves importantes:
 
 - `IS_STAGING` derivado de `PUBLIC_IS_STAGING === "true"`.
 - `SITE_CONFIG.origin` (`https://lunytales.com`).
-- `SITE_CONFIG.hotmartUrl` (checkout).
+- `SITE_CONFIG.hotmartUrlEs` (checkout en español).
+- `SITE_CONFIG.hotmartUrlEn` (checkout en inglés).
 - `SITE_CONFIG.paths.*` (rutas canónicas y assets clave).
 - `SITE_CONFIG.trackingGate`.
 
@@ -237,6 +238,9 @@ Cobertura actual de smoke tests:
 - PDFs demo:
   - ES: `assets/demo/demo.pdf`
   - EN: `assets/demo/demo_eng.pdf`
+- Checkout por idioma:
+  - ES: `SITE_CONFIG.hotmartUrlEs`
+  - EN: `SITE_CONFIG.hotmartUrlEn`
 
 ## 12) Componentes compartidos clave
 

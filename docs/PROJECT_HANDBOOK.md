@@ -119,7 +119,8 @@ Important keys:
 
 - `IS_STAGING` from `PUBLIC_IS_STAGING === "true"`.
 - `SITE_CONFIG.origin` (`https://lunytales.com`).
-- `SITE_CONFIG.hotmartUrl` (checkout).
+- `SITE_CONFIG.hotmartUrlEs` (Spanish checkout).
+- `SITE_CONFIG.hotmartUrlEn` (English checkout).
 - `SITE_CONFIG.paths.*` (all canonical paths and key assets).
 - `SITE_CONFIG.trackingGate`.
 
@@ -237,6 +238,9 @@ Smoke test routes/assets currently covered:
 - Demo PDFs:
   - ES: `assets/demo/demo.pdf`
   - EN: `assets/demo/demo_eng.pdf`
+- Checkout by locale:
+  - ES: `SITE_CONFIG.hotmartUrlEs`
+  - EN: `SITE_CONFIG.hotmartUrlEn`
 
 ## 12) Key Shared Components
 
