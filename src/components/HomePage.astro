@@ -20,7 +20,7 @@ const includeCardClasses = [
 const howPillClasses = ["how-pill--lila", "how-pill--mint", "how-pill--durazno"] as const;
 const howIconPaths = ["libro.webp", "audio.webp", "luna.webp"] as const;
 
-const hotmartUrl = SITE_CONFIG.hotmartUrl;
+const hotmartUrl = lang === "en" ? SITE_CONFIG.hotmartUrlEn : SITE_CONFIG.hotmartUrlEs;
 const demoPdfPath = lang === "en" ? SITE_CONFIG.paths.demoPdfEn : SITE_CONFIG.paths.demoPdf;
 const currentLangHomePath = lang === "en" ? SITE_CONFIG.paths.homeEn : SITE_CONFIG.paths.home;
 const includeSectionHref = `${toHref(currentLangHomePath)}#incluye`;

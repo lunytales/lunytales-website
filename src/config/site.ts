@@ -3,7 +3,8 @@ export const IS_STAGING =
 
 export const SITE_CONFIG = {
   origin: "https://lunytales.com",
-  hotmartUrl: "https://pay.hotmart.com/H100949723W?off=94i6su53",
+  hotmartUrlEs: "https://pay.hotmart.com/H100949723W?off=94i6su53",
+  hotmartUrlEn: "https://pay.hotmart.com/K104828315K",
   paths: {
     home: "",
     homeEn: "en/",
