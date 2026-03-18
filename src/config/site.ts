@@ -1,5 +1,19 @@
-export const IS_STAGING =
-  import.meta.env.PUBLIC_IS_STAGING === "true";
+function normalizeEnvValue(value: string | undefined): string {
+  return (value ?? "").trim().replace(/^["']|["']$/g, "").toLowerCase();
+}
+
+const PUBLIC_DEPLOY_ENV = normalizeEnvValue(import.meta.env.PUBLIC_DEPLOY_ENV);
+const IS_EXPLICIT_STAGING = normalizeEnvValue(import.meta.env.PUBLIC_IS_STAGING) === "true";
+const IS_PREVIEW_DEPLOY_ENV = PUBLIC_DEPLOY_ENV === "preview" || PUBLIC_DEPLOY_ENV === "staging";
+
+const CF_PAGES_FLAG = normalizeEnvValue(process.env.CF_PAGES);
+const CF_PAGES_BRANCH = normalizeEnvValue(process.env.CF_PAGES_BRANCH);
+const IS_CLOUDFLARE_PREVIEW =
+  (CF_PAGES_FLAG === "1" || CF_PAGES_FLAG === "true") &&
+  CF_PAGES_BRANCH !== "" &&
+  CF_PAGES_BRANCH !== "main";
+
+export const IS_STAGING = IS_EXPLICIT_STAGING || IS_PREVIEW_DEPLOY_ENV || IS_CLOUDFLARE_PREVIEW;
 
 export const SITE_CONFIG = {
   origin: "https://lunytales.com",
