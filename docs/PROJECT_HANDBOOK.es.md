@@ -1,6 +1,6 @@
-# Luny Tales v2 — Manual del Proyecto
+# Luny Tales Website — Manual del Proyecto
 
-Este documento es la fuente técnica de verdad del repositorio `lunytales-v2`.
+Este documento es la fuente técnica de verdad del repositorio `lunytales-website`.
 Está pensado para cualquier persona que necesite mantener, extender o migrar el sitio.
 
 ## 1) Alcance del proyecto
@@ -19,8 +19,8 @@ Está pensado para cualquier persona que necesite mantener, extender o migrar el
   - CSS global personalizado en `public/styles.css`.
 - Scripts de cliente: JavaScript vanilla en `public/assets/js/`.
 - Integración de sitemap SEO: `@astrojs/sitemap`.
-- CI/CD: GitHub Actions + `peaceiris/actions-gh-pages`.
-- Hosting: GitHub Pages (`gh-pages`) + dominio personalizado desde `public/CNAME`.
+- CI/CD: GitHub Actions (checks de CI) + despliegues en Cloudflare Pages.
+- Hosting: Cloudflare Pages (producción desde `main`, previews desde ramas no-main).
 
 ## 2.1) Infraestructura Edge (Cloudflare)
 
@@ -28,12 +28,12 @@ Esta configuración es operativa (fuera del repositorio) y debe mantenerse:
 
 - Tráfico del dominio proxyado por Cloudflare (proxy naranja activado).
 - HTTPS forzado en el edge para todas las solicitudes.
-- TLS y caché gestionados por Cloudflare delante de GitHub Pages.
+- TLS y caché edge gestionados por Cloudflare delante del origen de Cloudflare Pages.
 
 Nota de mapeo de dominio:
 
-- El dominio de producción se declara en `public/CNAME` como `lunytales.com`.
-- GitHub Pages sirve esa asociación de dominio personalizado, mientras que el DNS autoritativo se gestiona en Cloudflare.
+- `lunytales.com` está conectado como dominio personalizado en Cloudflare Pages.
+- El DNS autoritativo se gestiona en Cloudflare.
 - Todo el tráfico público debe pasar por el proxy de Cloudflare (nube naranja).
 
 Comandos de verificación:
@@ -64,7 +64,6 @@ Nota: estas configuraciones no se controlan desde Astro. Si el comportamiento ca
 │   ├── PROJECT_HANDBOOK.md
 │   └── PROJECT_HANDBOOK.es.md
 ├── public/
-│   ├── CNAME
 │   ├── styles.css
 │   ├── favicon.ico
 │   └── assets/
@@ -102,7 +101,7 @@ Rutas de infraestructura:
 
 - `/robots.txt` desde `src/pages/robots.txt.ts`
 - `/sitemap.xml` desde `src/pages/sitemap.xml.ts` (apunta a `sitemap-index.xml`)
-- `/lunytales-v2/` página de redirección a `/` para compatibilidad legacy
+- `/lunytales-v2/` redirección legacy hacia `/` gestionada desde `public/_redirects`
 
 Descubrimiento por robots:
 
@@ -117,7 +116,7 @@ Archivo fuente único para configuración global:
 
 Claves importantes:
 
-- `IS_STAGING` derivado de `PUBLIC_IS_STAGING === "true"`.
+- `IS_STAGING` derivado de señales de entorno de staging/preview (`PUBLIC_IS_STAGING`, contexto preview).
 - `SITE_CONFIG.origin` (`https://lunytales.com`).
 - `SITE_CONFIG.hotmartUrlEs` (checkout en español).
 - `SITE_CONFIG.hotmartUrlEn` (checkout en inglés).
@@ -220,7 +219,7 @@ Pasos:
 3. `npm run build`
 4. Verificación de artefactos requeridos
 5. Smoke test contra salida estática en servidor local
-6. Publicación de `dist/` en `gh-pages`
+6. Finalización de checks de CI (sin publicación a GitHub Pages)
 
 Cobertura actual de smoke tests:
 
@@ -282,4 +281,12 @@ Cobertura actual de smoke tests:
 
 Flujo de despliegue:
 
-- Build de Astro → GitHub Actions → rama `gh-pages` → origen de GitHub Pages → caché edge de Cloudflare → usuario final
+- Build de Astro → pipeline de despliegue de Cloudflare Pages → origen de Cloudflare Pages → caché edge de Cloudflare → usuario final
+
+
+## 17) Decisiones De Cleanup Post-Migración
+
+- El cutover de hosting quedó completado: `https://lunytales.com` ahora corre en Cloudflare Pages.
+- Se eliminó `public/CNAME` porque el dominio se administra directamente en Cloudflare Pages.
+- `.github/workflows/deploy.yml` se mantiene para checks de CI, pero se retiró la publicación a GitHub Pages.
+- `public/_redirects` se mantiene como fuente de verdad para redirecciones legacy (incluyendo `/lunytales-v2/`).
