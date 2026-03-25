@@ -2,6 +2,7 @@
   --indigo:#3a329c;
   --mint:#5fc498;
   --nav-offset: 92px;
+  --faq-anchor-offset: calc(var(--nav-offset) - 12px);
 
   /* Radii (system) */
   --radius-sm: 12px;
@@ -753,6 +754,10 @@ button:focus-visible{
   margin-top: 1.4rem;
 }
 
+.faq-group{
+  scroll-margin-top: var(--faq-anchor-offset);
+}
+
 .faq-group__header{
   margin-bottom: .6rem;
 }
@@ -797,7 +802,7 @@ button:focus-visible{
   align-items: center;
   gap: .75rem;
   padding: .95rem 1rem;
-  color: #3f3a8b;
+  color: rgba(31,39,73,.82);
   font-weight: 500;
   font-size: clamp(.96rem, 1.45vw, 1.02rem);
 }
@@ -824,7 +829,7 @@ button:focus-visible{
 
 #faq-content summary:hover,
 #faq-content summary:focus-visible{
-  color: #2f2881;
+  color: #2f344b;
   outline: none;
 }
 
