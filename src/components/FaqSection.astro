@@ -9,22 +9,6 @@ interface Props {
 const { lang, showHeader = true } = Astro.props;
 const strings = getStrings(lang);
 const accordionId = `faq-accordion-${lang}`;
-const faqToneClasses = [
-  "faq-item--mint",
-  "faq-item--lila",
-  "faq-item--durazno",
-  "faq-item--cielo",
-] as const;
-const faqIconPaths = [
-  "libro.webp",
-  "audio.webp",
-  "policy-sin-registros.webp",
-  "policy-privacidad-total.webp",
-  "luna.webp",
-  "audio.webp",
-  "policy-voz-segura.webp",
-  "libro.webp",
-] as const;
 ---
 <section class="py-5 bg-white border-top" id="faq">
   <div class="container">
@@ -35,44 +19,44 @@ const faqIconPaths = [
       </div>
     )}
 
-    <div class="accordion faq-accordion" id={accordionId}>
-      {strings.faq.items.map((item, index) => {
-        const headingId = `${accordionId}-heading-${index}`;
-        const collapseId = `${accordionId}-collapse-${index}`;
-        const isFirst = index === 0;
-        const toneClass = faqToneClasses[index % faqToneClasses.length] ?? faqToneClasses[0];
-        const iconPath = faqIconPaths[index % faqIconPaths.length] ?? faqIconPaths[0];
+    <div class="faq-frame">
+      <div class="accordion faq-accordion" id={accordionId}>
+        {strings.faq.items.map((item, index) => {
+          const headingId = `${accordionId}-heading-${index}`;
+          const collapseId = `${accordionId}-collapse-${index}`;
+          const isFirst = index === 0;
 
-        return (
-          <article class={`accordion-item faq-item ${toneClass}`.trim()}>
-            <h3 class="accordion-header" id={headingId}>
-              <button
-                class={`accordion-button faq-question ${isFirst ? "" : "collapsed"}`.trim()}
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target={`#${collapseId}`}
-                aria-expanded={isFirst ? "true" : "false"}
-                aria-controls={collapseId}
+          return (
+            <article class="accordion-item faq-item">
+              <h3 class="accordion-header" id={headingId}>
+                <button
+                  class={`accordion-button faq-question ${isFirst ? "" : "collapsed"}`.trim()}
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target={`#${collapseId}`}
+                  aria-expanded={isFirst ? "true" : "false"}
+                  aria-controls={collapseId}
+                >
+                  <span class="faq-question__badge" aria-hidden="true">Q</span>
+                  <span class="faq-question__text">{item.question}</span>
+                  <span class="faq-toggle-icon" aria-hidden="true"></span>
+                </button>
+              </h3>
+
+              <div
+                id={collapseId}
+                class={`accordion-collapse collapse ${isFirst ? "show" : ""}`.trim()}
+                aria-labelledby={headingId}
+                data-bs-parent={`#${accordionId}`}
               >
-                <img class="faq-question__icon" src={`assets/icons/${iconPath}`} alt="" loading="lazy" decoding="async">
-                <span class="faq-question__text">{item.question}</span>
-                <span class="faq-toggle-icon" aria-hidden="true"></span>
-              </button>
-            </h3>
-
-            <div
-              id={collapseId}
-              class={`accordion-collapse collapse ${isFirst ? "show" : ""}`.trim()}
-              aria-labelledby={headingId}
-              data-bs-parent={`#${accordionId}`}
-            >
-              <div class="accordion-body faq-answer">
-                <p class="mb-0">{item.answer}</p>
+                <div class="accordion-body faq-answer">
+                  <p class="mb-0">{item.answer}</p>
+                </div>
               </div>
-            </div>
-          </article>
-        );
-      })}
+            </article>
+          );
+        })}
+      </div>
     </div>
   </div>
 </section>
