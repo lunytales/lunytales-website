@@ -15,7 +15,6 @@ const questionIndexesByGroup = [[0, 1], [2, 3], [4, 5, 6], [7]] as const;
     <div class="faq-layout">
       <aside class="faq-toc" aria-labelledby={`${detailsIdPrefix}-toc-title`}>
         <div class="faq-toc__header">
-          <p class="faq-toc__eyebrow">{strings.faq.toc.eyebrow}</p>
           <h2 class="faq-toc__title" id={`${detailsIdPrefix}-toc-title`}>{strings.faq.toc.title}</h2>
         </div>
 
@@ -37,7 +36,6 @@ const questionIndexesByGroup = [[0, 1], [2, 3], [4, 5, 6], [7]] as const;
 
       <section class="faq-main" aria-labelledby={`${detailsIdPrefix}-title`}>
         <header class="faq-main__header">
-          <p class="faq-main__eyebrow">{strings.faq.panel.eyebrow}</p>
           <h2 class="faq-main__title" id={`${detailsIdPrefix}-title`}>{strings.faq.panel.title}</h2>
           <p class="faq-main__description">{strings.faq.panel.description}</p>
         </header>
@@ -47,7 +45,6 @@ const questionIndexesByGroup = [[0, 1], [2, 3], [4, 5, 6], [7]] as const;
           return (
             <section id={group.id} class="faq-group" aria-labelledby={`${detailsIdPrefix}-${group.id}-title`}>
               <div class="faq-group__header">
-                <p class="faq-group__eyebrow">{group.eyebrow}</p>
                 <h3 class="faq-group__title" id={`${detailsIdPrefix}-${group.id}-title`}>{group.title}</h3>
               </div>
 

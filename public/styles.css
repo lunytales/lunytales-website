@@ -630,46 +630,9 @@ button:focus-visible{
   padding: 3.3rem 0 4rem;
 }
 
-.faq-hero__eyebrow{
-  margin: 0 0 .75rem;
-  color: rgba(255,255,255,.82);
-  font-size: .92rem;
-  font-weight: 700;
-  letter-spacing: .03em;
-  text-transform: uppercase;
-}
-
 .faq-hero__lead{
   max-width: 56ch;
   margin: 0;
-}
-
-.faq-hero__quick-nav{
-  display: flex;
-  flex-wrap: wrap;
-  gap: .65rem;
-  margin-top: 1.4rem;
-}
-
-.faq-hero__quick-nav a{
-  display: inline-flex;
-  align-items: center;
-  min-height: 40px;
-  padding: 0 .95rem;
-  border-radius: var(--radius-pill);
-  text-decoration: none;
-  color: rgba(255,255,255,.95);
-  border: 1px solid rgba(255,255,255,.24);
-  background: rgba(255,255,255,.1);
-  transition: transform var(--dur-1) var(--ease-standard), background-color var(--dur-1) var(--ease-standard), border-color var(--dur-1) var(--ease-standard);
-}
-
-.faq-hero__quick-nav a:hover,
-.faq-hero__quick-nav a:focus-visible{
-  transform: translateY(-1px);
-  background: rgba(255,255,255,.16);
-  border-color: rgba(255,255,255,.38);
-  outline: none;
 }
 
 .faq-hero__mascot{
@@ -710,20 +673,9 @@ button:focus-visible{
   margin-bottom: .9rem;
 }
 
-.faq-toc__eyebrow,
-.faq-main__eyebrow,
-.faq-group__eyebrow{
-  margin: 0;
-  color: #4d43b7;
-  font-size: .82rem;
-  font-weight: 700;
-  letter-spacing: .03em;
-  text-transform: uppercase;
-}
-
 .faq-toc__title,
 .faq-main__title{
-  margin: .35rem 0 0;
+  margin: 0;
   color: #2f2881;
   font-size: clamp(1.45rem, 2vw, 1.95rem);
   line-height: 1.1;
@@ -804,7 +756,7 @@ button:focus-visible{
 }
 
 .faq-group__title{
-  margin: .35rem 0 0;
+  margin: 0;
   color: #2f2881;
   font-size: 1.22rem;
 }
@@ -883,6 +835,20 @@ button:focus-visible{
   max-width: 64ch;
 }
 
+.faq-help{
+  padding: .5rem 0 .25rem;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.faq-help p{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 58ch;
+  color: rgba(9,30,47,.72);
+}
+
 @media (max-width: 991.98px){
   .faq-content{
     margin-top: -1.3rem;
@@ -901,17 +867,6 @@ button:focus-visible{
 @media (max-width: 575.98px){
   .faq-hero{
     padding: 2.65rem 0 3.15rem;
-  }
-
-  .faq-hero__quick-nav{
-    gap: .5rem;
-    margin-top: 1.1rem;
-  }
-
-  .faq-hero__quick-nav a{
-    min-height: 36px;
-    padding: 0 .82rem;
-    font-size: .93rem;
   }
 
   .faq-content{

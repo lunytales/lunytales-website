@@ -100,17 +100,8 @@ export const en = {
   faq: {
     title: "Frequently Asked Questions",
     subtitle: "Clear answers to help you decide before buying.",
-    heroEyebrow: "Luny Tales · Help and clarity",
     heroLead: "Everything you need to know about buying and using Luny Tales, explained in a clear, kind, and easy-to-find way.",
-    quickNavAria: "Quick links",
-    quickNav: {
-      purchase: "Purchase",
-      access: "Access",
-      usage: "Usage",
-      future: "Coming soon",
-    },
     toc: {
-      eyebrow: "Quick navigation",
       title: "Explore by topic",
       cards: [
         {
@@ -136,29 +127,24 @@ export const en = {
       ],
     },
     panel: {
-      eyebrow: "Quick answers",
-      title: "Everything in one place",
+      title: "Quick answers",
       description: "These answers are designed to help you decide clearly, without interrupting the main experience of the site.",
     },
     groups: [
       {
         id: "purchase",
-        eyebrow: "Topic 1",
         title: "Purchase",
       },
       {
         id: "access",
-        eyebrow: "Topic 2",
         title: "Access",
       },
       {
         id: "usage",
-        eyebrow: "Topic 3",
         title: "Usage",
       },
       {
         id: "future",
-        eyebrow: "Topic 4",
         title: "Coming soon",
       },
     ],
