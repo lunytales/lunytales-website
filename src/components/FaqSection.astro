@@ -1,5 +1,6 @@
 ---
 import { getStrings, type Language } from "../i18n";
+import { SITE_CONFIG } from "../config/site";
 
 interface Props {
   lang: Language;
@@ -9,6 +10,7 @@ const { lang } = Astro.props;
 const strings = getStrings(lang);
 const detailsIdPrefix = `faq-details-${lang}`;
 const questionIndexesByGroup = [[0, 1], [2, 3], [4, 5, 6], [7]] as const;
+const faqPath = lang === "en" ? SITE_CONFIG.paths.faqEn : SITE_CONFIG.paths.faq;
 ---
 <section class="faq-content" id="faq-content">
   <div class="container">
@@ -22,7 +24,7 @@ const questionIndexesByGroup = [[0, 1], [2, 3], [4, 5, 6], [7]] as const;
           {strings.faq.toc.cards.map((card, index) => {
             const group = strings.faq.groups[index] ?? strings.faq.groups[0];
             return (
-              <a class="faq-toc__item" href={`#${group.id}`}>
+              <a class="faq-toc__item" href={`${faqPath}#${group.id}`}>
                 <span class="faq-toc__icon" aria-hidden="true">{card.icon}</span>
                 <span>
                   <strong>{card.title}</strong>
