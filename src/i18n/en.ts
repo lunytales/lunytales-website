@@ -107,28 +107,28 @@ export const en = {
         {
           icon: "✦",
           title: "Purchase",
-          description: "What you receive and how payment works",
+          description: "What you get and how payment works",
         },
         {
           icon: "☾",
           title: "Access",
-          description: "How to enter, download, and find your content",
+          description: "How to find and open your content",
         },
         {
           icon: "♪",
-          title: "Usage",
-          description: "Devices, internet, and Alexa experience",
+          title: "Use",
+          description: "Devices, internet, and Alexa",
         },
         {
           icon: "★",
           title: "Coming soon",
-          description: "New stories, future volumes, and print edition",
+          description: "New stories and printed edition",
         },
       ],
     },
     panel: {
       title: "Quick answers",
-      description: "These answers are designed to help you decide clearly, without interrupting the main experience of the site.",
+      description: "Clear answers about purchase, access, and daily use.",
     },
     groups: [
       {
@@ -141,7 +141,7 @@ export const en = {
       },
       {
         id: "usage",
-        title: "Usage",
+        title: "Use",
       },
       {
         id: "future",
@@ -155,31 +155,31 @@ export const en = {
       },
       {
         question: "Is this a one-time purchase or a subscription?",
-        answer: "It is a one-time purchase. It is not a monthly subscription.",
+        answer: "It is a one-time purchase, not a monthly subscription.",
       },
       {
         question: "How do I access my purchase after paying?",
-        answer: "At the moment, the purchase is processed through Hotmart. After completing payment, Hotmart will guide you to access your content through its platform.",
+        answer: "At the moment, the purchase is processed through Hotmart. After completing your payment, Hotmart will show you the steps to access your content. If you cannot find it later, first check your purchase inside that platform.",
       },
       {
         question: "Can I download it again later?",
-        answer: "Access and downloads depend on the flow enabled by Hotmart for your purchase. If you need help finding your content, first check your access on that platform.",
+        answer: "Access and downloads depend on the flow enabled by Hotmart for your purchase. If you need help finding your content, first check your purchase details on that platform.",
       },
       {
         question: "What devices can I use it on?",
-        answer: "You can read it on a phone, tablet, or computer. The experience is designed to be flexible and easy to use across different devices.",
+        answer: "You can read it on a phone, tablet, or computer. The experience is designed to feel flexible and easy to use across devices.",
       },
       {
         question: "Do I need internet to read or listen to it?",
-        answer: "You may need an internet connection to access the purchase and open the audio links. Once the PDF is downloaded, reading it depends on the device you use.",
+        answer: "You may need an internet connection to access your purchase and open the audio links. Once the PDF is downloaded, you can read it on your device.",
       },
       {
         question: "How does it work with Alexa?",
-        answer: "Luny Tales includes a complementary Alexa experience designed to support the bedtime routine. Availability and use depend on the user's device and compatible setup.",
+        answer: "Luny Tales includes a complementary Alexa experience designed to support the bedtime routine. Availability and use depend on your device and compatible setup.",
       },
       {
         question: "Will there be more stories or a printed version?",
-        answer: "Yes. Luny Tales is meant to grow with new stories, future volumes, and a possible printed edition.",
+        answer: "Yes. Luny Tales is designed to grow with new stories, future volumes, and a possible printed edition.",
       },
     ],
     helpTitle: "Need additional help?",

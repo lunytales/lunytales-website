@@ -112,23 +112,23 @@ export const es = {
         {
           icon: "☾",
           title: "Acceso",
-          description: "Cómo entrar, descargar y encontrar tu contenido",
+          description: "Cómo entrar y encontrar tu contenido",
         },
         {
           icon: "♪",
           title: "Uso",
-          description: "Dispositivos, internet y experiencia con Alexa",
+          description: "Dispositivos, internet y Alexa",
         },
         {
           icon: "★",
           title: "Próximamente",
-          description: "Nuevos cuentos, tomos y versión impresa",
+          description: "Nuevos cuentos y edición impresa",
         },
       ],
     },
     panel: {
       title: "Respuestas rápidas",
-      description: "Estas respuestas están pensadas para ayudarte a decidir con claridad, sin interrumpir la experiencia principal del sitio.",
+      description: "Respuestas claras sobre compra, acceso y uso de Luny Tales.",
     },
     groups: [
       {
@@ -159,7 +159,7 @@ export const es = {
       },
       {
         question: "¿Cómo accedo a mi compra después de pagar?",
-        answer: "Actualmente, la compra se procesa a través de Hotmart. Después de completar el pago, Hotmart te guiará para acceder a tu contenido desde su plataforma.",
+        answer: "Actualmente, la compra se procesa a través de Hotmart. Después de completar el pago, Hotmart te mostrará los pasos para acceder a tu contenido. Si en algún momento no logras encontrarlo, revisa primero tu compra dentro de esa plataforma.",
       },
       {
         question: "¿Puedo volver a descargarlo después?",
