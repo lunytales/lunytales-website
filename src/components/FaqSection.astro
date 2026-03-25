@@ -3,60 +3,73 @@ import { getStrings, type Language } from "../i18n";
 
 interface Props {
   lang: Language;
-  showHeader?: boolean;
 }
 
-const { lang, showHeader = true } = Astro.props;
+const { lang } = Astro.props;
 const strings = getStrings(lang);
-const accordionId = `faq-accordion-${lang}`;
+const detailsIdPrefix = `faq-details-${lang}`;
+const questionIndexesByGroup = [[0, 1], [2, 3], [4, 5, 6], [7]] as const;
 ---
-<section class="py-5 bg-white border-top" id="faq">
+<section class="faq-content" id="faq-content">
   <div class="container">
-    {showHeader && (
-      <div class="mb-4">
-        <h2 class="fw-bold mb-1">{strings.faq.title}</h2>
-        <p class="text-secondary mb-0">{strings.faq.subtitle}</p>
-      </div>
-    )}
+    <div class="faq-layout">
+      <aside class="faq-toc" aria-labelledby={`${detailsIdPrefix}-toc-title`}>
+        <div class="faq-toc__header">
+          <p class="faq-toc__eyebrow">{strings.faq.toc.eyebrow}</p>
+          <h2 class="faq-toc__title" id={`${detailsIdPrefix}-toc-title`}>{strings.faq.toc.title}</h2>
+        </div>
 
-    <div class="faq-frame">
-      <div class="accordion faq-accordion" id={accordionId}>
-        {strings.faq.items.map((item, index) => {
-          const headingId = `${accordionId}-heading-${index}`;
-          const collapseId = `${accordionId}-collapse-${index}`;
-          const isFirst = index === 0;
+        <div class="faq-toc__grid">
+          {strings.faq.toc.cards.map((card, index) => {
+            const group = strings.faq.groups[index] ?? strings.faq.groups[0];
+            return (
+              <a class="faq-toc__item" href={`#${group.id}`}>
+                <span class="faq-toc__icon" aria-hidden="true">{card.icon}</span>
+                <span>
+                  <strong>{card.title}</strong>
+                  <small>{card.description}</small>
+                </span>
+              </a>
+            );
+          })}
+        </div>
+      </aside>
 
+      <section class="faq-main" aria-labelledby={`${detailsIdPrefix}-title`}>
+        <header class="faq-main__header">
+          <p class="faq-main__eyebrow">{strings.faq.panel.eyebrow}</p>
+          <h2 class="faq-main__title" id={`${detailsIdPrefix}-title`}>{strings.faq.panel.title}</h2>
+          <p class="faq-main__description">{strings.faq.panel.description}</p>
+        </header>
+
+        {strings.faq.groups.map((group, groupIndex) => {
+          const questionIndexes = questionIndexesByGroup[groupIndex] ?? [];
           return (
-            <article class="accordion-item faq-item">
-              <h3 class="accordion-header" id={headingId}>
-                <button
-                  class={`accordion-button faq-question ${isFirst ? "" : "collapsed"}`.trim()}
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target={`#${collapseId}`}
-                  aria-expanded={isFirst ? "true" : "false"}
-                  aria-controls={collapseId}
-                >
-                  <span class="faq-question__badge" aria-hidden="true">Q</span>
-                  <span class="faq-question__text">{item.question}</span>
-                  <span class="faq-toggle-icon" aria-hidden="true"></span>
-                </button>
-              </h3>
-
-              <div
-                id={collapseId}
-                class={`accordion-collapse collapse ${isFirst ? "show" : ""}`.trim()}
-                aria-labelledby={headingId}
-                data-bs-parent={`#${accordionId}`}
-              >
-                <div class="accordion-body faq-answer">
-                  <p class="mb-0">{item.answer}</p>
-                </div>
+            <section id={group.id} class="faq-group" aria-labelledby={`${detailsIdPrefix}-${group.id}-title`}>
+              <div class="faq-group__header">
+                <p class="faq-group__eyebrow">{group.eyebrow}</p>
+                <h3 class="faq-group__title" id={`${detailsIdPrefix}-${group.id}-title`}>{group.title}</h3>
               </div>
-            </article>
+
+              {questionIndexes.map((questionIndex, itemIndex) => {
+                const item = strings.faq.items[questionIndex];
+                if (!item) {
+                  return null;
+                }
+
+                return (
+                  <details class="faq-item" open={groupIndex === 0 && itemIndex === 0}>
+                    <summary>{item.question}</summary>
+                    <div class="faq-answer">
+                      <p>{item.answer}</p>
+                    </div>
+                  </details>
+                );
+              })}
+            </section>
           );
         })}
-      </div>
+      </section>
     </div>
   </div>
 </section>

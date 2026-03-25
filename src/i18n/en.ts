@@ -100,6 +100,68 @@ export const en = {
   faq: {
     title: "Frequently Asked Questions",
     subtitle: "Clear answers to help you decide before buying.",
+    heroEyebrow: "Luny Tales · Help and clarity",
+    heroLead: "Everything you need to know about buying and using Luny Tales, explained in a clear, kind, and easy-to-find way.",
+    quickNavAria: "Quick links",
+    quickNav: {
+      purchase: "Purchase",
+      access: "Access",
+      usage: "Usage",
+      future: "Coming soon",
+    },
+    toc: {
+      eyebrow: "Quick navigation",
+      title: "Explore by topic",
+      cards: [
+        {
+          icon: "✦",
+          title: "Purchase",
+          description: "What you receive and how payment works",
+        },
+        {
+          icon: "☾",
+          title: "Access",
+          description: "How to enter, download, and find your content",
+        },
+        {
+          icon: "♪",
+          title: "Usage",
+          description: "Devices, internet, and Alexa experience",
+        },
+        {
+          icon: "★",
+          title: "Coming soon",
+          description: "New stories, future volumes, and print edition",
+        },
+      ],
+    },
+    panel: {
+      eyebrow: "Quick answers",
+      title: "Everything in one place",
+      description: "These answers are designed to help you decide clearly, without interrupting the main experience of the site.",
+    },
+    groups: [
+      {
+        id: "purchase",
+        eyebrow: "Topic 1",
+        title: "Purchase",
+      },
+      {
+        id: "access",
+        eyebrow: "Topic 2",
+        title: "Access",
+      },
+      {
+        id: "usage",
+        eyebrow: "Topic 3",
+        title: "Usage",
+      },
+      {
+        id: "future",
+        eyebrow: "Topic 4",
+        title: "Coming soon",
+      },
+    ],
     items: [
       {
         question: "What exactly do I receive when I buy Luny Tales?",
@@ -127,13 +189,15 @@ export const en = {
       },
       {
         question: "How does it work with Alexa?",
-        answer: "Luny Tales includes a complementary Alexa experience designed to support the bedtime routine. Availability and use depend on the user’s device and compatible setup.",
+        answer: "Luny Tales includes a complementary Alexa experience designed to support the bedtime routine. Availability and use depend on the user's device and compatible setup.",
       },
       {
         question: "Will there be more stories or a printed version?",
         answer: "Yes. Luny Tales is meant to grow with new stories, future volumes, and a possible printed edition.",
       },
     ],
+    helpTitle: "Need additional help?",
+    helpText: "If your question is not listed here, contact us and we will help you personally.",
   },
   footer: {
     tagline: "Stories, audio, and music for sleep.",

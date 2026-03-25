@@ -26,23 +26,61 @@ const structuredData = createFaqStructuredData({
   pageUrl: seo.canonical,
   items: strings.faq.items,
 });
+
+const [purchaseGroup, accessGroup, usageGroup, futureGroup] = strings.faq.groups;
+const heroLinks = [
+  { href: `#${purchaseGroup?.id ?? "faq-content"}`, label: strings.faq.quickNav.purchase },
+  { href: `#${accessGroup?.id ?? "faq-content"}`, label: strings.faq.quickNav.access },
+  { href: `#${usageGroup?.id ?? "faq-content"}`, label: strings.faq.quickNav.usage },
+  { href: `#${futureGroup?.id ?? "faq-content"}`, label: strings.faq.quickNav.future },
+];
+const mascotImageSources = {
+  src: "assets/img/mascota-en-768.webp",
+  srcset: "assets/img/mascota-en-512.webp 512w, assets/img/mascota-en-768.webp 768w, assets/img/mascota-en-1024.webp 1024w",
+};
 ---
 <SiteLayout lang={lang} seo={seo} structuredData={structuredData} routeKey="faq" navVariant="legal" footerVariant="legal">
-  <section class="policy-hero policy-hero-full">
+  <header class="hero-luny hero-luny--grad faq-hero">
     <div class="container">
-      <h1 class="policy-title">{strings.faq.title}</h1>
-      <p class="policy-subtitle mb-0">{strings.faq.subtitle}</p>
-    </div>
-  </section>
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <p class="faq-hero__eyebrow">{strings.faq.heroEyebrow}</p>
+          <h1 class="hero-title mb-3">{strings.faq.title}</h1>
+          <p class="hero-subtitle faq-hero__lead">{strings.faq.heroLead}</p>
 
-  <FaqSection lang={lang} showHeader={false} />
+          <nav class="faq-hero__quick-nav" aria-label={strings.faq.quickNavAria}>
+            {heroLinks.map((link) => (
+              <a href={link.href}>{link.label}</a>
+            ))}
+          </nav>
+        </div>
+
+        <div class="col-lg-5 text-center text-lg-end">
+          <img
+            src={mascotImageSources.src}
+            srcset={mascotImageSources.srcset}
+            sizes="(max-width: 768px) 58vw, (max-width: 1199px) 40vw, 360px"
+            alt={strings.hero.mascotAlt}
+            width="1024"
+            height="1024"
+            class="hero-mascota faq-hero__mascot"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          >
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <FaqSection lang={lang} />
 
   <section class="py-4">
     <div class="container">
       <div class="card policy-contact shadow-sm">
         <div class="card-body text-center">
-          <h2 class="h5 fw-bold mb-2">Need additional help?</h2>
-          <p class="mb-3">If your question is not listed here, contact us and we will help you personally.</p>
+          <h2 class="h5 fw-bold mb-2">{strings.faq.helpTitle}</h2>
+          <p class="mb-3">{strings.faq.helpText}</p>
           <a class="btn btn-primary btn-pill btn-luny px-4" href={contactMailto}>{strings.footer.email}</a>
         </div>
       </div>

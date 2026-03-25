@@ -100,6 +100,68 @@ export const es = {
   faq: {
     title: "Preguntas frecuentes",
     subtitle: "Respuestas claras para ayudarte antes de comprar.",
+    heroEyebrow: "Luny Tales · Ayuda y claridad",
+    heroLead: "Todo lo que necesitas saber sobre la compra y el uso de Luny Tales, explicado de forma clara, amable y fácil de encontrar.",
+    quickNavAria: "Accesos rápidos",
+    quickNav: {
+      purchase: "Compra",
+      access: "Acceso",
+      usage: "Uso",
+      future: "Próximamente",
+    },
+    toc: {
+      eyebrow: "Navegación rápida",
+      title: "Explora por tema",
+      cards: [
+        {
+          icon: "✦",
+          title: "Compra",
+          description: "Qué recibes y cómo funciona el pago",
+        },
+        {
+          icon: "☾",
+          title: "Acceso",
+          description: "Cómo entrar, descargar y encontrar tu contenido",
+        },
+        {
+          icon: "♪",
+          title: "Uso",
+          description: "Dispositivos, internet y experiencia con Alexa",
+        },
+        {
+          icon: "★",
+          title: "Próximamente",
+          description: "Nuevos cuentos, tomos y versión impresa",
+        },
+      ],
+    },
+    panel: {
+      eyebrow: "Respuestas rápidas",
+      title: "Todo en un solo lugar",
+      description: "Estas respuestas están pensadas para ayudarte a decidir con claridad, sin interrumpir la experiencia principal del sitio.",
+    },
+    groups: [
+      {
+        id: "compra",
+        eyebrow: "Tema 1",
+        title: "Compra",
+      },
+      {
+        id: "acceso",
+        eyebrow: "Tema 2",
+        title: "Acceso",
+      },
+      {
+        id: "uso",
+        eyebrow: "Tema 3",
+        title: "Uso",
+      },
+      {
+        id: "futuro",
+        eyebrow: "Tema 4",
+        title: "Próximamente",
+      },
+    ],
     items: [
       {
         question: "¿Qué recibo exactamente al comprar Luny Tales?",
@@ -134,6 +196,8 @@ export const es = {
         answer: "Sí. Luny Tales está pensado para crecer con nuevos cuentos, futuros tomos y una posible versión impresa.",
       },
     ],
+    helpTitle: "¿Necesitas ayuda adicional?",
+    helpText: "Si tu duda no aparece aquí, escríbenos y te ayudamos personalmente.",
   },
   footer: {
     tagline: "Cuentos, audio y música para dormir.",

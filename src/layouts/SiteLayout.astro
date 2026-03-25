@@ -252,8 +252,12 @@ const primaryOgImage = seo.og.images[0];
             <div class="col-lg-6">
               <div class="footer-title">{strings.footer.legalTitle}</div>
               <div class="footer-legal footer-legal-inline">
-                <a href={currentLangLegalFaqHref}>{strings.footer.legalFaq}</a>
-                <span aria-hidden="true">|</span>
+                {routeKey !== "faq" && (
+                  <>
+                    <a href={currentLangLegalFaqHref}>{strings.footer.legalFaq}</a>
+                    <span aria-hidden="true">|</span>
+                  </>
+                )}
                 <a href={currentLangLegalPrivacyHref}>{strings.footer.legalPrivacy}</a>
                 <span aria-hidden="true">|</span>
                 <a href={currentLangLegalTermsHref}>{strings.footer.legalTerms}</a>
@@ -278,8 +282,12 @@ const primaryOgImage = seo.og.images[0];
         <div class="small">© <span id="y"></span> Luny Tales</div>
         {footerVariant === "home" && (
           <div class="footer-legal small">
-            <a href={currentLangLegalFaqHref}>{strings.footer.legalFaq}</a>
-            <span aria-hidden="true">|</span>
+            {routeKey !== "faq" && (
+              <>
+                <a href={currentLangLegalFaqHref}>{strings.footer.legalFaq}</a>
+                <span aria-hidden="true">|</span>
+              </>
+            )}
             <a href={currentLangLegalPrivacyHref}>{strings.footer.legalPrivacy}</a>
             <span aria-hidden="true">|</span>
             <a href={currentLangLegalTermsHref}>{strings.footer.legalTerms}</a>
