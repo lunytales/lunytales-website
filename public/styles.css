@@ -665,7 +665,7 @@ button:focus-visible{
 
 .faq-toc{
   position: sticky;
-  top: 1.45rem;
+  top: calc(var(--nav-offset) + 12px);
   padding: 1.2rem;
 }
 
@@ -724,7 +724,9 @@ button:focus-visible{
 .faq-toc__item strong{
   display: block;
   margin-bottom: .18rem;
-  font-size: .98rem;
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #2f2881;
 }
 
 .faq-toc__item small{
@@ -758,7 +760,8 @@ button:focus-visible{
 .faq-group__title{
   margin: 0;
   color: #2f2881;
-  font-size: 1.22rem;
+  font-size: 1.2rem;
+  font-weight: 800;
 }
 
 .faq-item{
@@ -794,9 +797,9 @@ button:focus-visible{
   align-items: center;
   gap: .75rem;
   padding: .95rem 1rem;
-  color: #3a329c;
-  font-weight: 800;
-  font-size: clamp(1rem, 1.6vw, 1.08rem);
+  color: #3f3a8b;
+  font-weight: 700;
+  font-size: clamp(.98rem, 1.5vw, 1.04rem);
 }
 
 #faq-content summary::-webkit-details-marker{
