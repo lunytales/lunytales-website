@@ -99,31 +99,39 @@ export const es = {
   },
   faq: {
     title: "Preguntas frecuentes",
-    subtitle: "Respuestas rápidas para ayudarte a decidir con claridad.",
+    subtitle: "Respuestas claras para ayudarte antes de comprar.",
     items: [
       {
-        question: "¿Para qué edades están pensados estos cuentos?",
-        answer: "Están creados para niñas y niños de 3 a 8 años, con historias breves y fáciles de seguir.",
+        question: "¿Qué recibo exactamente al comprar Luny Tales?",
+        answer: "Recibes un cuento ilustrado en PDF diseñado para acompañar la rutina de dormir, junto con acceso al contenido de audio disponible para esa experiencia.",
       },
       {
-        question: "¿Qué recibo al comprar Luny Tales?",
-        answer: "Obtienes el PDF interactivo de los 3 cuentos, acceso a audiocuentos, música para dormir y la experiencia con Alexa.",
+        question: "¿La compra es un pago único o una suscripción?",
+        answer: "Es una compra única. No es una suscripción mensual.",
       },
       {
-        question: "¿Es una compra única o una suscripción?",
-        answer: "Es un pago único. Compras una vez y puedes volver a usar el contenido cuando quieras.",
+        question: "¿Cómo accedo a mi compra después de pagar?",
+        answer: "Actualmente, la compra se procesa a través de Hotmart. Después de completar el pago, Hotmart te guiará para acceder a tu contenido desde su plataforma.",
       },
       {
-        question: "¿Puedo usar los cuentos todas las noches?",
-        answer: "Sí. Están diseñados para integrarse en la rutina nocturna y repetirlos según lo que necesite tu familia.",
+        question: "¿Puedo volver a descargarlo después?",
+        answer: "El acceso y las descargas dependen del flujo habilitado por Hotmart para tu compra. Si necesitas ayuda para encontrar tu contenido, revisa primero tu acceso en esa plataforma.",
       },
       {
-        question: "¿Cómo veo el contenido después de comprar?",
-        answer: "Después del pago recibes acceso inmediato y puedes abrirlo desde tu celular, tablet o computadora.",
+        question: "¿En qué dispositivos puedo usarlo?",
+        answer: "Puedes leerlo en celular, tablet o computadora. La experiencia está pensada para ser flexible y fácil de usar en distintos dispositivos.",
       },
       {
-        question: "¿Sirve si mi hijo se distrae o le cuesta relajarse?",
-        answer: "Sí. Las historias, el audio y la música buscan bajar el ritmo del final del día y acompañar una transición más tranquila al sueño.",
+        question: "¿Necesito internet para leerlo o escucharlo?",
+        answer: "Para acceder a la compra y abrir los enlaces de audio sí puedes necesitar conexión. Una vez descargado el PDF, su lectura depende del dispositivo en el que lo uses.",
+      },
+      {
+        question: "¿Cómo funciona con Alexa?",
+        answer: "Luny Tales cuenta con una experiencia complementaria en Alexa para acompañar la rutina nocturna. Su disponibilidad y uso dependen del dispositivo y la configuración compatible del usuario.",
+      },
+      {
+        question: "¿Habrá más cuentos o una versión impresa?",
+        answer: "Sí. Luny Tales está pensado para crecer con nuevos cuentos, futuros tomos y una posible versión impresa.",
       },
     ],
   },
@@ -138,6 +146,7 @@ export const es = {
     email: "hola@lunytales.com",
     emailButton: "Enviar correo",
     mascotAlt: "Luny, el búho mascota, sosteniendo una tablet con la portada de A dormir en 3 cuentos",
+    legalFaq: "Preguntas frecuentes",
     legalPrivacy: "Privacidad",
     legalTerms: "Términos",
     legalCookies: "Preferencias de cookies",

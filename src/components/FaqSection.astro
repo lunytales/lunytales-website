@@ -3,18 +3,21 @@ import { getStrings, type Language } from "../i18n";
 
 interface Props {
   lang: Language;
+  showHeader?: boolean;
 }
 
-const { lang } = Astro.props;
+const { lang, showHeader = true } = Astro.props;
 const strings = getStrings(lang);
 const accordionId = `faq-accordion-${lang}`;
 ---
 <section class="py-5 bg-white border-top" id="faq">
   <div class="container">
-    <div class="mb-4">
-      <h2 class="fw-bold mb-1">{strings.faq.title}</h2>
-      <p class="text-secondary mb-0">{strings.faq.subtitle}</p>
-    </div>
+    {showHeader && (
+      <div class="mb-4">
+        <h2 class="fw-bold mb-1">{strings.faq.title}</h2>
+        <p class="text-secondary mb-0">{strings.faq.subtitle}</p>
+      </div>
+    )}
 
     <div class="accordion faq-accordion" id={accordionId}>
       {strings.faq.items.map((item, index) => {

@@ -7,7 +7,7 @@ import { normalizeStructuredData, serializeStructuredData, type JsonLdNode } fro
 import bootstrapCssUrl from "bootstrap/dist/css/bootstrap.min.css?url";
 import bootstrapBundleUrl from "bootstrap/dist/js/bootstrap.bundle.min.js?url";
 
-type RouteKey = "home" | "privacy" | "terms" | "bedtimeStories";
+type RouteKey = "home" | "privacy" | "terms" | "faq" | "bedtimeStories";
 
 interface Props {
   lang: Language;
@@ -45,6 +45,10 @@ const routeLinks: Record<RouteKey, { es: string; en: string }> = {
     es: SITE_CONFIG.paths.terms,
     en: SITE_CONFIG.paths.termsEn,
   },
+  faq: {
+    es: SITE_CONFIG.paths.faq,
+    en: SITE_CONFIG.paths.faqEn,
+  },
   bedtimeStories: {
     es: SITE_CONFIG.paths.bedtimeStoriesEs,
     en: SITE_CONFIG.paths.bedtimeStoriesEn,
@@ -57,6 +61,7 @@ const currentRouteLinks = routeLinks[routeKey];
 const switchEsHref = toHref(currentRouteLinks.es);
 const switchEnHref = toHref(currentRouteLinks.en);
 
+const currentLangLegalFaqHref = toHref(lang === "en" ? SITE_CONFIG.paths.faqEn : SITE_CONFIG.paths.faq);
 const currentLangLegalPrivacyHref = toHref(lang === "en" ? SITE_CONFIG.paths.privacyEn : SITE_CONFIG.paths.privacy);
 const currentLangLegalTermsHref = toHref(lang === "en" ? SITE_CONFIG.paths.termsEn : SITE_CONFIG.paths.terms);
 
@@ -247,6 +252,8 @@ const primaryOgImage = seo.og.images[0];
             <div class="col-lg-6">
               <div class="footer-title">{strings.footer.legalTitle}</div>
               <div class="footer-legal footer-legal-inline">
+                <a href={currentLangLegalFaqHref}>{strings.footer.legalFaq}</a>
+                <span aria-hidden="true">|</span>
                 <a href={currentLangLegalPrivacyHref}>{strings.footer.legalPrivacy}</a>
                 <span aria-hidden="true">|</span>
                 <a href={currentLangLegalTermsHref}>{strings.footer.legalTerms}</a>
@@ -271,6 +278,8 @@ const primaryOgImage = seo.og.images[0];
         <div class="small">© <span id="y"></span> Luny Tales</div>
         {footerVariant === "home" && (
           <div class="footer-legal small">
+            <a href={currentLangLegalFaqHref}>{strings.footer.legalFaq}</a>
+            <span aria-hidden="true">|</span>
             <a href={currentLangLegalPrivacyHref}>{strings.footer.legalPrivacy}</a>
             <span aria-hidden="true">|</span>
             <a href={currentLangLegalTermsHref}>{strings.footer.legalTerms}</a>

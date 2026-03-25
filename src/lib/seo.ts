@@ -1,6 +1,6 @@
 import { IS_STAGING, SITE_CONFIG, SITE_ORIGIN } from "../config/site";
 
-type SeoPage = "home" | "homeEn" | "privacy" | "privacyEn" | "terms" | "termsEn";
+type SeoPage = "home" | "homeEn" | "privacy" | "privacyEn" | "terms" | "termsEn" | "faq" | "faqEn";
 
 type SeoMetaInput = {
   title: string;
@@ -57,6 +57,8 @@ const PAGE_PATHS: Record<SeoPage, string> = {
   privacyEn: SITE_CONFIG.paths.privacyEn,
   terms: SITE_CONFIG.paths.terms,
   termsEn: SITE_CONFIG.paths.termsEn,
+  faq: SITE_CONFIG.paths.faq,
+  faqEn: SITE_CONFIG.paths.faqEn,
 };
 
 const ALTERNATE_PAGE_GROUPS: Record<SeoPage, { es: SeoPage; en: SeoPage }> = {
@@ -66,6 +68,8 @@ const ALTERNATE_PAGE_GROUPS: Record<SeoPage, { es: SeoPage; en: SeoPage }> = {
   privacyEn: { es: "privacy", en: "privacyEn" },
   terms: { es: "terms", en: "termsEn" },
   termsEn: { es: "terms", en: "termsEn" },
+  faq: { es: "faq", en: "faqEn" },
+  faqEn: { es: "faq", en: "faqEn" },
 };
 
 function normalizeBase(baseHref: string): string {

@@ -98,32 +98,40 @@ export const en = {
     ],
   },
   faq: {
-    title: "Frequently asked questions",
-    subtitle: "Quick answers to help you decide with confidence.",
+    title: "Frequently Asked Questions",
+    subtitle: "Clear answers to help you decide before buying.",
     items: [
       {
-        question: "What age range are these bedtime stories designed for?",
-        answer: "They are created for children ages 3 to 8, with short stories that are easy to follow.",
-      },
-      {
-        question: "What do I get when I buy Luny Tales?",
-        answer: "You get the interactive PDF with 3 stories, audio stories, sleep music, and the Alexa experience.",
+        question: "What exactly do I receive when I buy Luny Tales?",
+        answer: "You receive an illustrated PDF story designed to support the bedtime routine, along with access to the audio content available for that experience.",
       },
       {
         question: "Is this a one-time purchase or a subscription?",
-        answer: "It is a one-time payment. You buy once and can use the content whenever you want.",
+        answer: "It is a one-time purchase. It is not a monthly subscription.",
       },
       {
-        question: "Can we use these stories every night?",
-        answer: "Yes. They are designed to fit into your bedtime routine and can be repeated as needed.",
+        question: "How do I access my purchase after paying?",
+        answer: "At the moment, the purchase is processed through Hotmart. After completing payment, Hotmart will guide you to access your content through its platform.",
       },
       {
-        question: "How do I access the content after purchase?",
-        answer: "After payment you get immediate access, and you can open everything on phone, tablet, or computer.",
+        question: "Can I download it again later?",
+        answer: "Access and downloads depend on the flow enabled by Hotmart for your purchase. If you need help finding your content, first check your access on that platform.",
       },
       {
-        question: "Will this help if my child struggles to relax at night?",
-        answer: "Yes. The stories, audio, and music are designed to slow down the end of the day and support a calmer transition to sleep.",
+        question: "What devices can I use it on?",
+        answer: "You can read it on a phone, tablet, or computer. The experience is designed to be flexible and easy to use across different devices.",
+      },
+      {
+        question: "Do I need internet to read or listen to it?",
+        answer: "You may need an internet connection to access the purchase and open the audio links. Once the PDF is downloaded, reading it depends on the device you use.",
+      },
+      {
+        question: "How does it work with Alexa?",
+        answer: "Luny Tales includes a complementary Alexa experience designed to support the bedtime routine. Availability and use depend on the user’s device and compatible setup.",
+      },
+      {
+        question: "Will there be more stories or a printed version?",
+        answer: "Yes. Luny Tales is meant to grow with new stories, future volumes, and a possible printed edition.",
       },
     ],
   },
@@ -138,6 +146,7 @@ export const en = {
     email: "hello@lunytales.com",
     emailButton: "Send email",
     mascotAlt: "Luny the owl mascot holding a tablet with the cover of Bedtime in 3 Stories",
+    legalFaq: "Frequently Asked Questions",
     legalPrivacy: "Privacy",
     legalTerms: "Terms",
     legalCookies: "Cookie preferences",

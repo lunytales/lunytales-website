@@ -1,0 +1,51 @@
+---
+import FaqSection from "../components/FaqSection.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { getStrings } from "../i18n";
+import { createContactMailto } from "../lib/contact";
+import { createSeo } from "../lib/seo";
+import { createFaqStructuredData } from "../lib/structured-data";
+
+const lang = "es" as const;
+const strings = getStrings(lang);
+const contactMailto = createContactMailto(strings.footer.email, lang);
+const seo = createSeo({
+  page: "faq",
+  meta: {
+    title: "Preguntas frecuentes | Luny Tales",
+    description: "Respuestas sobre compra, acceso y uso de Luny Tales para familias.",
+    ogTitle: "Preguntas frecuentes | Luny Tales",
+    ogDescription: "Respuestas sobre compra, acceso y uso de Luny Tales para familias.",
+    twitterTitle: "Preguntas frecuentes | Luny Tales",
+    twitterDescription: "Respuestas sobre compra, acceso y uso de Luny Tales para familias.",
+  },
+  baseHref: import.meta.env.BASE_URL,
+});
+const structuredData = createFaqStructuredData({
+  lang,
+  pageUrl: seo.canonical,
+  items: strings.faq.items,
+});
+---
+<SiteLayout lang={lang} seo={seo} structuredData={structuredData} routeKey="faq" navVariant="legal" footerVariant="legal">
+  <section class="policy-hero policy-hero-full">
+    <div class="container">
+      <h1 class="policy-title">{strings.faq.title}</h1>
+      <p class="policy-subtitle mb-0">{strings.faq.subtitle}</p>
+    </div>
+  </section>
+
+  <FaqSection lang={lang} showHeader={false} />
+
+  <section class="py-4">
+    <div class="container">
+      <div class="card policy-contact shadow-sm">
+        <div class="card-body text-center">
+          <h2 class="h5 fw-bold mb-2">¿Necesitas ayuda adicional?</h2>
+          <p class="mb-3">Si tu duda no aparece aquí, escríbenos y te ayudamos personalmente.</p>
+          <a class="btn btn-primary btn-pill btn-luny px-4" href={contactMailto}>{strings.footer.email}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</SiteLayout>
