@@ -218,7 +218,8 @@ button:focus-visible{
 
 /* Anchors with sticky header */
 #incluye,
-#como{
+#como,
+#faq{
   scroll-margin-top: var(--nav-offset);
 }
 
@@ -623,6 +624,43 @@ button:focus-visible{
 .how-pill--lila{ background: var(--how-lila); }
 .how-pill--mint{ background: var(--how-mint); }
 .how-pill--durazno{ background: var(--how-durazno); }
+
+/* FAQ */
+#faq .faq-accordion{
+  display: grid;
+  gap: .8rem;
+}
+
+#faq .faq-item{
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+#faq .faq-question{
+  font-weight: 700;
+  color: var(--indigo);
+  background: #fff;
+  padding: 1rem 1.1rem;
+  box-shadow: none;
+}
+
+#faq .faq-question:not(.collapsed){
+  color: var(--indigo);
+  background: #f7f8fb;
+}
+
+#faq .faq-question:focus,
+#faq .faq-question:focus-visible{
+  box-shadow: none;
+}
+
+#faq .faq-answer{
+  color: rgba(9,30,47,.78);
+  line-height: 1.55;
+  padding: 1rem 1.1rem 1.15rem;
+}
 
 /* Footer */
 .footer-luny{

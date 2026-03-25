@@ -97,6 +97,36 @@ export const en = {
       },
     ],
   },
+  faq: {
+    title: "Frequently asked questions",
+    subtitle: "Quick answers to help you decide with confidence.",
+    items: [
+      {
+        question: "What age range are these bedtime stories designed for?",
+        answer: "They are created for children ages 3 to 8, with short stories that are easy to follow.",
+      },
+      {
+        question: "What do I get when I buy Luny Tales?",
+        answer: "You get the interactive PDF with 3 stories, audio stories, sleep music, and the Alexa experience.",
+      },
+      {
+        question: "Is this a one-time purchase or a subscription?",
+        answer: "It is a one-time payment. You buy once and can use the content whenever you want.",
+      },
+      {
+        question: "Can we use these stories every night?",
+        answer: "Yes. They are designed to fit into your bedtime routine and can be repeated as needed.",
+      },
+      {
+        question: "How do I access the content after purchase?",
+        answer: "After payment you get immediate access, and you can open everything on phone, tablet, or computer.",
+      },
+      {
+        question: "Will this help if my child struggles to relax at night?",
+        answer: "Yes. The stories, audio, and music are designed to slow down the end of the day and support a calmer transition to sleep.",
+      },
+    ],
+  },
   footer: {
     tagline: "Stories, audio, and music for sleep.",
     navTitle: "Navigation",

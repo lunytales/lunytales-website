@@ -2,6 +2,7 @@
 import { SITE_CONFIG, toHref } from "../config/site";
 import { getStrings, type Language } from "../i18n";
 import StoriesCards from "./StoriesCards.astro";
+import FaqSection from "./FaqSection.astro";
 
 interface Props {
   lang: Language;
@@ -151,3 +152,5 @@ const mascotImageSources = lang === "en"
     </div>
   </div>
 </section>
+
+<FaqSection lang={lang} />

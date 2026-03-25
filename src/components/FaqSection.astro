@@ -1,0 +1,55 @@
+---
+import { getStrings, type Language } from "../i18n";
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const strings = getStrings(lang);
+const accordionId = `faq-accordion-${lang}`;
+---
+<section class="py-5 bg-white border-top" id="faq">
+  <div class="container">
+    <div class="mb-4">
+      <h2 class="fw-bold mb-1">{strings.faq.title}</h2>
+      <p class="text-secondary mb-0">{strings.faq.subtitle}</p>
+    </div>
+
+    <div class="accordion faq-accordion" id={accordionId}>
+      {strings.faq.items.map((item, index) => {
+        const headingId = `${accordionId}-heading-${index}`;
+        const collapseId = `${accordionId}-collapse-${index}`;
+        const isFirst = index === 0;
+
+        return (
+          <article class="accordion-item faq-item">
+            <h3 class="accordion-header" id={headingId}>
+              <button
+                class={`accordion-button faq-question ${isFirst ? "" : "collapsed"}`.trim()}
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target={`#${collapseId}`}
+                aria-expanded={isFirst ? "true" : "false"}
+                aria-controls={collapseId}
+              >
+                {item.question}
+              </button>
+            </h3>
+
+            <div
+              id={collapseId}
+              class={`accordion-collapse collapse ${isFirst ? "show" : ""}`.trim()}
+              aria-labelledby={headingId}
+              data-bs-parent={`#${accordionId}`}
+            >
+              <div class="accordion-body faq-answer">
+                <p class="mb-0">{item.answer}</p>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>

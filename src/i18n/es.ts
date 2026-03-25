@@ -97,6 +97,36 @@ export const es = {
       },
     ],
   },
+  faq: {
+    title: "Preguntas frecuentes",
+    subtitle: "Respuestas rápidas para ayudarte a decidir con claridad.",
+    items: [
+      {
+        question: "¿Para qué edades están pensados estos cuentos?",
+        answer: "Están creados para niñas y niños de 3 a 8 años, con historias breves y fáciles de seguir.",
+      },
+      {
+        question: "¿Qué recibo al comprar Luny Tales?",
+        answer: "Obtienes el PDF interactivo de los 3 cuentos, acceso a audiocuentos, música para dormir y la experiencia con Alexa.",
+      },
+      {
+        question: "¿Es una compra única o una suscripción?",
+        answer: "Es un pago único. Compras una vez y puedes volver a usar el contenido cuando quieras.",
+      },
+      {
+        question: "¿Puedo usar los cuentos todas las noches?",
+        answer: "Sí. Están diseñados para integrarse en la rutina nocturna y repetirlos según lo que necesite tu familia.",
+      },
+      {
+        question: "¿Cómo veo el contenido después de comprar?",
+        answer: "Después del pago recibes acceso inmediato y puedes abrirlo desde tu celular, tablet o computadora.",
+      },
+      {
+        question: "¿Sirve si mi hijo se distrae o le cuesta relajarse?",
+        answer: "Sí. Las historias, el audio y la música buscan bajar el ritmo del final del día y acompañar una transición más tranquila al sueño.",
+      },
+    ],
+  },
   footer: {
     tagline: "Cuentos, audio y música para dormir.",
     navTitle: "Navegación",

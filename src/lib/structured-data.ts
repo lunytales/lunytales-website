@@ -125,3 +125,42 @@ export function createHomeStructuredData(params: HomeStructuredDataParams): Json
     ],
   });
 }
+
+type FaqStructuredDataItem = {
+  question: string;
+  answer: string;
+};
+
+type FaqStructuredDataParams = {
+  lang: Language;
+  pageUrl: string;
+  items: FaqStructuredDataItem[];
+};
+
+export function createFaqStructuredData(params: FaqStructuredDataParams): JsonLdNode {
+  const mainEntity = params.items
+    .map((item) => ({
+      question: item.question.trim(),
+      answer: item.answer.trim(),
+    }))
+    .filter((item) => item.question.length > 0 && item.answer.length > 0)
+    .map((item) =>
+      sanitizeJsonLdNode({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      }),
+    )
+    .filter((entity) => Object.keys(entity).length > 0);
+
+  return sanitizeJsonLdNode({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage: params.lang,
+    url: params.pageUrl,
+    mainEntity,
+  });
+}
