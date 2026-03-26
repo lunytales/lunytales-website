@@ -68,6 +68,7 @@ const currentLangLegalTermsHref = toHref(lang === "en" ? SITE_CONFIG.paths.terms
 const currentLangHomeHref = lang === "en" ? homeEnHref : homeHref;
 const includeSectionHref = `${currentLangHomeHref}#incluye`;
 const howSectionHref = `${currentLangHomeHref}#como`;
+const faqSectionHref = toHref(lang === "en" ? SITE_CONFIG.paths.faqEn : SITE_CONFIG.paths.faq);
 const buySectionHref = `${currentLangHomeHref}#comprar`;
 const resolvedLegalNavLabel = legalNavLabel ?? strings.nav.home;
 const brandHref = currentLangHomeHref;
@@ -152,6 +153,7 @@ const primaryOgImage = seo.og.images[0];
             <>
               <a class="nav-link" href={includeSectionHref}>{strings.nav.include}</a>
               <a class="nav-link" href={howSectionHref}>{strings.nav.how}</a>
+              <a class="nav-link" href={faqSectionHref}>{strings.nav.faq}</a>
 
               <div class="d-flex align-items-center lang-switch" role="group" aria-label={strings.a11y.languageSwitcher}>
                 <a

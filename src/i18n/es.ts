@@ -19,6 +19,7 @@ export const es = {
   nav: {
     include: "Ver qué incluye",
     how: "Cómo funciona",
+    faq: "Preguntas frecuentes",
     home: "Ir a la página principal",
     languageEs: "Español",
     languageEn: "English",

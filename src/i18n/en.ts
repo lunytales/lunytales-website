@@ -19,6 +19,7 @@ export const en = {
   nav: {
     include: "See what's included",
     how: "How it works",
+    faq: "FAQ",
     home: "Return to website",
     languageEs: "Español",
     languageEn: "English",
