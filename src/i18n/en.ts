@@ -151,7 +151,7 @@ export const en = {
     items: [
       {
         question: "What exactly do I receive when I buy Luny Tales?",
-        answer: "You receive an illustrated PDF story designed to support the bedtime routine, along with access to the audio content available for that experience.",
+        answer: "You receive an illustrated interactive PDF designed to support the bedtime routine. Inside the PDF, you will find the links to access the audio content available for that experience.",
       },
       {
         question: "Is this a one-time purchase or a subscription?",
@@ -163,11 +163,11 @@ export const en = {
       },
       {
         question: "Can I download it again later?",
-        answer: "Access and downloads depend on the flow enabled by Hotmart for your purchase. If you need help finding your content, first check your purchase details on that platform.",
+        answer: "Yes. You will be able to access your purchase and download it again through your Hotmart account, depending on the options enabled on that platform. If you cannot find your content later, first check your access inside Hotmart.",
       },
       {
         question: "What devices can I use it on?",
-        answer: "You can read it on a phone, tablet, or computer. The experience is designed to feel flexible and easy to use across devices.",
+        answer: "You can read it on a phone, tablet, or computer, as long as the device has a PDF reader. The experience is designed to be flexible and easy to use across different formats.",
       },
       {
         question: "Do I need internet to read or listen to it?",
@@ -175,7 +175,7 @@ export const en = {
       },
       {
         question: "How does it work with Alexa?",
-        answer: "Luny Tales includes a complementary Alexa experience designed to support the bedtime routine. Availability and use depend on your device and compatible setup.",
+        answer: "To use Luny Tales with Alexa, open the Alexa app and tap More in the bottom bar. Then go to Skills & Games, search for Luny Tales, and enable the skill. Once it is activated, you can ask your Echo devices to open it by saying: “Alexa, open Luny Tales”.",
       },
       {
         question: "Will there be more stories or a printed version?",

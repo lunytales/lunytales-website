@@ -151,7 +151,7 @@ export const es = {
     items: [
       {
         question: "¿Qué recibo exactamente al comprar Luny Tales?",
-        answer: "Recibes un cuento ilustrado en PDF diseñado para acompañar la rutina de dormir, junto con acceso al contenido de audio disponible para esa experiencia.",
+        answer: "Recibes un cuento ilustrado en PDF interactivo diseñado para acompañar la rutina de dormir. Dentro del PDF encontrarás los enlaces para acceder al contenido de audio disponible para esa experiencia.",
       },
       {
         question: "¿La compra es un pago único o una suscripción?",
@@ -163,11 +163,11 @@ export const es = {
       },
       {
         question: "¿Puedo volver a descargarlo después?",
-        answer: "El acceso y las descargas dependen del flujo habilitado por Hotmart para tu compra. Si necesitas ayuda para encontrar tu contenido, revisa primero tu acceso en esa plataforma.",
+        answer: "Sí. Podrás volver a acceder a tu compra y descargarla desde tu cuenta de Hotmart, según las opciones habilitadas en esa plataforma. Si en algún momento no encuentras tu contenido, revisa primero tu acceso dentro de Hotmart.",
       },
       {
         question: "¿En qué dispositivos puedo usarlo?",
-        answer: "Puedes leerlo en celular, tablet o computadora. La experiencia está pensada para ser flexible y fácil de usar en distintos dispositivos.",
+        answer: "Puedes leerlo en celular, tablet o computadora, en cualquier dispositivo que cuente con un lector de PDF. La experiencia está pensada para ser flexible y fácil de usar en distintos formatos.",
       },
       {
         question: "¿Necesito internet para leerlo o escucharlo?",
@@ -175,7 +175,7 @@ export const es = {
       },
       {
         question: "¿Cómo funciona con Alexa?",
-        answer: "Luny Tales cuenta con una experiencia complementaria en Alexa para acompañar la rutina nocturna. Su disponibilidad y uso dependen del dispositivo y la configuración compatible del usuario.",
+        answer: "Para usar Luny Tales con Alexa, abre la app de Alexa y entra a la opción Más en la barra inferior. Luego ve a Skills y Juegos, busca Cuentos Luna y habilita la skill. Después de activarla, puedes pedirle a tus dispositivos Echo que abran la skill diciendo: “Alexa, abre Cuentos Luna”.",
       },
       {
         question: "¿Habrá más cuentos o una versión impresa?",
