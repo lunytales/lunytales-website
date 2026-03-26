@@ -33,15 +33,7 @@ const mascotImagePath = "assets/img/luny-faq.png";
   <header class="hero-luny hero-luny--grad faq-hero">
     <div class="container">
       <div class="row align-items-center g-3 faq-hero__row">
-        <div class="col-lg-7">
-          <h1 class="hero-title faq-hero__title mb-3">
-            <span class="faq-hero__title-main">Frequently Asked</span>{" "}
-            <span class="faq-hero__title-accent">Questions</span>
-          </h1>
-          <p class="hero-subtitle faq-hero__lead">{strings.faq.heroLead}</p>
-        </div>
-
-        <div class="col-lg-5 text-center faq-hero__art">
+        <div class="col-4 col-md-4 col-lg-4 text-center faq-hero__art">
           <img
             src={mascotImagePath}
             alt={strings.hero.mascotAlt}
@@ -52,6 +44,14 @@ const mascotImagePath = "assets/img/luny-faq.png";
             decoding="async"
             fetchpriority="high"
           >
+        </div>
+
+        <div class="col-8 col-md-8 col-lg-8 faq-hero__copy">
+          <h1 class="hero-title faq-hero__title mb-3">
+            <span class="faq-hero__title-main">Frequently Asked</span>{" "}
+            <span class="faq-hero__title-accent">Questions</span>
+          </h1>
+          <p class="hero-subtitle faq-hero__lead">{strings.faq.heroLead}</p>
         </div>
       </div>
     </div>
