@@ -665,7 +665,7 @@ button:focus-visible{
 }
 
 .faq-hero__title{
-  font-size: clamp(2.05rem, 4.1vw, 3.35rem);
+  font-size: clamp(2.3rem, 4.9vw, 3.85rem);
   line-height: .96;
   letter-spacing: -.015em;
   max-width: 11.5ch;
@@ -946,7 +946,7 @@ button:focus-visible{
   }
 
   .faq-hero__title{
-    font-size: clamp(1.85rem, 6.1vw, 2.6rem);
+    font-size: clamp(2.05rem, 6.6vw, 2.95rem);
   }
 
   .faq-hero__mascot{
@@ -975,7 +975,7 @@ button:focus-visible{
   }
 
   .faq-hero__title{
-    font-size: clamp(1.65rem, 8.8vw, 2.12rem);
+    font-size: clamp(1.9rem, 9.4vw, 2.35rem);
     margin-bottom: .6rem !important;
   }
 
