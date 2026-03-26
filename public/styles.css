@@ -628,7 +628,16 @@ button:focus-visible{
 
 /* FAQ */
 .faq-hero{
-  padding: 3.3rem 0 4rem;
+  padding: 2.35rem 0 2.9rem;
+}
+
+.faq-hero__row{
+  --bs-gutter-x: clamp(1rem, 2vw, 1.75rem);
+}
+
+.faq-hero__art{
+  display: flex;
+  justify-content: center;
 }
 
 .hero-luny.hero-luny--grad.faq-hero{
@@ -656,7 +665,7 @@ button:focus-visible{
 }
 
 .faq-hero__title{
-  font-size: clamp(2.4rem, 5.35vw, 4.5rem);
+  font-size: clamp(2.2rem, 4.8vw, 3.9rem);
   line-height: .96;
   letter-spacing: -.015em;
   max-width: 12ch;
@@ -671,13 +680,19 @@ button:focus-visible{
 }
 
 .faq-hero__lead{
-  max-width: 56ch;
+  max-width: 52ch;
   margin: 0;
 }
 
 .faq-hero__mascot{
   width: 100%;
-  max-width: 420px;
+  max-width: 340px;
+}
+
+@media (min-width: 992px){
+  .faq-hero__mascot{
+    transform: translateX(14px);
+  }
 }
 
 .faq-content{
@@ -924,18 +939,23 @@ button:focus-visible{
     opacity: .26;
   }
 
+  .faq-hero{
+    padding: 2.15rem 0 2.55rem;
+  }
+
   .faq-hero__title{
-    font-size: clamp(2.15rem, 7.4vw, 3.5rem);
+    font-size: clamp(2rem, 6.8vw, 3.1rem);
   }
 
   .faq-hero__mascot{
-    max-width: 360px;
+    max-width: 310px;
+    transform: none;
   }
 }
 
 @media (max-width: 575.98px){
   .faq-hero{
-    padding: 2.65rem 0 3.15rem;
+    padding: 1.95rem 0 2.15rem;
   }
 
   .hero-luny.hero-luny--grad.faq-hero{
@@ -953,7 +973,11 @@ button:focus-visible{
   }
 
   .faq-hero__title{
-    font-size: clamp(2rem, 10.2vw, 2.9rem);
+    font-size: clamp(1.8rem, 9.6vw, 2.45rem);
+  }
+
+  .faq-hero__mascot{
+    max-width: 265px;
   }
 
   .faq-content{
