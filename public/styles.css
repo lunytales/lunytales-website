@@ -736,9 +736,11 @@ button:focus-visible{
 
 .hero-luny.hero-luny--grad{
   background:
-    radial-gradient(900px 520px at 78% 18%, rgba(95,196,152,.16), transparent 62%),
-    radial-gradient(820px 520px at 18% 22%, rgba(20,18,60,.22), transparent 58%),
-    linear-gradient(90deg, #3A329C 0%, #4338B0 38%, #5148C6 68%, #6258D6 100%);
+    linear-gradient(90deg, rgba(20,18,60,.46) 0%, rgba(20,18,60,.30) 44%, rgba(20,18,60,.14) 72%, rgba(20,18,60,.06) 100%),
+    url("assets/img/hero-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color:#fff;
   position:relative;
   overflow:hidden;
