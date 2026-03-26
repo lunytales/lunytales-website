@@ -1179,10 +1179,17 @@ button:focus-visible{
 }
 
 .hero-luny.hero-luny--grad{
-  background:
-    radial-gradient(900px 520px at 78% 18%, rgba(95,196,152,.16), transparent 62%),
-    radial-gradient(820px 520px at 18% 22%, rgba(20,18,60,.22), transparent 58%),
-    linear-gradient(90deg, #3A329C 0%, #4338B0 38%, #5148C6 68%, #6258D6 100%);
+  --hero-overlay-angle: 96deg;
+  --hero-overlay-stop-2: 42%;
+  --hero-overlay-stop-3: 70%;
+  --hero-overlay-color-1: rgba(58,50,156,.78);
+  --hero-overlay-color-2: rgba(58,50,156,.56);
+  --hero-overlay-color-3: rgba(58,50,156,.25);
+  --hero-overlay-color-4: rgba(58,50,156,.08);
+  background-image: url("assets/img/hero-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color:#fff;
   position:relative;
   overflow:hidden;
@@ -1208,13 +1215,12 @@ button:focus-visible{
   position:absolute;
   inset:0;
   pointer-events:none;
-  /* Slightly darken the left side with a smooth fade (no hard vertical cut) */
   background: linear-gradient(
-    90deg,
-    rgba(20,18,60,.30) 0%,
-    rgba(20,18,60,.18) 38%,
-    rgba(20,18,60,.08) 56%,
-    rgba(20,18,60,0) 72%
+    var(--hero-overlay-angle),
+    var(--hero-overlay-color-1) 0%,
+    var(--hero-overlay-color-2) var(--hero-overlay-stop-2),
+    var(--hero-overlay-color-3) var(--hero-overlay-stop-3),
+    var(--hero-overlay-color-4) 100%
   );
   z-index:0;
 }
@@ -1301,6 +1307,20 @@ button:focus-visible{
     background: rgba(255,255,255,.14);
   }
 
+  .hero-luny.hero-luny--grad{
+    --hero-overlay-angle: 102deg;
+    --hero-overlay-stop-2: 56%;
+    --hero-overlay-stop-3: 84%;
+    --hero-overlay-color-1: rgba(58,50,156,.86);
+    --hero-overlay-color-2: rgba(58,50,156,.70);
+    --hero-overlay-color-3: rgba(58,50,156,.42);
+    --hero-overlay-color-4: rgba(58,50,156,.18);
+  }
+
+  .hero-luny.hero-luny--grad::before{
+    opacity: .26;
+  }
+
   .hero-luny{
     padding: 3.5rem 0 4rem;
     text-align: left;
@@ -1337,6 +1357,20 @@ button:focus-visible{
 }
 
 @media (max-width: 575.98px){
+  .hero-luny.hero-luny--grad{
+    --hero-overlay-angle: 180deg;
+    --hero-overlay-stop-2: 52%;
+    --hero-overlay-stop-3: 88%;
+    --hero-overlay-color-1: rgba(58,50,156,.90);
+    --hero-overlay-color-2: rgba(58,50,156,.72);
+    --hero-overlay-color-3: rgba(58,50,156,.48);
+    --hero-overlay-color-4: rgba(58,50,156,.28);
+  }
+
+  .hero-luny.hero-luny--grad::before{
+    opacity: .18;
+  }
+
   .how-pill__icon{ width: 64px; }
   #a-dormir-3-cuentos .cta-stack{
     align-items: stretch;

@@ -24,15 +24,7 @@ const hotmartUrl = lang === "en" ? SITE_CONFIG.hotmartUrlEn : SITE_CONFIG.hotmar
 const demoPdfPath = lang === "en" ? SITE_CONFIG.paths.demoPdfEn : SITE_CONFIG.paths.demoPdf;
 const currentLangHomePath = lang === "en" ? SITE_CONFIG.paths.homeEn : SITE_CONFIG.paths.home;
 const includeSectionHref = `${toHref(currentLangHomePath)}#incluye`;
-const mascotImageSources = lang === "en"
-  ? {
-      src: "assets/img/mascota-en-768.webp",
-      srcset: "assets/img/mascota-en-512.webp 512w, assets/img/mascota-en-768.webp 768w, assets/img/mascota-en-1024.webp 1024w",
-    }
-  : {
-      src: "assets/img/mascota-768.webp",
-      srcset: "assets/img/mascota-512.webp 512w, assets/img/mascota-768.webp 768w, assets/img/mascota-1024.webp 1024w",
-    };
+const mascotImageSrc = "assets/img/mascota-luny.png";
 ---
 <header class="hero-luny hero-luny--grad">
   <div class="container">
@@ -70,9 +62,7 @@ const mascotImageSources = lang === "en"
 
       <div class="col-lg-6 text-center text-lg-end">
         <img
-          src={mascotImageSources.src}
-          srcset={mascotImageSources.srcset}
-          sizes="(max-width: 768px) 70vw, (max-width: 1199px) 48vw, 560px"
+          src={mascotImageSrc}
           alt={strings.hero.mascotAlt}
           width="1024"
           height="1024"
