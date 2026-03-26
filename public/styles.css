@@ -734,7 +734,7 @@ button:focus-visible{
   }
 }
 
-.hero-luny.hero-luny--grad{
+.hero-luny.hero-luny--grad.home-hero{
   --hero-overlay-angle: 96deg;
   --hero-overlay-stop-2: 42%;
   --hero-overlay-stop-3: 70%;
@@ -751,7 +751,7 @@ button:focus-visible{
   overflow:hidden;
 }
 
-.hero-luny.hero-luny--grad::before{
+.hero-luny.hero-luny--grad.home-hero::before{
   content:"";
   position:absolute;
   inset:0;
@@ -761,12 +761,12 @@ button:focus-visible{
   opacity:.35;
 }
 
-.hero-luny.hero-luny--grad > .container{
+.hero-luny.hero-luny--grad.home-hero > .container{
   position:relative;
   z-index:1;
 }
 
-.hero-luny.hero-luny--grad::after{
+.hero-luny.hero-luny--grad.home-hero::after{
   content:"";
   position:absolute;
   inset:0;
@@ -863,7 +863,7 @@ button:focus-visible{
     background: rgba(255,255,255,.14);
   }
 
-  .hero-luny.hero-luny--grad{
+  .hero-luny.hero-luny--grad.home-hero{
     --hero-overlay-angle: 102deg;
     --hero-overlay-stop-2: 56%;
     --hero-overlay-stop-3: 84%;
@@ -873,7 +873,7 @@ button:focus-visible{
     --hero-overlay-color-4: rgba(58,50,156,.18);
   }
 
-  .hero-luny.hero-luny--grad::before{
+  .hero-luny.hero-luny--grad.home-hero::before{
     opacity: .26;
   }
 
@@ -913,7 +913,7 @@ button:focus-visible{
 }
 
 @media (max-width: 575.98px){
-  .hero-luny.hero-luny--grad{
+  .hero-luny.hero-luny--grad.home-hero{
     --hero-overlay-angle: 180deg;
     --hero-overlay-stop-2: 52%;
     --hero-overlay-stop-3: 88%;
@@ -923,7 +923,7 @@ button:focus-visible{
     --hero-overlay-color-4: rgba(58,50,156,.28);
   }
 
-  .hero-luny.hero-luny--grad::before{
+  .hero-luny.hero-luny--grad.home-hero::before{
     opacity: .18;
   }
 
