@@ -2,12 +2,10 @@
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { createSeo } from "../lib/seo";
 import { createHomeStructuredData } from "../lib/structured-data";
-import { getStrings } from "../i18n";
 import StoriesCards from "../components/StoriesCards.astro";
 import { SITE_CONFIG, toHref } from "../config/site";
 
 const lang = "es" as const;
-const strings = getStrings(lang);
 const title = "3 Cuentos para Dormir Niños | Luny Tales";
 const description = "Cuentos cortos para dormir que ayudan a los niños a relajarse antes de dormir.";
 const canonical = "https://lunytales.com/3-cuentos-para-dormir";
