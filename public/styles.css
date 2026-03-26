@@ -631,7 +631,7 @@ button:focus-visible{
   padding: 3.3rem 0 4rem;
 }
 
-.faq-hero.hero-luny--grad{
+.hero-luny.hero-luny--grad.faq-hero{
   --hero-overlay-angle: 96deg;
   --hero-overlay-stop-2: 42%;
   --hero-overlay-stop-3: 70%;
@@ -639,13 +639,13 @@ button:focus-visible{
   --hero-overlay-color-2: rgba(58,50,156,.56);
   --hero-overlay-color-3: rgba(58,50,156,.25);
   --hero-overlay-color-4: rgba(58,50,156,.08);
-  background-image: url("assets/img/hero-bg.jpg");
+  background-image: url("/assets/img/hero-bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.faq-hero.hero-luny--grad::after{
+.hero-luny.hero-luny--grad.faq-hero::after{
   background: linear-gradient(
     var(--hero-overlay-angle),
     var(--hero-overlay-color-1) 0%,
@@ -910,7 +910,7 @@ button:focus-visible{
     top: 0;
   }
 
-  .faq-hero.hero-luny--grad{
+  .hero-luny.hero-luny--grad.faq-hero{
     --hero-overlay-angle: 102deg;
     --hero-overlay-stop-2: 56%;
     --hero-overlay-stop-3: 84%;
@@ -920,7 +920,7 @@ button:focus-visible{
     --hero-overlay-color-4: rgba(58,50,156,.18);
   }
 
-  .faq-hero.hero-luny--grad::before{
+  .hero-luny.hero-luny--grad.faq-hero::before{
     opacity: .26;
   }
 
@@ -938,7 +938,7 @@ button:focus-visible{
     padding: 2.65rem 0 3.15rem;
   }
 
-  .faq-hero.hero-luny--grad{
+  .hero-luny.hero-luny--grad.faq-hero{
     --hero-overlay-angle: 180deg;
     --hero-overlay-stop-2: 52%;
     --hero-overlay-stop-3: 88%;
@@ -948,7 +948,7 @@ button:focus-visible{
     --hero-overlay-color-4: rgba(58,50,156,.28);
   }
 
-  .faq-hero.hero-luny--grad::before{
+  .hero-luny.hero-luny--grad.faq-hero::before{
     opacity: .18;
   }
 
