@@ -665,10 +665,10 @@ button:focus-visible{
 }
 
 .faq-hero__title{
-  font-size: clamp(2.3rem, 4.9vw, 3.85rem);
+  font-size: clamp(2.6rem, 5.6vw, 4.4rem);
   line-height: .96;
   letter-spacing: -.015em;
-  max-width: 11.5ch;
+  max-width: 13ch;
   margin-bottom: .7rem !important;
 }
 
@@ -946,11 +946,11 @@ button:focus-visible{
   }
 
   .faq-hero__title{
-    font-size: clamp(2.05rem, 6.6vw, 2.95rem);
+    font-size: clamp(2.4rem, 8vw, 3.5rem);
   }
 
   .faq-hero__mascot{
-    max-width: 248px;
+    max-width: 212px;
     transform: none;
   }
 }
@@ -975,16 +975,16 @@ button:focus-visible{
   }
 
   .faq-hero__title{
-    font-size: clamp(1.9rem, 9.4vw, 2.35rem);
+    font-size: clamp(2.15rem, 11.2vw, 2.95rem);
     margin-bottom: .6rem !important;
   }
 
   .faq-hero__lead{
-    max-width: 38ch;
+    max-width: 100%;
   }
 
   .faq-hero__mascot{
-    max-width: 218px;
+    max-width: 176px;
   }
 
   .faq-content{
