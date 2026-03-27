@@ -94,6 +94,8 @@ Rutas principales:
 - `/terms/`
 - `/en/privacy/`
 - `/en/terms/`
+- `/faq/`
+- `/en/faq/`
 - `/3-cuentos-para-dormir/` (landing SEO ES)
 - `/en/3-minute-bedtime-stories/` (landing SEO EN)
 
@@ -246,6 +248,7 @@ Cobertura actual de smoke tests:
 - `src/layouts/SiteLayout.astro`: shell global (head/nav/footer/cookies/tracking).
 - `src/components/HomePage.astro`: estructura compartida del home.
 - `src/components/StoriesCards.astro`: bloque reutilizable de cards de cuentos (permite ocultar/mostrar encabezado).
+- `src/components/FaqSection.astro`: sección FAQ compartida para ES/EN (TOC, anchors y acordeones).
 
 ## 13) Guía de cambios
 
@@ -290,3 +293,40 @@ Flujo de despliegue:
 - Se eliminó `public/CNAME` porque el dominio se administra directamente en Cloudflare Pages.
 - `.github/workflows/deploy.yml` se mantiene para checks de CI, pero se retiró la publicación a GitHub Pages.
 - `public/_redirects` se mantiene como fuente de verdad para redirecciones legacy (incluyendo `/lunytales-v2/`).
+
+
+## 18) Actualizaciones FAQ y navegación (2026-03)
+
+- FAQ movida fuera del home y consolidada como páginas dedicadas:
+  - ES: `/faq/`
+  - EN: `/en/faq/`
+- El footer incluye enlace a FAQ por idioma (ES/EN).
+- El header del home incluye FAQ como enlace de apoyo:
+  - ES: `Preguntas frecuentes`
+  - EN: `FAQ`
+- Se refinaron copy, navegación interna por temas (anchors) y consistencia editorial ES/EN.
+- Convención de nombre de skill en contenido:
+  - ES: `Cuentos Luna`
+  - EN: `Luny Tales`
+- QA de ramas: usar siempre la URL estable de rama en Cloudflare Pages (`https://<rama-normalizada>.lunytales-website.pages.dev`) para revisión continua; evitar depender de URLs hash por deploy.
+
+## 19) Hero FAQ y alineación visual (2026-03)
+
+- El hero de FAQ se alineó con el lenguaje visual del hero actual del home:
+  - mismo tratamiento de fondo
+  - mismo enfoque de overlay/degradado
+  - composición responsive ajustada para desktop/tablet/mobile
+- Assets FAQ relevantes:
+  - `public/assets/img/luny-faq.png`
+  - `public/assets/img/hero-bg.jpg` (fondo compartido)
+
+## 20) Hero principal y mantenibilidad frontend (2026-03)
+
+- Hero del home actualizado con:
+  - nuevo fondo visual
+  - nuevo asset de Luny
+  - overlay CSS para proteger legibilidad del bloque textual sin perder atmósfera.
+- Cleanup técnico aprobado para mantenibilidad (rama `codex/frontend-cleanup`):
+  - scope de estilos del hero del home para evitar bleed global
+  - limpieza de assets no usados e imports muertos.
+- Nota operativa: este cleanup está documentado como línea de mantenimiento y debe revisarse antes de su integración final si aún no está en `main`.

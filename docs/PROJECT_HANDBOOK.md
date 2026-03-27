@@ -94,6 +94,8 @@ Primary routes:
 - `/terms/`
 - `/en/privacy/`
 - `/en/terms/`
+- `/faq/`
+- `/en/faq/`
 - `/3-cuentos-para-dormir/` (SEO landing ES)
 - `/en/3-minute-bedtime-stories/` (SEO landing EN)
 
@@ -246,6 +248,7 @@ Smoke test routes/assets currently covered:
 - `src/layouts/SiteLayout.astro`: head/nav/footer/cookie/tracking shell.
 - `src/components/HomePage.astro`: shared home content structure.
 - `src/components/StoriesCards.astro`: reusable stories cards block (optional heading control).
+- `src/components/FaqSection.astro`: shared FAQ section for ES/EN (topic nav, anchors, and accordions).
 
 ## 13) Change Guide
 
@@ -290,3 +293,40 @@ Deployment flow:
 - `public/CNAME` was removed because domain binding is managed directly in Cloudflare Pages.
 - `.github/workflows/deploy.yml` was retained as CI checks, but GitHub Pages publishing was removed.
 - `public/_redirects` remains the source of truth for legacy route redirects (including `/lunytales-v2/`).
+
+
+## 18) FAQ and navigation updates (2026-03)
+
+- FAQ was removed from home and consolidated as dedicated pages:
+  - ES: `/faq/`
+  - EN: `/en/faq/`
+- Footer now includes locale-aware FAQ links (ES/EN).
+- Home header now includes FAQ as a supporting navigation link:
+  - ES: `Preguntas frecuentes`
+  - EN: `FAQ`
+- FAQ copy, topic navigation anchors, and ES/EN editorial consistency were refined.
+- Skill naming convention in content:
+  - ES: `Cuentos Luna`
+  - EN: `Luny Tales`
+- Branch QA policy: always use the stable Cloudflare Pages branch alias URL (`https://<normalized-branch>.lunytales-website.pages.dev`) for ongoing review; avoid hash-specific deploy URLs as the primary QA link.
+
+## 19) FAQ hero and visual alignment (2026-03)
+
+- FAQ hero was aligned with the latest home hero visual language:
+  - same background treatment
+  - same overlay/gradient approach
+  - responsive composition tuning for desktop/tablet/mobile
+- Relevant FAQ hero assets:
+  - `public/assets/img/luny-faq.png`
+  - `public/assets/img/hero-bg.jpg` (shared background)
+
+## 20) Home hero update and frontend maintainability (2026-03)
+
+- Home hero was updated with:
+  - new background treatment
+  - new Luny hero asset
+  - CSS overlay to improve text legibility without flattening the atmosphere.
+- Approved frontend maintainability cleanup (`codex/frontend-cleanup` branch):
+  - scoped home hero styles to prevent global bleed
+  - removed unused assets and dead imports.
+- Operational note: this cleanup is documented as a maintenance track and should be validated again before final integration if it is not yet in `main`.

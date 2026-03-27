@@ -35,6 +35,8 @@ Build output is generated in `dist/` (never edit `dist/` manually).
 - `/en/` (EN home)
 - `/privacy/`
 - `/terms/`
+- `/faq/` (ES FAQ)
+- `/en/faq/` (EN FAQ)
 
 ## Configuration
 
