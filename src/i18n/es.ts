@@ -33,7 +33,7 @@ export const es = {
     buyNow: "Comprar ahora",
     buyAria: "Comprar ahora Luny Tales en Hotmart (hero)",
     includeCta: "Ver qué incluye",
-    mascotAlt: "Luny, el búho mascota, sosteniendo una tablet con la portada de A dormir en 3 cuentos",
+    mascotAlt: "Luny, el búho mascota de Luny Tales",
   },
   includes: {
     title: "Qué incluye",
@@ -196,7 +196,7 @@ export const es = {
     contactTitle: "Escríbenos",
     email: "hola@lunytales.com",
     emailButton: "Enviar correo",
-    mascotAlt: "Luny, el búho mascota, sosteniendo una tablet con la portada de A dormir en 3 cuentos",
+    mascotAlt: "Luny, el búho mascota de Luny Tales",
     legalFaq: "Preguntas frecuentes",
     legalPrivacy: "Privacidad",
     legalTerms: "Términos",

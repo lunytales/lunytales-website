@@ -33,7 +33,7 @@ export const en = {
     buyNow: "Buy now",
     buyAria: "Buy Luny Tales now on Hotmart (hero)",
     includeCta: "See what's included",
-    mascotAlt: "Luny the owl mascot holding a tablet with the cover of Bedtime in 3 Stories",
+    mascotAlt: "Luny, the owl mascot of Luny Tales",
   },
   includes: {
     title: "What's included",
@@ -196,7 +196,7 @@ export const en = {
     contactTitle: "Contact us",
     email: "hello@lunytales.com",
     emailButton: "Send email",
-    mascotAlt: "Luny the owl mascot holding a tablet with the cover of Bedtime in 3 Stories",
+    mascotAlt: "Luny, the owl mascot of Luny Tales",
     legalFaq: "Frequently Asked Questions",
     legalPrivacy: "Privacy",
     legalTerms: "Terms",

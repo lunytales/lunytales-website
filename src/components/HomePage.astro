@@ -24,9 +24,9 @@ const hotmartUrl = lang === "en" ? SITE_CONFIG.hotmartUrlEn : SITE_CONFIG.hotmar
 const demoPdfPath = lang === "en" ? SITE_CONFIG.paths.demoPdfEn : SITE_CONFIG.paths.demoPdf;
 const currentLangHomePath = lang === "en" ? SITE_CONFIG.paths.homeEn : SITE_CONFIG.paths.home;
 const includeSectionHref = `${toHref(currentLangHomePath)}#incluye`;
-const mascotImageSrc = "assets/img/mascota-luny-768.webp";
+const mascotImageSrc = "assets/img/mascota-luny-640.webp";
 const mascotImageSrcSet =
-  "assets/img/mascota-luny-512.webp 512w, assets/img/mascota-luny-768.webp 768w, assets/img/mascota-luny-1024.webp 1024w";
+  "assets/img/mascota-luny-512.webp 512w, assets/img/mascota-luny-640.webp 640w, assets/img/mascota-luny-768.webp 768w, assets/img/mascota-luny-1024.webp 1024w";
 const mascotImageSizes = "(max-width: 575.98px) 78vw, (max-width: 991.98px) 84vw, 560px";
 ---
 <header class="hero-luny hero-luny--grad">
@@ -41,6 +41,7 @@ const mascotImageSizes = "(max-width: 575.98px) 78vw, (max-width: 991.98px) 84vw
           class="hero-logo mb-4"
           loading="eager"
           decoding="async"
+          fetchpriority="low"
         >
 
         <h1 class="hero-title mb-3">{strings.hero.title}</h1>
@@ -73,7 +74,6 @@ const mascotImageSizes = "(max-width: 575.98px) 78vw, (max-width: 991.98px) 84vw
           height="1024"
           class="hero-mascota"
           loading="eager"
-          decoding="async"
           fetchpriority="high"
         >
       </div>
