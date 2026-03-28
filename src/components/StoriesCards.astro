@@ -8,7 +8,23 @@ interface Props {
 
 const { lang, showHeader = true } = Astro.props;
 const strings = getStrings(lang);
-const storyImagePaths = ["timo.webp", "galen.webp", "lira.webp"] as const;
+
+const storyImageSources = [
+  {
+    defaultSrc: "assets/img/timo-640.webp",
+    srcSet: "assets/img/timo-384.webp 384w, assets/img/timo-640.webp 640w, assets/img/timo.webp 1100w",
+  },
+  {
+    defaultSrc: "assets/img/galen-640.webp",
+    srcSet: "assets/img/galen-384.webp 384w, assets/img/galen-640.webp 640w, assets/img/galen.webp 1100w",
+  },
+  {
+    defaultSrc: "assets/img/lira-640.webp",
+    srcSet: "assets/img/lira-384.webp 384w, assets/img/lira-640.webp 640w, assets/img/lira.webp 1100w",
+  },
+] as const;
+
+const storyImageSizes = "(max-width: 575.98px) calc(100vw - 2rem), (max-width: 991.98px) calc(50vw - 1.75rem), 360px";
 ---
 {showHeader && (
   <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
@@ -25,7 +41,9 @@ const storyImagePaths = ["timo.webp", "galen.webp", "lira.webp"] as const;
       <article class="story-vertical card h-100 shadow-sm">
         <div class="story-vertical__media">
           <img
-            src={`assets/img/${storyImagePaths[index] ?? storyImagePaths[0]}`}
+            src={storyImageSources[index]?.defaultSrc ?? storyImageSources[0].defaultSrc}
+            srcset={storyImageSources[index]?.srcSet ?? storyImageSources[0].srcSet}
+            sizes={storyImageSizes}
             alt={story.imageAlt}
             width="1100"
             height="1100"
