@@ -233,9 +233,10 @@ Smoke test routes/assets currently covered:
 ## 11) Asset Strategy
 
 - Static assets are under `public/assets/...`.
-- Hero assets are language-specific:
-  - ES: default hero assets
-  - EN: `hero-title-en.svg`, `mascota-en.webp`
+- Home hero uses:
+  - shared responsive mascot assets: `mascota-luny-512.webp`, `mascota-luny-640.webp`, `mascota-luny-768.webp`, `mascota-luny-1024.webp`
+  - shared background asset: `hero-bg.jpg`
+  - locale-specific title art: ES `logo2.svg`, EN `hero-title-en.svg`
 - Demo PDFs:
   - ES: `assets/demo/demo.pdf`
   - EN: `assets/demo/demo_eng.pdf`
@@ -330,3 +331,49 @@ Deployment flow:
   - scoped home hero styles to prevent global bleed
   - removed unused assets and dead imports.
 - Operational note: this cleanup is documented as a maintenance track and should be validated again before final integration if it is not yet in `main`.
+
+
+## 21) Performance, accessibility, and edge security hardening (2026-03-28)
+
+Implemented scope:
+
+- Home/hero performance:
+  - LCP optimization centered on the hero mascot `<img>`.
+  - Responsive mascot delivery with WebP variants and tuned loading priority.
+  - Hero visual design preserved while reducing mobile transfer overhead.
+- Story covers optimization:
+  - Added responsive variants for `timo`, `galen`, and `lira`.
+  - `src/components/StoriesCards.astro` now uses `srcset`/`sizes` to avoid overserving 1100px originals on mobile.
+- Accessibility pass:
+  - Improved touch targets in mobile footer legal links and cookie preferences trigger.
+  - Contrast tuned in cookie banner and responsive nav hierarchy softened.
+
+Cloudflare edge operations:
+
+- Security headers are managed at edge level (Cloudflare), not in Astro source:
+  - `Strict-Transport-Security: max-age=31536000; includeSubDomains`
+  - `X-Frame-Options: SAMEORIGIN`
+  - `Permissions-Policy: geolocation=(), microphone=(), camera=()`
+- Cloudflare Managed `robots.txt` content-signal injection was disabled.
+  - Public `robots.txt` is standards-only (`User-agent`, `Allow`, `Sitemap`).
+
+Repository cleanup in this round:
+
+- Removed orphan hero image variants no longer referenced by source templates:
+  - `public/assets/img/mascota-512.webp`
+  - `public/assets/img/mascota-768.webp`
+  - `public/assets/img/mascota-1024.webp`
+  - `public/assets/img/mascota-en-512.webp`
+  - `public/assets/img/mascota-en-768.webp`
+  - `public/assets/img/mascota-en-1024.webp`
+
+Status snapshot:
+
+- Security headers grade reported in current operations review: `A`.
+- Home Lighthouse is currently in the high range after this performance pass (exact score varies by run conditions).
+
+Deliberate deferrals / tradeoffs:
+
+- `Content-Security-Policy` intentionally deferred to a dedicated hardening phase to avoid accidental breakage of third-party resources.
+- No aggressive CSS refactor in this round.
+- CSS order intentionally kept stable (`bootstrap` first, `styles.css` second) to preserve approved CTA brand styling.

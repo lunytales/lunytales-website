@@ -233,9 +233,10 @@ Cobertura actual de smoke tests:
 ## 11) Estrategia de assets
 
 - Los assets estáticos viven en `public/assets/...`.
-- Hero por idioma:
-  - ES: assets base
-  - EN: `hero-title-en.svg`, `mascota-en.webp`
+- El hero del home usa:
+  - assets responsivos compartidos de mascota: `mascota-luny-512.webp`, `mascota-luny-640.webp`, `mascota-luny-768.webp`, `mascota-luny-1024.webp`
+  - fondo compartido: `hero-bg.jpg`
+  - arte de título por idioma: ES `logo2.svg`, EN `hero-title-en.svg`
 - PDFs demo:
   - ES: `assets/demo/demo.pdf`
   - EN: `assets/demo/demo_eng.pdf`
@@ -330,3 +331,49 @@ Flujo de despliegue:
   - scope de estilos del hero del home para evitar bleed global
   - limpieza de assets no usados e imports muertos.
 - Nota operativa: este cleanup está documentado como línea de mantenimiento y debe revisarse antes de su integración final si aún no está en `main`.
+
+
+## 21) Endurecimiento de performance, accesibilidad y seguridad edge (2026-03-28)
+
+Alcance implementado:
+
+- Performance de home/hero:
+  - Optimización de LCP centrada en la mascota del hero como `<img>`.
+  - Entrega responsiva en WebP con prioridad de carga ajustada.
+  - Se mantuvo el diseño visual del hero mientras se redujo transferencia innecesaria en mobile.
+- Optimización de portadas de cuentos:
+  - Se añadieron variantes responsivas para `timo`, `galen` y `lira`.
+  - `src/components/StoriesCards.astro` usa `srcset`/`sizes` para evitar servir 1100px cuando no corresponde.
+- Ajustes de accesibilidad:
+  - Se mejoraron áreas táctiles en footer legal mobile y en el disparador de preferencias de cookies.
+  - Se ajustó contraste del banner de cookies y jerarquía visual del nav responsive.
+
+Operación en Cloudflare edge:
+
+- Security headers gestionados en edge (Cloudflare), no en el código Astro:
+  - `Strict-Transport-Security: max-age=31536000; includeSubDomains`
+  - `X-Frame-Options: SAMEORIGIN`
+  - `Permissions-Policy: geolocation=(), microphone=(), camera=()`
+- Se desactivó la inyección de contenido Managed en `robots.txt` de Cloudflare.
+  - El `robots.txt` público quedó limpio y estándar (`User-agent`, `Allow`, `Sitemap`).
+
+Limpieza de repositorio en esta ronda:
+
+- Se eliminaron variantes huérfanas del hero que ya no tenían referencias en los templates:
+  - `public/assets/img/mascota-512.webp`
+  - `public/assets/img/mascota-768.webp`
+  - `public/assets/img/mascota-1024.webp`
+  - `public/assets/img/mascota-en-512.webp`
+  - `public/assets/img/mascota-en-768.webp`
+  - `public/assets/img/mascota-en-1024.webp`
+
+Estado actual (snapshot):
+
+- Security Headers reportado en revisión operativa: `A`.
+- Lighthouse del home en rango alto tras este pase de performance (el valor exacto puede variar por corrida).
+
+Decisiones y tradeoffs explícitos:
+
+- `Content-Security-Policy` se pospone a una fase dedicada para evitar romper recursos de terceros en esta ronda.
+- No se hizo refactor agresivo de CSS.
+- El orden de CSS se mantiene estable (`bootstrap` primero, `styles.css` después) para preservar el estilo aprobado de CTA.
