@@ -27,7 +27,10 @@ const structuredData = createFaqStructuredData({
   items: strings.faq.items,
 });
 
-const mascotImagePath = "assets/img/luny-faq.png";
+const faqMascotSrc = "assets/img/luny-faq-768.webp";
+const faqMascotSrcSet =
+  "assets/img/luny-faq-512.webp 512w, assets/img/luny-faq-768.webp 768w, assets/img/luny-faq-1024.webp 1024w";
+const faqMascotSizes = "(max-width: 575.98px) 85px, (max-width: 767.98px) 94px, (max-width: 991.98px) 212px, 292px";
 ---
 <SiteLayout lang={lang} seo={seo} structuredData={structuredData} routeKey="faq" navVariant="legal" footerVariant="legal">
   <header class="hero-luny hero-luny--grad faq-hero">
@@ -35,14 +38,15 @@ const mascotImagePath = "assets/img/luny-faq.png";
       <div class="row align-items-center g-3 faq-hero__row">
         <div class="col-4 col-md-4 col-lg-3 text-center faq-hero__art">
           <img
-            src={mascotImagePath}
+            src={faqMascotSrc}
+            srcset={faqMascotSrcSet}
+            sizes={faqMascotSizes}
             alt={strings.hero.mascotAlt}
             width="1024"
             height="1024"
             class="hero-mascota faq-hero__mascot"
             loading="eager"
             decoding="async"
-            fetchpriority="high"
           >
         </div>
 
