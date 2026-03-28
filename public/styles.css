@@ -1489,6 +1489,33 @@ body.has-cookie-banner{
   border-radius: 10px;
 }
 
+@media (max-width: 767.98px){
+  .footer-legal{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: .15rem;
+    column-gap: .1rem;
+  }
+
+  .footer-legal a,
+  .footer-legal .cookie-pref-link{
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: .2rem .4rem;
+    line-height: 1.2;
+    border-radius: 10px;
+  }
+
+  .footer-legal span[aria-hidden="true"]{
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 .05rem;
+  }
+}
+
 /* Mobile */
 @media (max-width: 575.98px){
   .cookie-banner__inner{
