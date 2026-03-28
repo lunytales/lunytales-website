@@ -78,8 +78,6 @@ const assetVersion = import.meta.env.PUBLIC_ASSET_VERSION ?? "20260326r9";
 const structuredDataNodes = normalizeStructuredData(structuredData);
 
 const primaryOgImage = seo.og.images[0];
-const shouldPreloadHeroBackground = routeKey === "faq" || routeKey === "privacy" || routeKey === "terms";
-
 ---
 <!doctype html>
 <html lang={lang}>
@@ -124,19 +122,9 @@ const shouldPreloadHeroBackground = routeKey === "faq" || routeKey === "privacy"
   <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon-167.png" sizes="167x167">
   <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" sizes="180x180">
 
-  {shouldPreloadHeroBackground && (
-    <link
-      rel="preload"
-      as="image"
-      href="assets/img/hero-bg.webp"
-      imagesrcset="assets/img/hero-bg-mobile.webp 1440w, assets/img/hero-bg.webp 2724w"
-      imagesizes="100vw"
-      fetchpriority="high"
-    />
-  )}
-
-  <link rel="stylesheet" href={bootstrapCssUrl}>
   <link href={`styles.css?v=${assetVersion}`} rel="stylesheet">
+  <link rel="preload" href={bootstrapCssUrl} as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href={bootstrapCssUrl}></noscript>
 </head>
 
 <body class="bg-light luny">
