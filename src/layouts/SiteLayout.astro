@@ -78,7 +78,7 @@ const assetVersion = import.meta.env.PUBLIC_ASSET_VERSION ?? "20260326r9";
 const structuredDataNodes = normalizeStructuredData(structuredData);
 
 const primaryOgImage = seo.og.images[0];
-const shouldPreloadHeroBackground = routeKey === "home" || routeKey === "faq" || routeKey === "privacy" || routeKey === "terms";
+const shouldPreloadHeroBackground = routeKey === "faq" || routeKey === "privacy" || routeKey === "terms";
 
 ---
 <!doctype html>
