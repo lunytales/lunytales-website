@@ -369,10 +369,16 @@ const META_PIXEL_ID = "4211106805805636";
     </div>
   </div>
 
-  <script is:inline define:vars={{ trackingGateEnabled: SITE_CONFIG.trackingGate }}>
+  <script is:inline define:vars={{
+    trackingGateEnabled: SITE_CONFIG.trackingGate,
+    gaMeasurementId: SITE_CONFIG.gaMeasurementId,
+  }}>
     window.__LUNY_CONFIG = window.__LUNY_CONFIG || {};
     window.__LUNY_CONFIG.flags = Object.assign({}, window.__LUNY_CONFIG.flags, {
       trackingGate: trackingGateEnabled,
+    });
+    window.__LUNY_CONFIG.analytics = Object.assign({}, window.__LUNY_CONFIG.analytics, {
+      gaMeasurementId,
     });
   </script>
   <script src={bootstrapBundleUrl}></script>

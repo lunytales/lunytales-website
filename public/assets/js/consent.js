@@ -22,6 +22,20 @@
   const TRACKING_QUERY_ENABLED = new URLSearchParams(window.location.search).get("track") === "1";
   const TRACKING_ENABLED = TRACKING_GATE_ENABLED ? TRACKING_QUERY_ENABLED : true;
 
+  const analyticsConfig = window.__LUNY_CONFIG && window.__LUNY_CONFIG.analytics
+    ? window.__LUNY_CONFIG.analytics
+    : null;
+  const ANALYTICS_MEASUREMENT_ID =
+    analyticsConfig && typeof analyticsConfig.gaMeasurementId === "string"
+      ? analyticsConfig.gaMeasurementId.trim()
+      : "";
+  const GOOGLE_ANALYTICS_SRC = ANALYTICS_MEASUREMENT_ID
+    ? `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ANALYTICS_MEASUREMENT_ID)}`
+    : "";
+  const GA_DISABLE_KEY = ANALYTICS_MEASUREMENT_ID
+    ? `ga-disable-${ANALYTICS_MEASUREMENT_ID}`
+    : "";
+
   const setBodyPadding = () => {
     if (!banner || banner.hasAttribute("hidden")) return;
     const h = banner.offsetHeight || 96;
@@ -45,6 +59,51 @@
 
     window.fbq('init', '4211106805805636');
     window.fbq('track', 'PageView');
+  };
+
+  const disableGoogleAnalytics = () => {
+    if (!GA_DISABLE_KEY) return;
+    window[GA_DISABLE_KEY] = true;
+    if (typeof window.gtag === "function") {
+      window.gtag("consent", "update", { analytics_storage: "denied" });
+    }
+  };
+
+  const loadGoogleAnalytics = () => {
+    if (!ANALYTICS_MEASUREMENT_ID || !GOOGLE_ANALYTICS_SRC) return;
+
+    if (GA_DISABLE_KEY) {
+      window[GA_DISABLE_KEY] = false;
+    }
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag(){
+      window.dataLayer.push(arguments);
+    };
+
+    if (!window.__lunyGaInitialized) {
+      window.gtag("js", new Date());
+      window.__lunyGaInitialized = true;
+    }
+
+    window.gtag("consent", "update", { analytics_storage: "granted" });
+
+    if (!window.__lunyGaConfigured) {
+      window.gtag("config", ANALYTICS_MEASUREMENT_ID);
+      window.__lunyGaConfigured = true;
+    }
+
+    const exists = Array.from(document.scripts).some(
+      (script) => (script.src || "") === GOOGLE_ANALYTICS_SRC
+    );
+
+    if (!exists) {
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = GOOGLE_ANALYTICS_SRC;
+      script.dataset.lunyGa = ANALYTICS_MEASUREMENT_ID;
+      document.head.appendChild(script);
+    }
   };
 
   const loadTracking = () => {
@@ -79,7 +138,10 @@
     rejectBtn?.blur();
     if (value === "accepted" && TRACKING_ENABLED) {
       loadMetaPixel();
+      loadGoogleAnalytics();
       loadTracking();
+    } else if (value === "rejected") {
+      disableGoogleAnalytics();
     }
     hideBanner();
   };
@@ -89,12 +151,14 @@
   const consent = getConsent();
   if (consent === "accepted" && TRACKING_ENABLED) {
     loadMetaPixel();
+    loadGoogleAnalytics();
     loadTracking();
   } else if (consent === "accepted" && TRACKING_GATE_ENABLED) {
-    // In v2 staging, tracking stays disabled unless ?track=1 is present.
+    disableGoogleAnalytics();
   } else if (consent === "rejected") {
-    // Keep the Meta Pixel disabled.
+    disableGoogleAnalytics();
   } else {
+    disableGoogleAnalytics();
     showBanner();
   }
 
