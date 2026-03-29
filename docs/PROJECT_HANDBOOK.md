@@ -377,3 +377,11 @@ Deliberate deferrals / tradeoffs:
 - `Content-Security-Policy` intentionally deferred to a dedicated hardening phase to avoid accidental breakage of third-party resources.
 - No aggressive CSS refactor in this round.
 - CSS order intentionally kept stable (`bootstrap` first, `styles.css` second) to preserve approved CTA brand styling.
+
+
+Round closure decision (end of this technical pass):
+
+- LCP discovery/priority and heading-order issues were addressed successfully in this round.
+- Remaining primary performance debt is still unused CSS / Bootstrap payload.
+- That debt is explicitly deferred to a separate future phase.
+- No further low-return micro-optimizations should be applied in this phase to avoid visual regressions and keep focus on marketing execution.

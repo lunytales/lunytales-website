@@ -377,3 +377,11 @@ Decisiones y tradeoffs explícitos:
 - `Content-Security-Policy` se pospone a una fase dedicada para evitar romper recursos de terceros en esta ronda.
 - No se hizo refactor agresivo de CSS.
 - El orden de CSS se mantiene estable (`bootstrap` primero, `styles.css` después) para preservar el estilo aprobado de CTA.
+
+
+Decisión de cierre de ronda (fin de este pase técnico):
+
+- En esta ronda se resolvió correctamente el descubrimiento/prioridad de LCP y la jerarquía de headings.
+- La deuda principal de performance pendiente sigue siendo CSS no usado / carga de Bootstrap.
+- Esa deuda queda diferida explícitamente a una fase futura separada.
+- En esta fase no se harán más micro-optimizaciones de bajo retorno para evitar riesgo visual y mantener el foco en marketing.
