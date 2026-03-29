@@ -71,35 +71,6 @@
     }
   };
 
-  const ensureGlobalGtag = () => {
-    window.dataLayer = window.dataLayer || [];
-
-    if (typeof window.gtag !== "function" || !window.gtag.__lunyProxy) {
-      const gtagProxy = function(){
-        window.dataLayer.push(arguments);
-      };
-      gtagProxy.__lunyProxy = true;
-      window.gtag = gtagProxy;
-      console.info("GA GLOBAL GTAG READY");
-    }
-  };
-
-  const queueGaBootstrapEvents = () => {
-    if (!ANALYTICS_MEASUREMENT_ID || window.__lunyGaInitEventsQueued) return;
-
-    ensureGlobalGtag();
-
-    window.gtag("js", new Date());
-    console.info("GA JS EVENT QUEUED");
-
-    window.gtag("config", ANALYTICS_MEASUREMENT_ID, {
-      send_page_view: true,
-    });
-    console.info("GA CONFIG EVENT QUEUED");
-
-    window.__lunyGaInitEventsQueued = true;
-  };
-
   const loadGoogleAnalytics = () => {
     if (!ANALYTICS_MEASUREMENT_ID || !GOOGLE_ANALYTICS_SRC) return;
 
@@ -107,32 +78,34 @@
       window[GA_DISABLE_KEY] = false;
     }
 
-    ensureGlobalGtag();
-    queueGaBootstrapEvents();
-
     const existingScript = Array.from(document.scripts).find(
       (script) => (script.src || "") === GOOGLE_ANALYTICS_SRC
     );
 
-    if (existingScript) {
-      if (existingScript.dataset.lunyGaLoadListener !== "true") {
-        existingScript.dataset.lunyGaLoadListener = "true";
-        existingScript.addEventListener("load", () => {
-          existingScript.dataset.lunyGaLoaded = "true";
-          console.info("GA SCRIPT LOADED");
-        }, { once: true });
-      }
-      return;
-    }
+    if (existingScript) return;
 
     const script = document.createElement("script");
     script.async = true;
     script.src = GOOGLE_ANALYTICS_SRC;
-    script.dataset.lunyGa = ANALYTICS_MEASUREMENT_ID;
-    script.addEventListener("load", () => {
-      script.dataset.lunyGaLoaded = "true";
+
+    script.onload = () => {
+      if (readConsent() !== "accepted") return;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){
+        window.dataLayer.push(arguments);
+      };
+
       console.info("GA SCRIPT LOADED");
-    }, { once: true });
+
+      window.gtag("js", new Date());
+      console.info("GA JS EVENT FIRED");
+
+      window.gtag("config", ANALYTICS_MEASUREMENT_ID, {
+        send_page_view: true,
+      });
+      console.info("GA CONFIG FIRED");
+    };
 
     document.head.appendChild(script);
   };
