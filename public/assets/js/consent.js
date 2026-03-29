@@ -68,8 +68,60 @@
     window[GA_DISABLE_KEY] = true;
     if (typeof window.gtag === "function") {
       window.gtag("consent", "update", { analytics_storage: "denied" });
+      window.__lunyGaConsentGranted = false;
     }
   };
+
+  const ensureGlobalGtag = () => {
+    window.dataLayer = window.dataLayer || [];
+
+    if (typeof window.gtag !== "function") {
+      window.gtag = function(){
+        window.dataLayer.push(arguments);
+      };
+      console.info("GA GLOBAL GTAG READY");
+    }
+  };
+
+  const queueGaBootstrapEvents = () => {
+    if (!ANALYTICS_MEASUREMENT_ID || window.__lunyGaInitEventsQueued) return;
+
+    ensureGlobalGtag();
+
+    window.gtag("js", new Date());
+    console.info("GA JS EVENT QUEUED");
+
+    window.gtag("config", ANALYTICS_MEASUREMENT_ID, {
+      send_page_view: true,
+    });
+    console.info("GA CONFIG EVENT QUEUED");
+
+    window.__lunyGaInitEventsQueued = true;
+  };
+
+  const grantGoogleAnalyticsConsent = () => {
+    if (!ANALYTICS_MEASUREMENT_ID || window.__lunyGaConsentGranted) return;
+    ensureGlobalGtag();
+    window.gtag("consent", "update", { analytics_storage: "granted" });
+    window.__lunyGaConsentGranted = true;
+  };
+
+  const attachGaLoadLogListener = (script) => {
+    if (!script || script.dataset.lunyGaLoadListener === "true") return;
+    script.dataset.lunyGaLoadListener = "true";
+    script.addEventListener("load", () => {
+      script.dataset.lunyGaLoaded = "true";
+      console.info("GA SCRIPT LOADED");
+    }, { once: true });
+    script.addEventListener("error", () => {
+      script.dataset.lunyGaLoadError = "true";
+      console.warn("GA SCRIPT LOAD FAILED", GOOGLE_ANALYTICS_SRC);
+    }, { once: true });
+  };
+
+  const findGaScript = () => Array.from(document.scripts).find(
+    (script) => (script.src || "") === GOOGLE_ANALYTICS_SRC
+  );
 
   const loadGoogleAnalytics = () => {
     if (!ANALYTICS_MEASUREMENT_ID || !GOOGLE_ANALYTICS_SRC) return;
@@ -78,34 +130,22 @@
       window[GA_DISABLE_KEY] = false;
     }
 
-    const existingScript = Array.from(document.scripts).find(
-      (script) => (script.src || "") === GOOGLE_ANALYTICS_SRC
-    );
+    ensureGlobalGtag();
+    queueGaBootstrapEvents();
+    grantGoogleAnalyticsConsent();
 
-    if (existingScript) return;
+    const existingScript = findGaScript();
+
+    if (existingScript) {
+      attachGaLoadLogListener(existingScript);
+      return;
+    }
 
     const script = document.createElement("script");
     script.async = true;
     script.src = GOOGLE_ANALYTICS_SRC;
-
-    script.onload = () => {
-      if (readConsent() !== "accepted") return;
-
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function(){
-        window.dataLayer.push(arguments);
-      };
-
-      console.info("GA SCRIPT LOADED");
-
-      window.gtag("js", new Date());
-      console.info("GA JS EVENT FIRED");
-
-      window.gtag("config", ANALYTICS_MEASUREMENT_ID, {
-        send_page_view: true,
-      });
-      console.info("GA CONFIG FIRED");
-    };
+    script.dataset.lunyGa = ANALYTICS_MEASUREMENT_ID;
+    attachGaLoadLogListener(script);
 
     document.head.appendChild(script);
   };
