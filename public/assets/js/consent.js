@@ -4,6 +4,7 @@
   const acceptBtn = document.getElementById("cookieAccept");
   const rejectBtn = document.getElementById("cookieReject");
   const prefsBtn = document.getElementById("cookiePrefs");
+
   const currentScriptSrc = (document.currentScript && document.currentScript.getAttribute("src")) || "";
   const TRACKING_SRC = currentScriptSrc.includes("consent.js")
     ? currentScriptSrc.replace("consent.js", "tracking.js")
@@ -12,6 +13,7 @@
         ? "/assets/js/tracking.js"
         : "assets/js/tracking.js"
     );
+
   const config = window.__LUNY_CONFIG && window.__LUNY_CONFIG.flags
     ? window.__LUNY_CONFIG.flags
     : null;
@@ -115,11 +117,11 @@
       window.__lunyTrackingLoaded = true;
       return;
     }
-    const s = document.createElement("script");
-    s.defer = true;
-    s.src = TRACKING_SRC;
-    s.onload = () => { window.__lunyTrackingLoaded = true; };
-    document.body.appendChild(s);
+    const script = document.createElement("script");
+    script.defer = true;
+    script.src = TRACKING_SRC;
+    script.onload = () => { window.__lunyTrackingLoaded = true; };
+    document.body.appendChild(script);
   };
 
   const showBanner = () => {
@@ -134,43 +136,68 @@
     clearBodyPadding();
   };
 
-  const setConsent = (value) => {
-    localStorage.setItem(KEY, value);
-    acceptBtn?.blur();
-    rejectBtn?.blur();
+  const writeConsent = (value) => {
+    try {
+      localStorage.setItem(KEY, value);
+    } catch (_) {
+      // Ignore storage failures in restricted browser contexts.
+    }
+  };
+
+  const readConsent = () => {
+    try {
+      return localStorage.getItem(KEY);
+    } catch (_) {
+      return null;
+    }
+  };
+
+  const applyConsentState = (value, source) => {
     if (value === "accepted") {
-      console.info("GA CONSENT ACCEPTED");
+      if (source === "auto") {
+        console.info("GA AUTO LOAD TRIGGERED");
+      } else {
+        console.info("GA CONSENT ACCEPTED");
+      }
       loadGoogleAnalytics();
       loadMetaPixel();
       if (TRACKING_ENABLED) {
         loadTracking();
       }
-    } else if (value === "rejected") {
-      disableGoogleAnalytics();
+      hideBanner();
+      return;
     }
-    hideBanner();
+
+    disableGoogleAnalytics();
+
+    if (value === "rejected") {
+      hideBanner();
+      return;
+    }
+
+    showBanner();
   };
 
-  const getConsent = () => localStorage.getItem(KEY);
+  const setConsent = (value) => {
+    writeConsent(value);
+    acceptBtn?.blur();
+    rejectBtn?.blur();
+    applyConsentState(value, "manual");
+  };
 
-  const consent = getConsent();
-  if (consent === "accepted") {
-    console.info("GA CONSENT ACCEPTED");
-    loadGoogleAnalytics();
-    loadMetaPixel();
-    if (TRACKING_ENABLED) {
-      loadTracking();
-    }
-  } else if (consent === "rejected") {
-    disableGoogleAnalytics();
-  } else {
-    disableGoogleAnalytics();
-    showBanner();
-  }
+  const initializeConsentState = () => {
+    applyConsentState(readConsent(), "auto");
+  };
 
   acceptBtn?.addEventListener("click", () => setConsent("accepted"));
   rejectBtn?.addEventListener("click", () => setConsent("rejected"));
   prefsBtn?.addEventListener("click", () => showBanner());
 
   window.addEventListener("resize", () => setBodyPadding(), { passive: true });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeConsentState, { once: true });
+  } else {
+    initializeConsentState();
+  }
 })();
