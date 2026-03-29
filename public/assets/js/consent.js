@@ -141,8 +141,8 @@
     if (value === "accepted") {
       console.info("GA CONSENT ACCEPTED");
       loadGoogleAnalytics();
+      loadMetaPixel();
       if (TRACKING_ENABLED) {
-        loadMetaPixel();
         loadTracking();
       }
     } else if (value === "rejected") {
@@ -157,8 +157,8 @@
   if (consent === "accepted") {
     console.info("GA CONSENT ACCEPTED");
     loadGoogleAnalytics();
+    loadMetaPixel();
     if (TRACKING_ENABLED) {
-      loadMetaPixel();
       loadTracking();
     }
   } else if (consent === "rejected") {
