@@ -71,6 +71,26 @@
     }
   };
 
+  const ensureGtagStub = () => {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag(){
+      window.dataLayer.push(arguments);
+    };
+  };
+
+  const fireGaConfig = () => {
+    if (!ANALYTICS_MEASUREMENT_ID || window.__lunyGaConfigured) return;
+
+    ensureGtagStub();
+    window.gtag("js", new Date());
+    window.gtag("config", ANALYTICS_MEASUREMENT_ID, {
+      send_page_view: true,
+    });
+
+    window.__lunyGaConfigured = true;
+    console.info("GA CONFIG FIRED");
+  };
+
   const loadGoogleAnalytics = () => {
     if (!ANALYTICS_MEASUREMENT_ID || !GOOGLE_ANALYTICS_SRC) return;
 
@@ -78,36 +98,36 @@
       window[GA_DISABLE_KEY] = false;
     }
 
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function gtag(){
-      window.dataLayer.push(arguments);
-    };
+    ensureGtagStub();
 
-    if (!window.__lunyGaInitialized) {
-      window.gtag("js", new Date());
-      window.__lunyGaInitialized = true;
-    }
-
-    window.gtag("consent", "update", { analytics_storage: "granted" });
-
-    if (!window.__lunyGaConfigured) {
-      window.gtag("config", ANALYTICS_MEASUREMENT_ID);
-      console.info("GA CONFIG FIRED");
-      window.__lunyGaConfigured = true;
-    }
-
-    const exists = Array.from(document.scripts).some(
+    const existingScript = Array.from(document.scripts).find(
       (script) => (script.src || "") === GOOGLE_ANALYTICS_SRC
     );
 
-    if (!exists) {
-      const script = document.createElement("script");
-      script.async = true;
-      script.src = GOOGLE_ANALYTICS_SRC;
-      script.dataset.lunyGa = ANALYTICS_MEASUREMENT_ID;
-      document.head.appendChild(script);
-      console.info("GA SCRIPT INJECTED");
+    if (existingScript) {
+      fireGaConfig();
+
+      if (existingScript.dataset.lunyGaLoadListener !== "true") {
+        existingScript.dataset.lunyGaLoadListener = "true";
+        existingScript.addEventListener("load", () => {
+          existingScript.dataset.lunyGaLoaded = "true";
+          fireGaConfig();
+        }, { once: true });
+      }
+      return;
     }
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = GOOGLE_ANALYTICS_SRC;
+    script.dataset.lunyGa = ANALYTICS_MEASUREMENT_ID;
+    script.addEventListener("load", () => {
+      script.dataset.lunyGaLoaded = "true";
+      fireGaConfig();
+    }, { once: true });
+
+    document.head.appendChild(script);
+    console.info("GA SCRIPT INJECTED");
   };
 
   const loadTracking = () => {
