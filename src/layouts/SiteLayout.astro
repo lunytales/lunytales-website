@@ -76,6 +76,7 @@ const footerLogoHref = currentLangHomeHref;
 const contactMailto = createContactMailto(strings.footer.email, lang);
 const assetVersion = import.meta.env.PUBLIC_ASSET_VERSION ?? "20260326r9";
 const structuredDataNodes = normalizeStructuredData(structuredData);
+const shouldPreloadHeroBackground = routeKey === "home" || routeKey === "faq";
 
 const primaryOgImage = seo.og.images[0];
 ---
@@ -121,6 +122,24 @@ const primaryOgImage = seo.og.images[0];
   <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon-152.png" sizes="152x152">
   <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon-167.png" sizes="167x167">
   <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" sizes="180x180">
+  {shouldPreloadHeroBackground && (
+    <>
+      <link
+        rel="preload"
+        as="image"
+        href="assets/img/hero-bg-mobile.webp"
+        media="(max-width: 575.98px)"
+        fetchpriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href="assets/img/hero-bg.webp"
+        media="(min-width: 576px)"
+        fetchpriority="high"
+      />
+    </>
+  )}
 
   <link rel="stylesheet" href={bootstrapCssUrl}>
   <link href={`styles.css?v=${assetVersion}`} rel="stylesheet">

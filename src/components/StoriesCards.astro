@@ -25,6 +25,7 @@ const storyImageSources = [
 ] as const;
 
 const storyImageSizes = "(max-width: 575.98px) calc(100vw - 2rem), (max-width: 991.98px) calc(50vw - 1.75rem), 360px";
+const StoryTitleTag = showHeader ? "h3" : "h2";
 ---
 {showHeader && (
   <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
@@ -53,7 +54,7 @@ const storyImageSizes = "(max-width: 575.98px) calc(100vw - 2rem), (max-width: 9
           >
         </div>
         <div class="story-vertical__body">
-          <h3 class="story-title">{story.title}</h3>
+          <StoryTitleTag class="story-title">{story.title}</StoryTitleTag>
           <p class="story-desc">{story.description}</p>
         </div>
       </article>
