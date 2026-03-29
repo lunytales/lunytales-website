@@ -90,6 +90,7 @@
 
     if (!window.__lunyGaConfigured) {
       window.gtag("config", ANALYTICS_MEASUREMENT_ID);
+      console.info("GA CONFIG FIRED");
       window.__lunyGaConfigured = true;
     }
 
@@ -103,6 +104,7 @@
       script.src = GOOGLE_ANALYTICS_SRC;
       script.dataset.lunyGa = ANALYTICS_MEASUREMENT_ID;
       document.head.appendChild(script);
+      console.info("GA SCRIPT INJECTED");
     }
   };
 
@@ -136,10 +138,13 @@
     localStorage.setItem(KEY, value);
     acceptBtn?.blur();
     rejectBtn?.blur();
-    if (value === "accepted" && TRACKING_ENABLED) {
-      loadMetaPixel();
+    if (value === "accepted") {
+      console.info("GA CONSENT ACCEPTED");
       loadGoogleAnalytics();
-      loadTracking();
+      if (TRACKING_ENABLED) {
+        loadMetaPixel();
+        loadTracking();
+      }
     } else if (value === "rejected") {
       disableGoogleAnalytics();
     }
@@ -149,12 +154,13 @@
   const getConsent = () => localStorage.getItem(KEY);
 
   const consent = getConsent();
-  if (consent === "accepted" && TRACKING_ENABLED) {
-    loadMetaPixel();
+  if (consent === "accepted") {
+    console.info("GA CONSENT ACCEPTED");
     loadGoogleAnalytics();
-    loadTracking();
-  } else if (consent === "accepted" && TRACKING_GATE_ENABLED) {
-    disableGoogleAnalytics();
+    if (TRACKING_ENABLED) {
+      loadMetaPixel();
+      loadTracking();
+    }
   } else if (consent === "rejected") {
     disableGoogleAnalytics();
   } else {
