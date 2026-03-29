@@ -71,24 +71,33 @@
     }
   };
 
-  const ensureGtagStub = () => {
+  const ensureGlobalGtag = () => {
     window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function gtag(){
-      window.dataLayer.push(arguments);
-    };
+
+    if (typeof window.gtag !== "function" || !window.gtag.__lunyProxy) {
+      const gtagProxy = function(){
+        window.dataLayer.push(arguments);
+      };
+      gtagProxy.__lunyProxy = true;
+      window.gtag = gtagProxy;
+      console.info("GA GLOBAL GTAG READY");
+    }
   };
 
-  const fireGaConfig = () => {
-    if (!ANALYTICS_MEASUREMENT_ID || window.__lunyGaConfigured) return;
+  const queueGaBootstrapEvents = () => {
+    if (!ANALYTICS_MEASUREMENT_ID || window.__lunyGaInitEventsQueued) return;
 
-    ensureGtagStub();
+    ensureGlobalGtag();
+
     window.gtag("js", new Date());
+    console.info("GA JS EVENT QUEUED");
+
     window.gtag("config", ANALYTICS_MEASUREMENT_ID, {
       send_page_view: true,
     });
+    console.info("GA CONFIG EVENT QUEUED");
 
-    window.__lunyGaConfigured = true;
-    console.info("GA CONFIG FIRED");
+    window.__lunyGaInitEventsQueued = true;
   };
 
   const loadGoogleAnalytics = () => {
@@ -98,20 +107,19 @@
       window[GA_DISABLE_KEY] = false;
     }
 
-    ensureGtagStub();
+    ensureGlobalGtag();
+    queueGaBootstrapEvents();
 
     const existingScript = Array.from(document.scripts).find(
       (script) => (script.src || "") === GOOGLE_ANALYTICS_SRC
     );
 
     if (existingScript) {
-      fireGaConfig();
-
       if (existingScript.dataset.lunyGaLoadListener !== "true") {
         existingScript.dataset.lunyGaLoadListener = "true";
         existingScript.addEventListener("load", () => {
           existingScript.dataset.lunyGaLoaded = "true";
-          fireGaConfig();
+          console.info("GA SCRIPT LOADED");
         }, { once: true });
       }
       return;
@@ -123,11 +131,10 @@
     script.dataset.lunyGa = ANALYTICS_MEASUREMENT_ID;
     script.addEventListener("load", () => {
       script.dataset.lunyGaLoaded = "true";
-      fireGaConfig();
+      console.info("GA SCRIPT LOADED");
     }, { once: true });
 
     document.head.appendChild(script);
-    console.info("GA SCRIPT INJECTED");
   };
 
   const loadTracking = () => {
