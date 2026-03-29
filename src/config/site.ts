@@ -19,7 +19,7 @@ export const SITE_CONFIG = {
   origin: "https://lunytales.com",
   hotmartUrlEs: "https://pay.hotmart.com/H100949723W?off=94i6su53",
   hotmartUrlEn: "https://pay.hotmart.com/K104828315K",
-  gaMeasurementId: "G-8RCWV9MWFQ",
+  gaMeasurementId: "G-LNBS9K975K",
   paths: {
     home: "",
     homeEn: "en/",
