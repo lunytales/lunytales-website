@@ -13,7 +13,7 @@ Está pensado para cualquier persona que necesite mantener, extender o migrar el
 ## 2) Stack tecnológico
 
 - Runtime: Node.js (CI usa Node 20).
-- Framework: Astro `^5.17.1`.
+- Framework: Astro `^5.18.1`.
 - Estilos:
   - Bootstrap `^5.3.8` (instalado por npm, servido localmente desde assets del build).
   - CSS global personalizado en `public/styles.css`.
@@ -385,3 +385,12 @@ Decisión de cierre de ronda (fin de este pase técnico):
 - La deuda principal de performance pendiente sigue siendo CSS no usado / carga de Bootstrap.
 - Esa deuda queda diferida explícitamente a una fase futura separada.
 - En esta fase no se harán más micro-optimizaciones de bajo retorno para evitar riesgo visual y mantener el foco en marketing.
+
+## 22) Flujo de main protegida (2026-04)
+
+- `main` ahora debe tratarse operativamente como rama protegida.
+- Todo cambio debe iniciar en una rama distinta de `main`, por ejemplo `feature/*`, `fix/*`, `chore/*` o `docs/*`.
+- Toda integración hacia `main` debe ocurrir mediante pull request.
+- `CI Checks` en `.github/workflows/deploy.yml` corre en pushes a `main` y en pull requests dirigidos a `main`; si falla, debe bloquear el merge.
+- La revisión funcional de ramas debe seguir usando la URL estable de Cloudflare Pages por rama (`https://<rama-normalizada>.lunytales-website.pages.dev`).
+- Las acciones de GitHub para este repositorio se están ejecutando actualmente con la cuenta `menciajoel` dentro del contexto del repositorio `lunytales`.
