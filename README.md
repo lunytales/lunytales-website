@@ -63,3 +63,4 @@ SEO helpers are in `src/lib/seo.ts`.
 - Production builds keep `meta robots` as `index,follow` and `robots.txt` as `Allow: /`.
 - Preview/staging builds enforce `meta robots` as `noindex,nofollow` and `robots.txt` as `Disallow: /`.
 - `trackingGate: true` keeps tracking disabled unless URL contains `?track=1`.
+<!-- test: github flow check -->
