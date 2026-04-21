@@ -2,12 +2,10 @@
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import { createSeo } from "../../lib/seo";
 import { createHomeStructuredData } from "../../lib/structured-data";
-import { getStrings } from "../../i18n";
 import StoriesCards from "../../components/StoriesCards.astro";
 import { SITE_CONFIG, toHref } from "../../config/site";
 
 const lang = "en" as const;
-const strings = getStrings(lang);
 const title = "3 Minute Bedtime Stories for Kids | Luny Tales";
 const description = "Short calming bedtime stories that help children relax and fall asleep peacefully.";
 const canonical = "https://lunytales.com/en/3-minute-bedtime-stories";
