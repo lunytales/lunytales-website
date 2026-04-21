@@ -13,7 +13,7 @@ It is intended for engineers maintaining, extending, or migrating the site.
 ## 2) Technology Stack
 
 - Runtime: Node.js (CI uses Node 20).
-- Framework: Astro `^5.17.1`.
+- Framework: Astro `^5.18.1`.
 - Styling:
   - Bootstrap `^5.3.8` (installed via npm, self-hosted from built assets).
   - Custom global CSS in `public/styles.css`.
@@ -385,3 +385,12 @@ Round closure decision (end of this technical pass):
 - Remaining primary performance debt is still unused CSS / Bootstrap payload.
 - That debt is explicitly deferred to a separate future phase.
 - No further low-return micro-optimizations should be applied in this phase to avoid visual regressions and keep focus on marketing execution.
+
+## 22) Protected main workflow (2026-04)
+
+- `main` is now treated as a protected branch operationally.
+- All work should start from a non-main branch such as `feature/*`, `fix/*`, `chore/*`, or `docs/*`.
+- All merges into `main` should happen through pull requests.
+- `CI Checks` in `.github/workflows/deploy.yml` runs on pushes to `main` and pull requests targeting `main`; a failing run should block merge.
+- Branch QA should continue to use the stable Cloudflare Pages branch alias URL (`https://<normalized-branch>.lunytales-website.pages.dev`).
+- GitHub actions in this repository are currently executed by the `menciajoel` account inside the `lunytales` repository context.
