@@ -1,6 +1,29 @@
-# lunytales-website
+# Luny Tales
 
-Astro static site for the Luny Tales marketing website.
+**Digital Product · Web · Voice · Multimedia**
+
+Experiencia multimedia de cuentos infantiles para leer y escuchar en familia.
+
+## Producto
+
+Luny Tales conecta cuentos, audiocuentos narrados, música y contenido interactivo con una experiencia de voz para Alexa.
+
+Este repositorio contiene el sitio web público actual, construido con Astro y disponible en español e inglés.
+
+## Mi rol
+
+**Joel Mencía · Product Owner · Product Designer**
+
+Product Design · UX/UI · Multimedia · Web · Voice UI
+
+Como creador de Luny Tales, mi trabajo abarca la definición del producto, la estructura de contenidos, el diseño de UX/UI y la implementación web, conectando la experiencia multimedia con su componente de voz.
+
+## Ecosistema
+
+- **Web actual bilingüe:** [Español](https://lunytales.com/) · [English](https://lunytales.com/en/).
+- **Alexa / Voice UI:** [Repositorio original del componente Alexa](https://github.com/lunytales/skill-amazon-luny-tales).
+
+---
 
 ## Full technical documentation
 
